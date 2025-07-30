@@ -34,6 +34,10 @@
             line-height: 1.6;
             color: var(--text-dark);
             background-color: var(--white);
+               user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
         }
 
         /* Header Styles */
@@ -1130,7 +1134,23 @@
                 });
             });
         }
-
+ document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+        document.addEventListener('keydown', function (e) {
+            // Disable F12
+            if (e.key === 'F12') {
+                e.preventDefault();
+            }
+            // Disable Ctrl+Shift+I / Ctrl+U / Ctrl+S / Ctrl+C
+            if ((e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) || 
+                (e.ctrlKey && ['u', 's', 'c'].includes(e.key.toLowerCase()))) {
+                e.preventDefault();
+            }
+        });
+        document.addEventListener('copy', (e) => e.preventDefault());
+        document.addEventListener('cut', (e) => e.preventDefault());
+        document.addEventListener('paste', (e) => e.preventDefault());
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {

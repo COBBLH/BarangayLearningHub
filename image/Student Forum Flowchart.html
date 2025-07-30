@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTU-DB Community-StudentForum Data Flow</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 50%, #fdcb6e 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow-x: auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #d35400;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #e67e22;
+            font-weight: 500;
+        }
+
+        .flowchart-container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            max-width: 1400px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flowchart {
+            position: relative;
+            width: 100%;
+            height: 800px;
+        }
+
+        .flow-node {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: slideInUp 0.8s ease-out;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        .flow-node:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        /* Node Styles */
+        .start-node {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            width: 200px;
+            height: 80px;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 40px;
+        }
+
+        .auth-node {
+            background: linear-gradient(135deg, #f1c40f, #f39c12);
+            width: 180px;
+            height: 70px;
+            top: 180px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .database-node {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            width: 160px;
+            height: 100px;
+            top: 300px;
+            left: 100px;
+        }
+
+        .forum-node {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            width: 160px;
+            height: 100px;
+            top: 300px;
+            right: 100px;
+        }
+
+        .decision-node {
+            background: linear-gradient(135deg, #f1c40f, #f39c12);
+            width: 120px;
+            height: 120px;
+            top: 450px;
+            left: 50%;
+            transform: translateX(-50%) rotate(45deg);
+            border-radius: 15px;
+        }
+
+        .decision-content {
+            transform: rotate(-45deg);
+            font-size: 14px;
+        }
+
+        .post-node {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            width: 150px;
+            height: 80px;
+            top: 600px;
+            left: 150px;
+        }
+
+        .validate-node {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            width: 150px;
+            height: 80px;
+            top: 600px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .display-node {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            width: 150px;
+            height: 80px;
+            top: 600px;
+            right: 150px;
+        }
+
+        .end-node {
+            background: linear-gradient(135deg, #f1c40f, #f39c12);
+            width: 200px;
+            height: 80px;
+            top: 720px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 40px;
+        }
+
+        /* Arrow Styles */
+        .arrow {
+            position: absolute;
+            z-index: 5;
+        }
+
+        .arrow-line {
+            stroke: #e67e22;
+            stroke-width: 3;
+            fill: none;
+            marker-end: url(#arrowhead);
+            animation: drawLine 2s ease-in-out infinite;
+        }
+
+        .arrow-curved {
+            stroke: #e67e22;
+            stroke-width: 3;
+            fill: none;
+            marker-end: url(#arrowhead);
+            animation: drawLine 2s ease-in-out infinite;
+        }
+
+        /* Animated particles along arrows */
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, #f1c40f, #f39c12);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(241, 196, 15, 0.8);
+            z-index: 8;
+        }
+
+        .particle-1 {
+            animation: moveParticle1 3s infinite linear;
+        }
+
+        .particle-2 {
+            animation: moveParticle2 3s infinite linear 0.5s;
+        }
+
+        .particle-3 {
+            animation: moveParticle3 3s infinite linear 1s;
+        }
+
+        .particle-4 {
+            animation: moveParticle4 3s infinite linear 1.5s;
+        }
+
+        .particle-5 {
+            animation: moveParticle5 3s infinite linear 2s;
+        }
+
+        .particle-6 {
+            animation: moveParticle6 3s infinite linear 2.5s;
+        }
+
+        .particle-7 {
+            animation: moveParticle7 3s infinite linear 0.8s;
+        }
+
+        .particle-8 {
+            animation: moveParticle8 3s infinite linear 1.3s;
+        }
+
+        .particle-9 {
+            animation: moveParticle9 3s infinite linear 1.8s;
+        }
+
+        /* Data labels */
+        .data-label {
+            position: absolute;
+            background: rgba(241, 196, 15, 0.9);
+            color: #d35400;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 15;
+        }
+
+        /* Legend */
+        .legend {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            z-index: 20;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes drawLine {
+            0%, 100% {
+                stroke-dasharray: 0, 1000;
+            }
+            50% {
+                stroke-dasharray: 1000, 0;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+        }
+
+        /* Particle movement animations */
+        @keyframes moveParticle1 {
+            0% { top: 130px; left: 50%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 180px; left: 50%; opacity: 0; }
+        }
+
+        @keyframes moveParticle2 {
+            0% { top: 250px; left: 50%; opacity: 0; }
+            10% { opacity: 1; }
+            50% { top: 300px; left: 30%; }
+            90% { opacity: 1; }
+            100% { top: 350px; left: 180px; opacity: 0; }
+        }
+
+        @keyframes moveParticle3 {
+            0% { top: 250px; left: 50%; opacity: 0; }
+            10% { opacity: 1; }
+            50% { top: 300px; left: 70%; }
+            90% { opacity: 1; }
+            100% { top: 350px; right: 180px; opacity: 0; }
+        }
+
+        @keyframes moveParticle4 {
+            0% { top: 400px; left: 180px; opacity: 0; }
+            10% { opacity: 1; }
+            50% { top: 450px; left: 45%; }
+            90% { opacity: 1; }
+            100% { top: 500px; left: 50%; opacity: 0; }
+        }
+
+        @keyframes moveParticle5 {
+            0% { top: 400px; right: 180px; opacity: 0; }
+            10% { opacity: 1; }
+            50% { top: 450px; right: 45%; }
+            90% { opacity: 1; }
+            100% { top: 500px; left: 50%; opacity: 0; }
+        }
+
+        @keyframes moveParticle6 {
+            0% { top: 510px; left: 50%; opacity: 0; }
+            10% { opacity: 1; }
+            30% { top: 580px; left: 40%; }
+            60% { top: 580px; left: 50%; }
+            90% { opacity: 1; top: 580px; right: 40%; }
+            100% { top: 580px; right: 30%; opacity: 0; }
+        }
+
+        @keyframes moveParticle7 {
+            0% { top: 680px; left: 225px; opacity: 0; }
+            10% { opacity: 1; }
+            50% { top: 700px; left: 45%; }
+            90% { opacity: 1; }
+            100% { top: 720px; left: 50%; opacity: 0; }
+        }
+
+        @keyframes moveParticle8 {
+            0% { top: 680px; left: 50%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 720px; left: 50%; opacity: 0; }
+        }
+
+        @keyframes moveParticle9 {
+            0% { top: 680px; right: 225px; opacity: 0; }
+            10% { opacity: 1; }
+            50% { top: 700px; right: 45%; }
+            90% { opacity: 1; }
+            100% { top: 720px; left: 50%; opacity: 0; }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .flowchart-container {
+                padding: 20px;
+            }
+            
+            .flowchart {
+                height: 600px;
+                transform: scale(0.8);
+            }
+            
+            .flow-node {
+                font-size: 0.8rem;
+                padding: 10px;
+            }
+            
+            .legend {
+                position: relative;
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>CTU-DB Community-StudentForum</h1>
+        <p>Data Flow Architecture</p>
+    </div>
+
+    <div class="flowchart-container">
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background: linear-gradient(135deg, #f39c12, #e67e22);"></div>
+                <span>Start/End Process</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: linear-gradient(135deg, #f1c40f, #f39c12);"></div>
+                <span>User Action</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: linear-gradient(135deg, #e67e22, #d35400);"></div>
+                <span>System Process</span>
+            </div>
+        </div>
+
+        <div class="flowchart">
+            <!-- SVG for arrows -->
+            <svg width="100%" height="100%" style="position: absolute; top: 0; left: 0; z-index: 5;">
+                <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="7" 
+                            refX="9" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#e67e22" />
+                    </marker>
+                </defs>
+                
+                <!-- Start to Auth -->
+                <line class="arrow-line" x1="50%" y1="130" x2="50%" y2="180" />
+                
+                <!-- Auth to Database -->
+                <path class="arrow-curved" d="M 45% 250 Q 35% 275 180 300" />
+                
+                <!-- Auth to Forum -->
+                <path class="arrow-curved" d="M 55% 250 Q 65% 275 75% 300" />
+                
+                <!-- Database to Decision -->
+                <line class="arrow-line" x1="180" y1="400" x2="45%" y2="450" />
+                
+                <!-- Forum to Decision -->
+                <line class="arrow-line" x1="75%" y1="400" x2="55%" y2="450" />
+                
+                <!-- Decision to Post -->
+                <line class="arrow-line" x1="45%" y1="510" x2="225" y2="600" />
+                
+                <!-- Decision to Validate -->
+                <line class="arrow-line" x1="50%" y1="510" x2="50%" y2="600" />
+                
+                <!-- Decision to Display -->
+                <line class="arrow-line" x1="55%" y1="510" x2="75%" y2="600" />
+                
+                <!-- All to End -->
+                <line class="arrow-line" x1="225" y1="680" x2="45%" y2="720" />
+                <line class="arrow-line" x1="50%" y1="680" x2="50%" y2="720" />
+                <line class="arrow-line" x1="75%" y1="680" x2="55%" y2="720" />
+            </svg>
+
+            <!-- Flow Nodes -->
+            <div class="flow-node start-node">
+                <div>User Access<br>Portal</div>
+            </div>
+
+            <div class="flow-node auth-node">
+                <div>Authentication<br>& Login</div>
+            </div>
+
+            <div class="flow-node database-node">
+                <div>CTU Database<br>Connection</div>
+            </div>
+
+            <div class="flow-node forum-node">
+                <div>Forum<br>Interface</div>
+            </div>
+
+            <div class="flow-node decision-node">
+                <div class="decision-content">User<br>Action?</div>
+            </div>
+
+            <div class="flow-node post-node">
+                <div>Create/Edit<br>Posts</div>
+            </div>
+
+            <div class="flow-node validate-node">
+                <div>Content<br>Validation</div>
+            </div>
+
+            <div class="flow-node display-node">
+                <div>Display to<br>Community</div>
+            </div>
+
+            <div class="flow-node end-node">
+                <div>Update Database<br>& Notifications</div>
+            </div>
+
+            <!-- Animated Particles -->
+            <div class="particle particle-1"></div>
+            <div class="particle particle-2"></div>
+            <div class="particle particle-3"></div>
+            <div class="particle particle-4"></div>
+            <div class="particle particle-5"></div>
+            <div class="particle particle-6"></div>
+            <div class="particle particle-7"></div>
+            <div class="particle particle-8"></div>
+            <div class="particle particle-9"></div>
+
+            <!-- Data Labels -->
+            <div class="data-label" style="top: 155px; left: 52%;">User Credentials</div>
+            <div class="data-label" style="top: 275px; left: 25%;">Query Data</div>
+            <div class="data-label" style="top: 275px; right: 25%;">Forum Content</div>
+            <div class="data-label" style="top: 425px; left: 30%;">User Input</div>
+            <div class="data-label" style="top: 425px; right: 30%;">Interface Data</div>
+            <div class="data-label" style="top: 555px; left: 35%;">Post Data</div>
+            <div class="data-label" style="top: 555px; right: 35%;">Display Data</div>
+            <div class="data-label" style="bottom: 100px; left: 52%;">Notifications</div>
+        </div>
+    </div>
+
+    <script>
+        // Add hover effects and tooltips
+        function addInteractivity() {
+            const nodes = document.querySelectorAll('.flow-node');
+            
+            nodes.forEach((node, index) => {
+                node.addEventListener('mouseenter', () => {
+                    node.style.zIndex = '20';
+                    
+                    // Create ripple effect
+                    const ripple = document.createElement('div');
+                    ripple.style.position = 'absolute';
+                    ripple.style.borderRadius = '50%';
+                    ripple.style.background = 'rgba(241, 196, 15, 0.3)';
+                    ripple.style.width = '0';
+                    ripple.style.height = '0';
+                    ripple.style.left = '50%';
+                    ripple.style.top = '50%';
+                    ripple.style.transform = 'translate(-50%, -50%)';
+                    ripple.style.animation = 'rippleEffect 0.6s ease-out';
+                    ripple.style.pointerEvents = 'none';
+                    
+                    node.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        if (ripple.parentNode) {
+                            ripple.remove();
+                        }
+                    }, 600);
+                });
+                
+                node.addEventListener('mouseleave', () => {
+                    node.style.zIndex = '10';
+                });
+            });
+        }
+
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes rippleEffect {
+                0% {
+                    width: 0;
+                    height: 0;
+                    opacity: 1;
+                }
+                100% {
+                    width: 200px;
+                    height: 200px;
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Add background animation
+        function createBackgroundParticles() {
+            const container = document.body;
+            
+            setInterval(() => {
+                const particle = document.createElement('div');
+                particle.style.position = 'fixed';
+                particle.style.width = Math.random() * 6 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.background = `rgba(${Math.random() > 0.5 ? '241, 196, 15' : '243, 156, 18'}, ${Math.random() * 0.3 + 0.1})`;
+                particle.style.borderRadius = '50%';
+                particle.style.left = Math.random() * window.innerWidth + 'px';
+                particle.style.top = window.innerHeight + 'px';
+                particle.style.pointerEvents = 'none';
+                particle.style.zIndex = '-1';
+                
+                container.appendChild(particle);
+                
+                const duration = Math.random() * 3000 + 2000;
+                const endY = -100;
+                
+                particle.animate([
+                    { transform: 'translateY(0px)', opacity: 0 },
+                    { transform: 'translateY(-50px)', opacity: 1 },
+                    { transform: `translateY(${endY}px)`, opacity: 0 }
+                ], {
+                    duration: duration,
+                    easing: 'linear'
+                }).onfinish = () => {
+                    particle.remove();
+                };
+            }, 500);
+        }
+
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                addInteractivity();
+                createBackgroundParticles();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

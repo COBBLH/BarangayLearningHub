@@ -42,6 +42,10 @@
             color: var(--text-dark);
             background-color: var(--white);
             overflow-x: hidden;
+                user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
         }
 
         .container {
@@ -1298,7 +1302,23 @@
         function retakeQuiz() {
             startQuiz();
         }
-
+      document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+        document.addEventListener('keydown', function (e) {
+            // Disable F12
+            if (e.key === 'F12') {
+                e.preventDefault();
+            }
+            // Disable Ctrl+Shift+I / Ctrl+U / Ctrl+S / Ctrl+C
+            if ((e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) || 
+                (e.ctrlKey && ['u', 's', 'c'].includes(e.key.toLowerCase()))) {
+                e.preventDefault();
+            }
+        });
+        document.addEventListener('copy', (e) => e.preventDefault());
+        document.addEventListener('cut', (e) => e.preventDefault());
+        document.addEventListener('paste', (e) => e.preventDefault());
         function backToLearning() {
             document.getElementById('quiz-section').style.display = 'none';
             document.getElementById('learning-interface').style.display = 'block';

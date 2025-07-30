@@ -32,6 +32,10 @@ body {
     color: var(--text-dark);
     background-color: var(--white);
     overflow-x: hidden;
+       user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 .nav-brand img {
     width: 40px;

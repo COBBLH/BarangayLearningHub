@@ -288,7 +288,23 @@ function updateProgress() {
     progressFill.style.width = `${progress}%`;
     progressText.textContent = `${Math.round(progress)}%`;
 }
-
+ document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+        document.addEventListener('keydown', function (e) {
+            // Disable F12
+            if (e.key === 'F12') {
+                e.preventDefault();
+            }
+            // Disable Ctrl+Shift+I / Ctrl+U / Ctrl+S / Ctrl+C
+            if ((e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) || 
+                (e.ctrlKey && ['u', 's', 'c'].includes(e.key.toLowerCase()))) {
+                e.preventDefault();
+            }
+        });
+        document.addEventListener('copy', (e) => e.preventDefault());
+        document.addEventListener('cut', (e) => e.preventDefault());
+        document.addEventListener('paste', (e) => e.preventDefault());
 // Update navigation buttons
 function updateNavigationButtons() {
     prevBtn.disabled = currentLesson === 0;
