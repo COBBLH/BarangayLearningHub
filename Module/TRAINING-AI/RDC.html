@@ -1,0 +1,1430 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsible Digital Citizen Module - Barangay Learning Hub</title>
+     <link rel="icon" href="..\..\BLH_logo.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1e3a8a;
+            --light-blue: #3b82f6;
+            --accent-yellow: #fbbf24;
+            --dark-yellow: #f59e0b;
+            --success-green: #059669;
+            --danger-red: #dc2626;
+            --warning-orange: #ea580c;
+            --purple: #7c3aed;
+            --cyan: #0891b2;
+            --pink: #be185d;
+            --white: #ffffff;
+            --light-gray: #f8fafc;
+            --gray: #64748b;
+            --dark-gray: #334155;
+            --text-dark: #1e293b;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-blue) 100%);
+            box-shadow: var(--shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar {
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .nav-brand i {
+            margin-right: 0.5rem;
+            color: var(--accent-yellow);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+.nav-brand img {
+    width: 40px;
+    height: 40px;
+    margin-right: 0.5rem;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--accent-yellow);
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--purple) 0%, var(--cyan) 100%);
+            padding: 4rem 0;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 20s infinite linear;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--white);
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            background: var(--accent-yellow);
+            color: var(--primary-blue);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cta-button:hover {
+            background: var(--dark-yellow);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .floating-image {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            animation: float-gentle 3s ease-in-out infinite;
+        }
+
+        /* Learning Interface */
+        .learning-interface {
+            padding: 4rem 0;
+            background: var(--light-gray);
+        }
+
+        .module-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .module-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            background: var(--white);
+            border-radius: 50px;
+            height: 30px;
+            max-width: 400px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--purple), var(--cyan));
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 50px;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .lesson-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .lesson-content {
+            animation: fadeInLeft 0.6s ease;
+        }
+
+        .lesson-content h3 {
+            color: var(--primary-blue);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-content p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .lesson-content ul, .lesson-content ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .lesson-content strong {
+            color: var(--primary-blue);
+        }
+
+        .lesson-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeInRight 0.6s ease;
+        }
+
+        .content-image {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .content-image:hover {
+            transform: scale(1.05);
+        }
+
+        .navigation-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-btn:hover {
+            background: var(--light-blue);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .nav-btn:disabled {
+            background: var(--gray);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .quiz-btn {
+            background: var(--accent-yellow);
+            color: var(--primary-blue);
+        }
+
+        .quiz-btn:hover {
+            background: var(--dark-yellow);
+        }
+
+        /* Quiz Section */
+        .quiz-section {
+            padding: 4rem 0;
+            background: var(--white);
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .quiz-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .quiz-progress {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .quiz-progress-bar {
+            background: var(--light-gray);
+            border-radius: 50px;
+            height: 20px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .quiz-progress-fill {
+            background: linear-gradient(90deg, var(--success-green), var(--accent-yellow));
+            height: 100%;
+            width: 10%;
+            transition: width 0.5s ease;
+            border-radius: 50px;
+        }
+
+        .question-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 2rem;
+            border: 3px solid var(--cyan);
+        }
+
+        .question-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .answer-options {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .answer-option {
+            background: var(--light-gray);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .answer-option:hover {
+            background: rgba(124, 58, 237, 0.1);
+            border-color: var(--purple);
+            transform: translateX(10px);
+        }
+
+        .answer-option.selected {
+            background: rgba(8, 145, 178, 0.2);
+            border-color: var(--cyan);
+        }
+
+        .answer-option.correct {
+            background: rgba(5, 150, 105, 0.2);
+            border-color: var(--success-green);
+        }
+
+        .answer-option.incorrect {
+            background: rgba(220, 38, 38, 0.2);
+            border-color: var(--danger-red);
+        }
+
+        .quiz-navigation {
+            text-align: center;
+        }
+
+        /* Quiz Results */
+        .quiz-results {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .results-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .results-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .results-icon i {
+            color: var(--accent-yellow);
+            animation: bounce 1s ease infinite;
+        }
+
+        .score-display {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin: 1rem 0;
+        }
+
+        .score-number {
+            color: var(--success-green);
+        }
+
+        .results-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+         /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-blue) 100%);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3,
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--accent-yellow);
+        }
+
+        .footer-section p {
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            opacity: 0.9;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-yellow);
+            opacity: 1;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-yellow);
+            color: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0.8;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+
+        @keyframes float-gentle {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px var(--accent-yellow); }
+            to { text-shadow: 0 0 20px var(--accent-yellow), 0 0 30px var(--accent-yellow); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .animate-fadeInRight {
+            animation: fadeInRight 0.8s ease forwards;
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .animate-slideIn {
+            animation: slideIn 0.6s ease forwards;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .lesson-container {
+                grid-template-columns: 1fr;
+                padding: 2rem;
+            }
+
+            .navigation-controls {
+                flex-direction: column;
+            }
+
+            .footer-bottom-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .results-actions {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero {
+                padding: 2rem 0;
+            }
+
+            .learning-interface,
+            .quiz-section {
+                padding: 2rem 0;
+            }
+
+            .lesson-container,
+            .question-card,
+            .results-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <img src="..\..\Maps\blhimages\BLH_logo.png"> 
+                    <span>Barangay Learning Hub</span>
+                </div>
+                <div class="nav-menu" id="nav-menu">
+                   <a href="../../index.html" class="nav-link">Home</a>
+                    <a href="../../Maps/index.html" class="nav-link">Maps</a>
+                    <a href="index.html" class="nav-link active">Modules</a>
+                    <a href="../../Books/index.html" class="nav-link">Reading Corner</a>
+                    <a href="../../Calendar.html" class="nav-link">Calendar</a>
+                    <a href="../../About Us.html" class="nav-link ">About Us</a>
+                </div>
+                <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title animate-fadeInUp">Responsible Digital Citizen Module</h1>
+                    <p class="hero-subtitle animate-fadeInUp">Government Initiative for Free Community Education</p>
+                    <p class="hero-description animate-fadeInUp">Learn about digital citizenship, social media responsibility, cyberbullying prevention, and internet etiquette for safe online participation.</p>
+                    <button class="cta-button animate-fadeInUp" onclick="startLearning()">
+                        Start Learning <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="hero-image animate-fadeInRight">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Digital Citizenship" class="floating-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Module Interface -->
+        <section class="learning-interface" id="learning-interface" style="display: none;">
+            <div class="container">
+                <div class="module-header">
+                    <h2 id="module-title">Responsible Digital Citizen Module</h2>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                        <span class="progress-text" id="progress-text">0%</span>
+                    </div>
+                </div>
+
+                <div class="lesson-container" id="lesson-container">
+                    <div class="lesson-content" id="lesson-content">
+                        <!-- Lesson content will be dynamically loaded here -->
+                    </div>
+                    
+                    <div class="lesson-image" id="lesson-image">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Digital Citizenship" class="content-image">
+                    </div>
+                </div>
+
+                <div class="navigation-controls">
+                    <button class="nav-btn prev-btn" id="prev-btn" onclick="previousLesson()">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button class="nav-btn next-btn" id="next-btn" onclick="nextLesson()">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="nav-btn quiz-btn" id="quiz-btn" onclick="startQuiz()" style="display: none;">
+                        Take Quiz <i class="fas fa-brain"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section class="quiz-section" id="quiz-section" style="display: none;">
+            <div class="container">
+                <div class="quiz-header">
+                    <h2>Digital Citizenship Quiz</h2>
+                    <div class="quiz-progress">
+                        <span id="quiz-progress-text">Question 1 of 12</span>
+                        <div class="quiz-progress-bar">
+                            <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-container" id="quiz-container">
+                    <div class="question-card animate-slideIn" id="question-card">
+                        <h3 id="question-text">Loading question...</h3>
+                        <div class="answer-options" id="answer-options">
+                            <!-- Answer options will be dynamically loaded -->
+                        </div>
+                    </div>
+
+                    <div class="quiz-navigation">
+                        <button class="nav-btn" id="quiz-next-btn" onclick="nextQuestion()" disabled>
+                            Next Question <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quiz Results -->
+                <div class="quiz-results" id="quiz-results" style="display: none;">
+                    <div class="results-card animate-fadeIn">
+                        <div class="results-icon">
+                            <i class="fas fa-shield-alt" id="results-icon"></i>
+                        </div>
+                        <h2 id="results-title">Quiz Complete!</h2>
+                        <div class="score-display">
+                            <span class="score-number" id="final-score">0</span>
+                            <span class="score-total">/ 12</span>
+                        </div>
+                        <p id="results-message">Great job!</p>
+                        <div class="results-actions">
+                            <button class="nav-btn" onclick="retakeQuiz()">
+                                <i class="fas fa-redo"></i> Retake Quiz
+                            </button>
+                            <button class="nav-btn" onclick="backToLearning()">
+                                <i class="fas fa-book"></i> Back to Learning
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+  <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Barangay Learning Hub</h3>
+                    <p>Empowering communities through digital education and technology access.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/COBBarangayLearningHub"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="/Module/index.html">Learning Modules</a></li>
+                        <li><a href="/Module/index.html">Training Programs</a></li>
+                        <li><a href="About Us.html">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Programs</h4>
+                    <ul>
+                        <li><a href="Module/index.html">Digital Literacy</a></li>
+                        <li><a href="Module/index.html">Computer Training</a></li>
+                        <li><a href="Module/index.html">Internet Safety</a></li>
+                        <li><a href="Module/index.html">Youth Programs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Barangay Learning Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Learning Module Data with content from RDC training document
+        const moduleData = {
+            lessons: [
+                {
+                    title: "Introduction to Digital Citizenship",
+                    content: `
+                        <h3>Who Are Considered Digital Citizens?</h3>
+                        <p>A digital citizen is:</p>
+                        <ul>
+                            <li><strong>A person who possesses the knowledge and abilities</strong> to successfully interact with others, engage in society, and produce digital material using digital technology.</li>
+                            <li><strong>Someone who participates responsibly</strong> in social activities using the internet and digital technologies.</li>
+                        </ul>
+
+                        <h4>Why Digital Citizenship Matters:</h4>
+                        <ul>
+                            <li><strong>Safe Online Participation:</strong> Understanding how to navigate digital spaces safely</li>
+                            <li><strong>Responsible Technology Use:</strong> Using digital tools ethically and appropriately</li>
+                            <li><strong>Digital Literacy:</strong> Developing skills to effectively use technology</li>
+                            <li><strong>Community Building:</strong> Creating positive online communities and relationships</li>
+                        </ul>
+
+                        <h4>Key Areas of Digital Citizenship:</h4>
+                        <ul>
+                            <li>Digital communication and etiquette</li>
+                            <li>Online safety and security</li>
+                            <li>Information literacy and verification</li>
+                            <li>Respect for digital rights and responsibilities</li>
+                            <li>Understanding digital footprints</li>
+                        </ul>
+                    `,
+                    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Understanding Social Media",
+                    content: `
+                        <h3>What is Social Media?</h3>
+                        <p>Social media is:</p>
+                        <ul>
+                            <li><strong>A collective term</strong> for websites and applications focused on communication, community-based input, interaction, content-sharing, and collaboration.</li>
+                            <li><strong>Ways individuals connect</strong> in virtual communities and networks by creating, sharing, and exchanging information and ideas.</li>
+                        </ul>
+
+                        <h4>Types of Social Media:</h4>
+                        <ul>
+                            <li><strong>Social Network:</strong> Platforms for connecting with friends and family</li>
+                            <li><strong>Media Sharing Network:</strong> Platforms for sharing photos, videos, and other media</li>
+                            <li><strong>Discussion Forum:</strong> Platforms for topic-based discussions</li>
+                            <li><strong>Consumer Review Network:</strong> Platforms for product and service reviews</li>
+                            <li><strong>Blogging and Publishing Network:</strong> Platforms for sharing written content</li>
+                        </ul>
+
+                        <h4>Advantages of Social Media:</h4>
+                        <ul>
+                            <li><strong>Upskilling yourself:</strong> Learning new skills and knowledge</li>
+                            <li><strong>Exchanging knowledge:</strong> Sharing and receiving information</li>
+                            <li><strong>Connecting people:</strong> Building relationships across distances</li>
+                            <li><strong>Providing awareness:</strong> Spreading important information and causes</li>
+                        </ul>
+
+                        <h4>Disadvantages of Social Media:</h4>
+                        <ul>
+                            <li><strong>Disconnecting people:</strong> Reducing face-to-face interactions</li>
+                            <li><strong>License to be hurtful:</strong> Enabling negative behavior</li>
+                            <li><strong>Fake news / false information:</strong> Spreading misinformation</li>
+                            <li><strong>Securing data:</strong> Privacy and security concerns</li>
+                        </ul>
+                    `,
+                    image: "https://images.unsplash.com/photo-1611605698335-8b1569810432?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Social Media Do's and Don'ts",
+                    content: `
+                        <h3>Social Media Best Practices</h3>
+                        <p>Follow these guidelines to use social media responsibly and safely:</p>
+
+                        <h4>Essential Do's:</h4>
+                        <ul>
+                            <li><strong>Be mindful of the things you are sharing,</strong> especially personal information.</li>
+                            <li><strong>Trust only legitimate sources or sites</strong> when sharing information.</li>
+                            <li><strong>Check the authenticity of the information</strong> before sharing.</li>
+                            <li><strong>Be sensitive about what you share</strong> - consider how it might affect others.</li>
+                            <li><strong>Use social media to inspire, not to hate</strong> - spread positivity.</li>
+                            <li><strong>Respect others' opinions and beliefs</strong> even when you disagree.</li>
+                        </ul>
+
+                        <h4>Important Don'ts:</h4>
+                        <ul>
+                            <li><strong>Your whereabouts are not needed on social media</strong> - avoid sharing location details.</li>
+                            <li><strong>Not everything you see is true</strong> - don't believe everything without verification.</li>
+                            <li><strong>Cyberbullying has no place on social media</strong> - never engage in or support bullying.</li>
+                            <li><strong>Keep up with trends, but don't let them control you</strong> - maintain your values.</li>
+                        </ul>
+
+                        <h4>Privacy and Safety Tips:</h4>
+                        <ul>
+                            <li>Review your privacy settings regularly</li>
+                            <li>Think twice before posting personal information</li>
+                            <li>Be cautious about accepting friend requests from strangers</li>
+                            <li>Report inappropriate content or behavior</li>
+                            <li>Use strong, unique passwords for your accounts</li>
+                        </ul>
+                    `,
+                    image: "https://images.unsplash.com/photo-1560472355-536de3962603?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Understanding Cyberbullying",
+                    content: `
+                        <h3>What is Cyberbullying?</h3>
+                        <p>To understand cyberbullying, let's break down the terms:</p>
+                        
+                        <h4>What is Cyber?</h4>
+                        <p><strong>Related to computers, information technology, and virtual reality.</strong></p>
+                        <p>Examples:</p>
+                        <ul>
+                            <li>Computer</li>
+                            <li>Internet</li>
+                            <li>Virtual reality</li>
+                        </ul>
+
+                        <h4>What is Bullying?</h4>
+                        <p><strong>Seeking to harm, intimidate, or coerce someone perceived as vulnerable.</strong></p>
+
+                        <h4>What is Cyberbullying?</h4>
+                        <p><strong>A form of bullying that occurs through digital platforms.</strong></p>
+
+                        <h4>Common Forms of Cyberbullying:</h4>
+                        <ul>
+                            <li><strong>Harassment:</strong> Repeatedly sending offensive messages</li>
+                            <li><strong>Impersonation:</strong> Creating fake profiles to damage reputation</li>
+                            <li><strong>Exclusion:</strong> Deliberately leaving someone out of online groups</li>
+                            <li><strong>Doxxing:</strong> Sharing personal information without permission</li>
+                            <li><strong>Trolling:</strong> Posting inflammatory content to provoke reactions</li>
+                            <li><strong>Cyberstalking:</strong> Persistent unwanted contact online</li>
+                        </ul>
+
+                        <h4>Warning Signs:</h4>
+                        <ul>
+                            <li>Sudden changes in device usage</li>
+                            <li>Emotional distress after using devices</li>
+                            <li>Withdrawal from social activities</li>
+                            <li>Declining academic performance</li>
+                        </ul>
+                    `,
+                    image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Effects of Cyberbullying",
+                    content: `
+                        <h3>The Impact of Cyberbullying</h3>
+                        <p>Cyberbullying can have serious and lasting effects on victims. Understanding these impacts helps us recognize the importance of prevention.</p>
+
+                        <h4>Emotional Effects:</h4>
+                        <ul>
+                            <li><strong>Humiliation:</strong> Feeling embarrassed and ashamed</li>
+                            <li><strong>Isolation:</strong> Feeling alone and disconnected from others</li>
+                            <li><strong>Anger:</strong> Frustration and resentment toward the situation</li>
+                            <li><strong>Powerlessness:</strong> Feeling unable to control or stop the bullying</li>
+                        </ul>
+
+                        <h4>Mental Effects:</h4>
+                        <ul>
+                            <li><strong>Depression and anxiety:</strong> Persistent sadness and worry</li>
+                            <li><strong>Low self-esteem:</strong> Negative self-perception and confidence issues</li>
+                            <li><strong>Academic issues:</strong> Difficulty concentrating and declining grades</li>
+                            <li><strong>Suicidal thoughts and self-harm:</strong> Extreme emotional distress</li>
+                        </ul>
+
+                        <h4>Behavioral Effects:</h4>
+                        <ul>
+                            <li><strong>Using drugs and alcohol:</strong> Turning to substances to cope</li>
+                            <li><strong>Skipping school/classes:</strong> Avoiding places where bullying might occur</li>
+                            <li><strong>Carrying a weapon:</strong> Feeling the need for protection</li>
+                            <li><strong>Aggressive behavior:</strong> Acting out due to frustration</li>
+                        </ul>
+
+                        <h4>Physical Effects:</h4>
+                        <ul>
+                            <li><strong>Gastrointestinal issues:</strong> Stomach problems due to stress</li>
+                            <li><strong>Eating disorders:</strong> Changes in eating patterns</li>
+                            <li><strong>Sleep disturbances:</strong> Difficulty sleeping or nightmares</li>
+                            <li><strong>Headaches and fatigue:</strong> Physical manifestations of stress</li>
+                        </ul>
+                    `,
+                    image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Internet Etiquette (Netiquette)",
+                    content: `
+                        <h3>Guidelines for Respectful Online Behavior</h3>
+                        <p>Internet etiquette, or "netiquette," is a set of guidelines for respectful and appropriate behavior online. Following these rules helps create a positive digital environment for everyone.</p>
+
+                        <h4>Core Netiquette Guidelines:</h4>
+                        <ol>
+                            <li><strong>Be polite and respect others</strong> - Treat people online as you would in person</li>
+                            <li><strong>Protect your privacy</strong> - Be careful about sharing personal information</li>
+                            <li><strong>Verify information</strong> - Check facts before sharing content</li>
+                            <li><strong>Be mindful of your digital footprint</strong> - Remember that online actions have consequences</li>
+                            <li><strong>Respect intellectual property</strong> - Don't steal or misuse others' work</li>
+                            <li><strong>Promote positive interactions</strong> - Encourage constructive discussions</li>
+                            <li><strong>Be aware of online security</strong> - Protect yourself and others from threats</li>
+                            <li><strong>Practice digital literacy</strong> - Stay informed about technology and online trends</li>
+                            <li><strong>Be a good digital role model</strong> - Set a positive example for others</li>
+                            <li><strong>Report inappropriate behavior</strong> - Help maintain safe online spaces</li>
+                            <li><strong>Use proper language and tone</strong> - Communicate clearly and respectfully</li>
+                            <li><strong>Follow community guidelines</strong> - Respect the rules of each platform</li>
+                        </ol>
+
+                        <h4>Additional Tips:</h4>
+                        <ul>
+                            <li>Think before you post - consider how your message might be received</li>
+                            <li>Use appropriate capitalization (ALL CAPS = SHOUTING)</li>
+                            <li>Be patient with others who may be less tech-savvy</li>
+                            <li>Respect cultural differences and diverse perspectives</li>
+                        </ul>
+                    `,
+                    image: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Facebook Privacy Settings Guide",
+                    content: `
+                        <h3>How to Access Facebook Privacy Settings</h3>
+                        <p>Protecting your privacy on social media platforms is crucial. Here's a step-by-step guide to managing your Facebook privacy settings:</p>
+
+                        <h4>Getting Started:</h4>
+                        <ol>
+                            <li><strong>Log in to your Facebook account.</strong></li>
+                            <li><strong>Click the down arrow icon</strong> in the top-right corner.</li>
+                            <li><strong>Select "Settings & Privacy".</strong></li>
+                        </ol>
+
+                        <h4>Key Privacy Areas to Review:</h4>
+
+                        <h5>Privacy Settings:</h5>
+                        <ul>
+                            <li><strong>Review and adjust settings</strong> like who can see your posts or contact you.</li>
+                            <li><strong>Use "Privacy Shortcuts"</strong> for quick access.</li>
+                            <li><strong>Customize according to your preferences.</strong></li>
+                        </ul>
+
+                        <h5>Timeline and Tagging:</h5>
+                        <ul>
+                            <li><strong>Control who can post or tag you.</strong></li>
+                            <li><strong>Manage visibility of posts you're tagged in.</strong></li>
+                        </ul>
+
+                        <h5>Blocking:</h5>
+                        <ul>
+                            <li><strong>Block specific users, messages, and app invites.</strong></li>
+                        </ul>
+
+                        <h5>Security and Login:</h5>
+                        <ul>
+                            <li><strong>Enable two-factor authentication.</strong></li>
+                            <li><strong>Manage login alerts and trusted contacts.</strong></li>
+                        </ul>
+
+                        <h5>Apps and Websites:</h5>
+                        <ul>
+                            <li><strong>Review apps linked to your account.</strong></li>
+                            <li><strong>Remove ones you no longer use.</strong></li>
+                        </ul>
+
+                        <h5>Other Important Settings:</h5>
+                        <ul>
+                            <li><strong>Notifications:</strong> Control what and how you receive notifications</li>
+                            <li><strong>Profile and Tagging:</strong> Manage who can tag you and view tagged content</li>
+                            <li><strong>Location Settings:</strong> Control Facebook's access to your location</li>
+                            <li><strong>Activity Review:</strong> Review and manage past posts, comments, and interactions</li>
+                        </ul>
+                    `,
+                    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                }
+            ]
+        };
+
+        // Quiz Questions based on RDC content
+        const quizQuestions = [
+            {
+                question: "What defines a digital citizen?",
+                options: ["Someone who only uses computers", "A person who possesses knowledge and abilities to interact responsibly using digital technology", "Someone who works in IT", "A person who avoids technology"],
+                correct: 1
+            },
+            {
+                question: "Which is NOT a type of social media mentioned in the lesson?",
+                options: ["Social Network", "Media Sharing Network", "Gaming Platform", "Discussion Forum"],
+                correct: 2
+            },
+            {
+                question: "What should you NOT share on social media according to the guidelines?",
+                options: ["Your interests", "Your whereabouts", "Your opinions", "Your achievements"],
+                correct: 1
+            },
+            {
+                question: "What does 'Cyber' refer to?",
+                options: ["Only computers", "Related to computers, information technology, and virtual reality", "Internet only", "Mobile phones"],
+                correct: 1
+            },
+            {
+                question: "Which is an emotional effect of cyberbullying?",
+                options: ["Headaches", "Humiliation", "Sleep disturbances", "Eating disorders"],
+                correct: 1
+            },
+            {
+                question: "What is the first step in netiquette?",
+                options: ["Use proper grammar", "Be polite and respect others", "Check your spelling", "Use emojis"],
+                correct: 1
+            },
+            {
+                question: "To access Facebook privacy settings, you should click:",
+                options: ["The home button", "The down arrow icon in top-right corner", "The notification bell", "Your profile picture"],
+                correct: 1
+            },
+            {
+                question: "Which is an advantage of social media?",
+                options: ["Disconnecting people", "Fake news", "Upskilling yourself", "License to be hurtful"],
+                correct: 2
+            },
+            {
+                question: "What should you do before sharing information online?",
+                options: ["Share immediately", "Check the authenticity of the information", "Ask friends first", "Post without thinking"],
+                correct: 1
+            },
+            {
+                question: "Which is a physical effect of cyberbullying?",
+                options: ["Depression", "Low self-esteem", "Gastrointestinal issues", "Anger"],
+                correct: 2
+            },
+            {
+                question: "What does two-factor authentication help with?",
+                options: ["Faster login", "Security and login protection", "Better profile pictures", "More friends"],
+                correct: 1
+            },
+            {
+                question: "According to netiquette, what should you do about inappropriate behavior online?",
+                options: ["Ignore it", "Join in", "Report inappropriate behavior", "Share it with others"],
+                correct: 2
+            }
+        ];
+
+        // Global variables
+        let currentLesson = 0;
+        let currentQuestion = 0;
+        let selectedAnswers = [];
+        let score = 0;
+
+        // Start learning function
+        function startLearning() {
+            document.querySelector('.hero').style.display = 'none';
+            document.getElementById('learning-interface').style.display = 'block';
+            loadLesson(0);
+        }
+
+        // Load lesson
+        function loadLesson(lessonIndex) {
+            currentLesson = lessonIndex;
+            const lesson = moduleData.lessons[lessonIndex];
+            
+            document.getElementById('lesson-content').innerHTML = lesson.content;
+            document.querySelector('.content-image').src = lesson.image;
+            
+            updateProgress();
+            updateNavigationButtons();
+        }
+
+        // Update progress
+        function updateProgress() {
+            const progress = ((currentLesson + 1) / moduleData.lessons.length) * 100;
+            document.getElementById('progress-fill').style.width = `${progress}%`;
+            document.getElementById('progress-text').textContent = `${Math.round(progress)}%`;
+        }
+
+        // Update navigation buttons
+        function updateNavigationButtons() {
+            document.getElementById('prev-btn').disabled = currentLesson === 0;
+            
+            if (currentLesson === moduleData.lessons.length - 1) {
+                document.getElementById('next-btn').style.display = 'none';
+                document.getElementById('quiz-btn').style.display = 'inline-flex';
+            } else {
+                document.getElementById('next-btn').style.display = 'inline-flex';
+                document.getElementById('quiz-btn').style.display = 'none';
+            }
+        }
+
+        // Navigation functions
+        function previousLesson() {
+            if (currentLesson > 0) {
+                loadLesson(currentLesson - 1);
+            }
+        }
+
+        function nextLesson() {
+            if (currentLesson < moduleData.lessons.length - 1) {
+                loadLesson(currentLesson + 1);
+            }
+        }
+
+        // Quiz functions
+        function startQuiz() {
+            document.getElementById('learning-interface').style.display = 'none';
+            document.getElementById('quiz-section').style.display = 'block';
+            currentQuestion = 0;
+            selectedAnswers = [];
+            score = 0;
+            loadQuestion(0);
+        }
+
+        function loadQuestion(questionIndex) {
+            currentQuestion = questionIndex;
+            const question = quizQuestions[questionIndex];
+            
+            document.getElementById('question-text').textContent = question.question;
+            
+            const answerOptions = document.getElementById('answer-options');
+            answerOptions.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'answer-option';
+                optionDiv.innerHTML = `
+                    <div style="width: 30px; height: 30px; border: 2px solid var(--gray); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <span style="font-weight: bold; color: var(--gray);">${String.fromCharCode(65 + index)}</span>
+                    </div>
+                    <span>${option}</span>
+                `;
+                optionDiv.onclick = () => selectAnswer(index, optionDiv);
+                answerOptions.appendChild(optionDiv);
+            });
+            
+            updateQuizProgress();
+            document.getElementById('quiz-next-btn').disabled = true;
+        }
+
+        function selectAnswer(answerIndex, optionElement) {
+            document.querySelectorAll('.answer-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            optionElement.classList.add('selected');
+            selectedAnswers[currentQuestion] = answerIndex;
+            document.getElementById('quiz-next-btn').disabled = false;
+        }
+
+        function nextQuestion() {
+            const question = quizQuestions[currentQuestion];
+            const selectedAnswer = selectedAnswers[currentQuestion];
+            
+            if (selectedAnswer === question.correct) {
+                score++;
+            }
+            
+            setTimeout(() => {
+                if (currentQuestion < quizQuestions.length - 1) {
+                    loadQuestion(currentQuestion + 1);
+                } else {
+                    showQuizResults();
+                }
+            }, 500);
+        }
+
+        function updateQuizProgress() {
+            const progress = ((currentQuestion + 1) / quizQuestions.length) * 100;
+            document.getElementById('quiz-progress-fill').style.width = `${progress}%`;
+            document.getElementById('quiz-progress-text').textContent = `Question ${currentQuestion + 1} of ${quizQuestions.length}`;
+            
+            if (currentQuestion === quizQuestions.length - 1) {
+                document.getElementById('quiz-next-btn').innerHTML = 'Finish Quiz <i class="fas fa-check"></i>';
+            }
+        }
+
+        function showQuizResults() {
+            document.getElementById('quiz-container').style.display = 'none';
+            document.getElementById('quiz-results').style.display = 'block';
+            
+            document.getElementById('final-score').textContent = score;
+            
+            let message;
+            if (score >= 10) {
+                message = "Excellent! You're a responsible digital citizen!";
+            } else if (score >= 8) {
+                message = "Good job! You understand digital citizenship well.";
+            } else if (score >= 6) {
+                message = "Not bad! Review the lessons to improve your knowledge.";
+            } else {
+                message = "Keep learning! Review the lessons to become a better digital citizen.";
+            }
+            
+            document.getElementById('results-message').textContent = message;
+        }
+
+        function retakeQuiz() {
+            startQuiz();
+        }
+
+        function backToLearning() {
+            document.getElementById('quiz-section').style.display = 'none';
+            document.getElementById('learning-interface').style.display = 'block';
+            loadLesson(0);
+        }
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+            const navMenu = document.getElementById('nav-menu');
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+        });
+    </script>
+</body>
+</html>

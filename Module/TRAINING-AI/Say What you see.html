@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Artificial Intelligence Learning Module - Barangay Learning Hub</title>
+      <link rel="icon" href="..\..\BLH_logo.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1e3a8a;
+            --light-blue: #3b82f6;
+            --accent-yellow: #fbbf24;
+            --dark-yellow: #f59e0b;
+            --success-green: #059669;
+            --danger-red: #dc2626;
+            --warning-orange: #ea580c;
+            --purple: #7c3aed;
+            --cyan: #0891b2;
+            --pink: #be185d;
+            --white: #ffffff;
+            --light-gray: #f8fafc;
+            --gray: #64748b;
+            --dark-gray: #334155;
+            --text-dark: #1e293b;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-blue) 100%);
+            box-shadow: var(--shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar {
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .nav-brand i {
+            margin-right: 0.5rem;
+            color: var(--accent-yellow);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+.nav-brand img {
+    width: 40px;
+    height: 40px;
+    margin-right: 0.5rem;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--accent-yellow);
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--light-blue) 0%, var(--accent-yellow) 100%);
+            padding: 4rem 0;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 20s infinite linear;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--white);
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            background: var(--accent-yellow);
+            color: var(--primary-blue);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cta-button:hover {
+            background: var(--dark-yellow);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .floating-image {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            animation: float-gentle 3s ease-in-out infinite;
+        }
+
+        /* Learning Interface */
+        .learning-interface {
+            padding: 4rem 0;
+            background: var(--light-gray);
+        }
+
+        .module-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .module-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            background: var(--white);
+            border-radius: 50px;
+            height: 30px;
+            max-width: 400px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--light-blue), var(--accent-yellow));
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 50px;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .lesson-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .lesson-content {
+            animation: fadeInLeft 0.6s ease;
+        }
+
+        .lesson-content h3 {
+            color: var(--primary-blue);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-content h4 {
+            color: var(--light-blue);
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .lesson-content p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .lesson-content ul, .lesson-content ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .lesson-content strong {
+            color: var(--primary-blue);
+        }
+
+        .lesson-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeInRight 0.6s ease;
+        }
+
+        .content-image {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .content-image:hover {
+            transform: scale(1.05);
+        }
+
+        .navigation-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-btn:hover {
+            background: var(--light-blue);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .nav-btn:disabled {
+            background: var(--gray);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .quiz-btn {
+            background: var(--accent-yellow);
+            color: var(--primary-blue);
+        }
+
+        .quiz-btn:hover {
+            background: var(--dark-yellow);
+        }
+
+        /* Quiz Section */
+        .quiz-section {
+            padding: 4rem 0;
+            background: var(--white);
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .quiz-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .quiz-progress {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .quiz-progress-bar {
+            background: var(--light-gray);
+            border-radius: 50px;
+            height: 20px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .quiz-progress-fill {
+            background: linear-gradient(90deg, var(--success-green), var(--accent-yellow));
+            height: 100%;
+            width: 10%;
+            transition: width 0.5s ease;
+            border-radius: 50px;
+        }
+
+        .question-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 2rem;
+            border: 3px solid var(--accent-yellow);
+        }
+
+        .question-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .answer-options {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .answer-option {
+            background: var(--light-gray);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .answer-option:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: var(--light-blue);
+            transform: translateX(10px);
+        }
+
+        .answer-option.selected {
+            background: rgba(251, 191, 36, 0.2);
+            border-color: var(--accent-yellow);
+        }
+
+        .answer-option.correct {
+            background: rgba(5, 150, 105, 0.2);
+            border-color: var(--success-green);
+        }
+
+        .answer-option.incorrect {
+            background: rgba(220, 38, 38, 0.2);
+            border-color: var(--danger-red);
+        }
+
+        .quiz-navigation {
+            text-align: center;
+        }
+
+        /* Quiz Results */
+        .quiz-results {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .results-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .results-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .results-icon i {
+            color: var(--accent-yellow);
+            animation: bounce 1s ease infinite;
+        }
+
+        .score-display {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin: 1rem 0;
+        }
+
+        .score-number {
+            color: var(--success-green);
+        }
+
+        .results-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+               /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-blue) 100%);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3,
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--accent-yellow);
+        }
+
+        .footer-section p {
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            opacity: 0.9;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-yellow);
+            opacity: 1;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-yellow);
+            color: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        .social-links a i {
+            font-size: 1.1rem;
+        }
+
+        /* Fallback for social icons if Font Awesome doesn't load */
+        .social-links a[href*="facebook"]::before {
+            content: "f" !important;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+        }
+
+        .social-links a[href*="twitter"]::before {
+            content: "t" !important;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+        }
+
+        .social-links a[href*="instagram"]::before {
+            content: "i" !important;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+        }
+
+        .social-links a[href*="youtube"]::before {
+            content: "y" !important;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0.8;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+
+        @keyframes float-gentle {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px var(--accent-yellow); }
+            to { text-shadow: 0 0 20px var(--accent-yellow), 0 0 30px var(--accent-yellow); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .animate-fadeInRight {
+            animation: fadeInRight 0.8s ease forwards;
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .animate-slideIn {
+            animation: slideIn 0.6s ease forwards;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .lesson-container {
+                grid-template-columns: 1fr;
+                padding: 2rem;
+            }
+
+            .navigation-controls {
+                flex-direction: column;
+            }
+
+            .footer-bottom-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .results-actions {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero {
+                padding: 2rem 0;
+            }
+
+            .learning-interface,
+            .quiz-section {
+                padding: 2rem 0;
+            }
+
+            .lesson-container,
+            .question-card,
+            .results-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+     <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <img src="..\..\Maps\blhimages\BLH_logo.png"> 
+                    <span>Barangay Learning Hub</span>
+                </div>
+                <div class="nav-menu" id="nav-menu">
+                   <a href="../../index.html" class="nav-link">Home</a>
+                    <a href="../../Maps/index.html" class="nav-link">Maps</a>
+                    <a href="index.html" class="nav-link active">Modules</a>
+                    <a href="../../Books/index.html" class="nav-link">Reading Corner</a>
+                    <a href="../../Calendar.html" class="nav-link">Calendar</a>
+                    <a href="../../About Us.html" class="nav-link ">About Us</a>
+                </div>
+                <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title animate-fadeInUp">Say What you see</h1>
+                    <p class="hero-subtitle animate-fadeInUp">Comprehensive AI Learning Module</p>
+                    <p class="hero-description animate-fadeInUp">Learn about AI fundamentals, explore powerful tools like "Say What You See" and InVideo.io, and understand how artificial intelligence is transforming our world.</p>
+                    <button class="cta-button animate-fadeInUp" onclick="startLearning()">
+                        Start Learning <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="hero-image animate-fadeInRight">
+                    <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Artificial Intelligence" class="floating-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Module Interface -->
+        <section class="learning-interface" id="learning-interface" style="display: none;">
+            <div class="container">
+                <div class="module-header">
+                    <h2 id="module-title">Introduction to Artificial Intelligence</h2>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                        <span class="progress-text" id="progress-text">0%</span>
+                    </div>
+                </div>
+
+                <div class="lesson-container" id="lesson-container">
+                    <div class="lesson-content" id="lesson-content">
+                        <!-- Lesson content will be dynamically loaded here -->
+                    </div>
+                    
+                    <div class="lesson-image" id="lesson-image">
+                        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="AI Learning" class="content-image">
+                    </div>
+                </div>
+
+                <div class="navigation-controls">
+                    <button class="nav-btn prev-btn" id="prev-btn" onclick="previousLesson()">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button class="nav-btn next-btn" id="next-btn" onclick="nextLesson()">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="nav-btn quiz-btn" id="quiz-btn" onclick="startQuiz()" style="display: none;">
+                        Take Quiz <i class="fas fa-brain"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section class="quiz-section" id="quiz-section" style="display: none;">
+            <div class="container">
+                <div class="quiz-header">
+                    <h2>Artificial Intelligence Quiz</h2>
+                    <div class="quiz-progress">
+                        <span id="quiz-progress-text">Question 1 of 10</span>
+                        <div class="quiz-progress-bar">
+                            <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-container" id="quiz-container">
+                    <div class="question-card animate-slideIn" id="question-card">
+                        <h3 id="question-text">Loading question...</h3>
+                        <div class="answer-options" id="answer-options">
+                            <!-- Answer options will be dynamically loaded -->
+                        </div>
+                    </div>
+
+                    <div class="quiz-navigation">
+                        <button class="nav-btn" id="quiz-next-btn" onclick="nextQuestion()" disabled>
+                            Next Question <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quiz Results -->
+                <div class="quiz-results" id="quiz-results" style="display: none;">
+                    <div class="results-card animate-fadeIn">
+                        <div class="results-icon">
+                            <i class="fas fa-trophy" id="results-icon"></i>
+                        </div>
+                        <h2 id="results-title">Quiz Complete!</h2>
+                        <div class="score-display">
+                            <span class="score-number" id="final-score">0</span>
+                            <span class="score-total">/ 10</span>
+                        </div>
+                        <p id="results-message">Great job!</p>
+                        <div class="results-actions">
+                            <button class="nav-btn" onclick="retakeQuiz()">
+                                <i class="fas fa-redo"></i> Retake Quiz
+                            </button>
+                            <button class="nav-btn" onclick="backToLearning()">
+                                <i class="fas fa-book"></i> Back to Learning
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+       <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Barangay Learning Hub</h3>
+                    <p>Empowering communities through digital education and technology access.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/COBBarangayLearningHub"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="/Module/index.html">Learning Modules</a></li>
+                        <li><a href="/Module/index.html">Training Programs</a></li>
+                        <li><a href="About Us.html">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Programs</h4>
+                    <ul>
+                        <li><a href="Module/index.html">Digital Literacy</a></li>
+                        <li><a href="Module/index.html">Computer Training</a></li>
+                        <li><a href="Module/index.html">Internet Safety</a></li>
+                        <li><a href="Module/index.html">Youth Programs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Barangay Learning Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Learning Module Data based on your provided content
+        const moduleData = {
+            lessons: [
+                {
+                    title: "What is Artificial Intelligence?",
+                    content: `
+                        <h3>Introduction to Artificial Intelligence</h3>
+                        <p>Artificial Intelligence (AI) is the simulation of human intelligence executed by machines, typically computer systems. This technology enables machines to perform tasks that usually require human intelligence, such as reasoning, learning from experience, problem-solving, decision-making, and comprehension.</p>
+                        
+                        <p>AI has evolved from early rule-based systems to sophisticated neural networks capable of generating human-like text and interacting through various forms of input and output, including images, audio, and video. Common applications of AI include speech recognition, image recognition, content generation, recommendation systems, and self-driving cars.</p>
+
+                        <h4>Definition and Scope</h4>
+                        <p>Artificial intelligence (AI) is the theory and development of computer systems capable of performing tasks that historically required human intelligence, such as recognizing speech, making decisions, and identifying patterns. AI is an umbrella term that encompasses a wide variety of technologies, including machine learning, deep learning, and natural language processing (NLP).</p>
+
+                        <h4>What are AI Tools?</h4>
+                        <p>AI tools are software applications that use artificial intelligence to automate tasks and enhance decision-making. They can process large amounts of data, recognize patterns, and generate insights faster than humans. AI tools are used in various fields, including healthcare, marketing, finance,and customer service.</p>
+                        
+                        <p>Some common examples include chatbots, image recognition software, and AI-powered writing assistants. These tools help businesses and individuals save time, improve accuracy, and boost productivity.</p>
+                    `,
+                    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Capabilities and Limitations of AI",
+                    content: `
+                        <h3>Understanding AI's Potential and Boundaries</h3>
+                        
+                        <h4>Capabilities of AI</h4>
+                        <ul>
+                            <li><strong>Automating Repetitive Tasks:</strong> AI helps save time and effort by automating mundane tasks like data entry or scheduling.</li>
+                            <li><strong>Processing Large Amounts of Data:</strong> AI can quickly analyze huge datasets (e.g., in genomics or financial markets) to uncover insights.</li>
+                            <li><strong>Enhancing Decision-Making:</strong> AI can assist with data-driven decisions by identifying patterns and trends.</li>
+                            <li><strong>Providing Personalization:</strong> AI enables tailored experiences, from personalized learning tools to product recommendations.</li>
+                        </ul>
+
+                        <h4>Limitations of AI</h4>
+                        <ul>
+                            <li><strong>Dependence on Data:</strong> AI relies on data to function. If the data is flawed or biased, the results can be inaccurate. For example, healthcare AI might misdiagnose diseases if the training data is biased or incomplete.</li>
+                            <li><strong>Lack of Emotional Intelligence:</strong> AI cannot replicate human emotions, making it unsuitable for tasks that require empathy or nuanced understanding (e.g., counseling).</li>
+                            <li><strong>Limited Creativity:</strong> AI operates within the rules it is given and often struggles with true creative tasks, such as generating original ideas or art.</li>
+                            <li><strong>High Costs:</strong> Developing and maintaining AI systems can be expensive, both in terms of hardware and data processing.</li>
+                        </ul>
+
+                        <p>Understanding these capabilities and limitations is crucial for effectively implementing AI solutions and setting realistic expectations about what AI can and cannot achieve.</p>
+                    `,
+                    image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Say What You See - AI Tool #1",
+                    content: `
+                        <h3>Exploring Google's Interactive AI Experiment</h3>
+                        
+                        <p>"Say What You See" is an interactive experiment developed by Google Arts & Culture Lab, led by artist-in-residence Jack Wild. Launched in November 2023, the game challenges players to observe AI-generated images and craft descriptive prompts that closely match the visuals. Success in the game requires meeting specific visual thresholds, enhancing one's skills in image interpretation and prompt creation.</p>
+
+                        <p>The primary goal of "Say What You See" is to improve users' image-reading abilities and understanding of AI image generation. As players progress through levels, they receive feedback and tips to refine their descriptive prompts, with each level introducing more complex images.</p>
+
+                        <p>Initially available in select countries, including the United States, the experiment has expanded its reach. Players can access it through the Google Arts & Culture website, where they can test their skills and learn the art of prompt crafting. "Say What You See" exemplifies Google's commitment to blending art with artificial intelligence, offering an engaging platform for users to explore and enhance their interaction with AI-generated visuals.</p>
+
+                        <h4>Key Features</h4>
+                        <ul>
+                            <li><strong>AI-Generated Image Presentation:</strong> Varied image styles from abstract to highly detailed, with randomized selection for unique challenges.</li>
+                            <li><strong>Descriptive Challenge:</strong> Users observe images and create accurate text prompts that match the visuals.</li>
+                            <li><strong>Interactive Learning:</strong> Real-time feedback with tips for improvement and multiple attempts per level.</li>
+                            <li><strong>Educational Objective:</strong> Develops image prompting and descriptive skills valuable for AI interaction.</li>
+                            <li><strong>User-Friendly Interface:</strong> Engaging, intuitive design accessible to all skill levels.</li>
+                        </ul>
+
+                        <h4>Getting Started</h4>
+                        <ol>
+                            <li>Open your browser app</li>
+                            <li>Type "Say What You See" in the search bar and hit "Enter"</li>
+                            <li>Click "Say What You See — Google Arts & Culture"</li>
+                            <li>Click "Launch experiment"</li>
+                            <li>Click "Start Level 1" to begin your learning journey</li>
+                        </ol>
+                    `,
+                    image: "https://images.unsplash.com/photo-1633356122102-3fe601e05bd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "InVideo.io - AI Tool #2",
+                    content: `
+                        <h3>Revolutionizing Video Creation with AI</h3>
+                        
+                        <p>InVideo is an innovative online video editing platform that has transformed how individuals and businesses create video content. Whether you're a seasoned content creator or a complete novice, InVideo provides the tools and resources to help you easily craft engaging videos.</p>
+
+                        <p>InVideo is a cloud-based video editing tool designed to simplify the video creation process. Think of it as your video assistant, making it possible to create videos from scratch or customize pre-existing templates with your clips, images, text, music, and even voiceovers. One of its standout features is the AI video generator, which can automatically create scripts and visuals based on your text input. This means that even if you have no prior video editing experience, you can go from concept to finished product in just minutes.</p>
+
+                        <h4>History of InVideo.io</h4>
+                        <p>Founded in 2017 by Sanket Shah, Pankit Chheda, and Harsh Vakharia, InVideo was born out of a desire to make video creation accessible to everyone. The founders recognized the growing demand for video content across various platforms—from social media to marketing—and sought to create a user-friendly solution that would empower users at all skill levels. Since its inception, InVideo has continually evolved, integrating advanced AI features and expanding its library of templates and resources.</p>
+
+                        <h4>Key Features</h4>
+                        <ul>
+                            <li><strong>User-Friendly Interface:</strong> Intuitive design with drag-and-drop functionality accessible to non-tech-savvy users.</li>
+                            <li><strong>Advanced AI Features:</strong> AI script generator eliminates writer's block, automated text-to-speech in multiple languages.</li>
+                            <li><strong>Extensive Template Library:</strong> Thousands of customizable templates for diverse needs—from weddings to product launches.</li>
+                            <li><strong>Multiple Use Cases:</strong> Perfect for educators creating instructional videos, content creators for YouTube/TikTok, and social media managers.</li>
+                        </ul>
+
+                        <h4>Getting Started with InVideo.io</h4>
+                        <ol>
+                            <li>Create an account using "Join with Google" if you have a Gmail account</li>
+                            <li>Select your Gmail account to log in</li>
+                            <li>Choose a different template or start from scratch</li>
+                            <li>Create your video script based on your ideas or topics</li>
+                            <li>Choose your visual style, duration, and platform, then click continue</li>
+                            <li>Click "Proceed with stock media (free)" and continue</li>
+                            <li>Once generated, watch your video, edit via the Edit button or prompt, and download when satisfied</li>
+                        </ol>
+
+                        <h4>Training Output</h4>
+                        <p>Create a short story video of your choice or create a story using ChatGPT or any other generative AI tool in InVideo.io to practice your new skills.</p>
+                    `,
+                    image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                }
+            ]
+        };
+
+        // Quiz Questions based on the AI content
+        const quizQuestions = [
+            {
+                question: "What is Artificial Intelligence (AI)?",
+                options: ["A computer program", "The simulation of human intelligence by machines", "A type of robot", "A video game"],
+                correct: 1
+            },
+            {
+                question: "Which of the following is NOT a common application of AI?",
+                options: ["Speech recognition", "Image recognition", "Physical labor", "Recommendation systems"],
+                correct: 2
+            },
+            {
+                question: "What is a major limitation of AI systems?",
+                options: ["They work too fast", "They depend on quality data", "They are too creative", "They never make mistakes"],
+                correct: 1
+            },
+            {
+                question: "Who developed the 'Say What You See' experiment?",
+                options: ["Microsoft", "Apple", "Google Arts & Culture Lab", "Meta"],
+                correct: 2
+            },
+            {
+                question: "When was 'Say What You See' launched?",
+                options: ["November 2022", "November 2023", "December 2023", "January 2024"],
+                correct: 1
+            },
+            {
+                question: "What is the primary goal of 'Say What You See'?",
+                options: ["To create art", "To improve image-reading abilities and AI understanding", "To sell products", "To entertain users"],
+                correct: 1
+            },
+            {
+                question: "When was InVideo.io founded?",
+                options: ["2015", "2016", "2017", "2018"],
+                correct: 2
+            },
+            {
+                question: "What type of platform is InVideo?",
+                options: ["Desktop software", "Mobile app only", "Cloud-based video editing tool", "Gaming platform"],
+                correct: 2
+            },
+            {
+                question: "Which AI feature does InVideo.io offer?",
+                options: ["Image recognition", "Automated script generation", "Voice cloning", "Face detection"],
+                correct: 1
+            },
+            {
+                question: "What is a key benefit of AI tools for businesses?",
+                options: ["They replace all human workers", "They save time and improve productivity", "They eliminate all costs", "They work without electricity"],
+                correct: 1
+            }
+        ];
+
+        // Global variables
+        let currentLesson = 0;
+        let currentQuestion = 0;
+        let selectedAnswers = [];
+        let score = 0;
+
+        // Start learning function
+        function startLearning() {
+            document.querySelector('.hero').style.display = 'none';
+            document.getElementById('learning-interface').style.display = 'block';
+            loadLesson(0);
+        }
+
+        // Load lesson
+        function loadLesson(lessonIndex) {
+            currentLesson = lessonIndex;
+            const lesson = moduleData.lessons[lessonIndex];
+            
+            document.getElementById('lesson-content').innerHTML = lesson.content;
+            document.querySelector('.content-image').src = lesson.image;
+            
+            updateProgress();
+            updateNavigationButtons();
+        }
+
+        // Update progress
+        function updateProgress() {
+            const progress = ((currentLesson + 1) / moduleData.lessons.length) * 100;
+            document.getElementById('progress-fill').style.width = `${progress}%`;
+            document.getElementById('progress-text').textContent = `${Math.round(progress)}%`;
+        }
+
+        // Update navigation buttons
+        function updateNavigationButtons() {
+            document.getElementById('prev-btn').disabled = currentLesson === 0;
+            
+            if (currentLesson === moduleData.lessons.length - 1) {
+                document.getElementById('next-btn').style.display = 'none';
+                document.getElementById('quiz-btn').style.display = 'inline-flex';
+            } else {
+                document.getElementById('next-btn').style.display = 'inline-flex';
+                document.getElementById('quiz-btn').style.display = 'none';
+            }
+        }
+
+        // Navigation functions
+        function previousLesson() {
+            if (currentLesson > 0) {
+                loadLesson(currentLesson - 1);
+            }
+        }
+
+        function nextLesson() {
+            if (currentLesson < moduleData.lessons.length - 1) {
+                loadLesson(currentLesson + 1);
+            }
+        }
+
+        // Quiz functions
+        function startQuiz() {
+            document.getElementById('learning-interface').style.display = 'none';
+            document.getElementById('quiz-section').style.display = 'block';
+            currentQuestion = 0;
+            selectedAnswers = [];
+            score = 0;
+            loadQuestion(0);
+        }
+
+        function loadQuestion(questionIndex) {
+            currentQuestion = questionIndex;
+            const question = quizQuestions[questionIndex];
+            
+            document.getElementById('question-text').textContent = question.question;
+            
+            const answerOptions = document.getElementById('answer-options');
+            answerOptions.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'answer-option';
+                optionDiv.innerHTML = `
+                    <div style="width: 30px; height: 30px; border: 2px solid var(--gray); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <span style="font-weight: bold; color: var(--gray);">${String.fromCharCode(65 + index)}</span>
+                    </div>
+                    <span>${option}</span>
+                `;
+                optionDiv.onclick = () => selectAnswer(index, optionDiv);
+                answerOptions.appendChild(optionDiv);
+            });
+            
+            updateQuizProgress();
+            document.getElementById('quiz-next-btn').disabled = true;
+        }
+
+        function selectAnswer(answerIndex, optionElement) {
+            document.querySelectorAll('.answer-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            optionElement.classList.add('selected');
+            selectedAnswers[currentQuestion] = answerIndex;
+            document.getElementById('quiz-next-btn').disabled = false;
+        }
+
+        function nextQuestion() {
+            const question = quizQuestions[currentQuestion];
+            const selectedAnswer = selectedAnswers[currentQuestion];
+            
+            if (selectedAnswer === question.correct) {
+                score++;
+            }
+            
+            setTimeout(() => {
+                if (currentQuestion < quizQuestions.length - 1) {
+                    loadQuestion(currentQuestion + 1);
+                } else {
+                    showQuizResults();
+                }
+            }, 500);
+        }
+
+        function updateQuizProgress() {
+            const progress = ((currentQuestion + 1) / quizQuestions.length) * 100;
+            document.getElementById('quiz-progress-fill').style.width = `${progress}%`;
+            document.getElementById('quiz-progress-text').textContent = `Question ${currentQuestion + 1} of ${quizQuestions.length}`;
+            
+            if (currentQuestion === quizQuestions.length - 1) {
+                document.getElementById('quiz-next-btn').innerHTML = 'Finish Quiz <i class="fas fa-check"></i>';
+            }
+        }
+
+        function showQuizResults() {
+            document.getElementById('quiz-container').style.display = 'none';
+            document.getElementById('quiz-results').style.display = 'block';
+            
+            document.getElementById('final-score').textContent = score;
+            
+            let message;
+            if (score >= 8) {
+                message = "Excellent! You have mastered AI fundamentals!";
+            } else if (score >= 6) {
+                message = "Good job! You have a solid understanding of AI concepts.";
+            } else {
+                message = "Keep learning! Review the lessons and try again.";
+            }
+            
+            document.getElementById('results-message').textContent = message;
+        }
+
+        function retakeQuiz() {
+            startQuiz();
+        }
+
+        function backToLearning() {
+            document.getElementById('quiz-section').style.display = 'none';
+            document.getElementById('learning-interface').style.display = 'block';
+            loadLesson(0);
+        }
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+            const navMenu = document.getElementById('nav-menu');
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+        });
+    </script>
+</body>
+</html>

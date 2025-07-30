@@ -1,0 +1,1511 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft PowerPoint Learning Module - Barangay Learning Hub</title>
+    <link rel="icon" href="..\..\BLH_logo.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1e3a8a;
+            --light-blue: #3b82f6;
+            --accent-yellow: #fbbf24;
+            --dark-yellow: #f59e0b;
+            --success-green: #059669;
+            --danger-red: #dc2626;
+            --warning-orange: #ea580c;
+            --purple: #7c3aed;
+            --cyan: #0891b2;
+            --pink: #be185d;
+            --white: #ffffff;
+            --light-gray: #f8fafc;
+            --gray: #64748b;
+            --dark-gray: #334155;
+            --text-dark: #1e293b;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-blue) 100%);
+            box-shadow: var(--shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar {
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .nav-brand i {
+            margin-right: 0.5rem;
+            color: var(--accent-yellow);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+.nav-brand img {
+    width: 40px;
+    height: 40px;
+    margin-right: 0.5rem;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--accent-yellow);
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+            padding: 4rem 0;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 20s infinite linear;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--white);
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            background: var(--accent-yellow);
+            color: var(--primary-blue);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cta-button:hover {
+            background: var(--dark-yellow);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .floating-image {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            animation: float-gentle 3s ease-in-out infinite;
+        }
+
+        /* Learning Interface */
+        .learning-interface {
+            padding: 4rem 0;
+            background: var(--light-gray);
+        }
+
+        .module-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .module-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            background: var(--white);
+            border-radius: 50px;
+            height: 30px;
+            max-width: 400px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #d97706, var(--accent-yellow));
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 50px;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .lesson-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .lesson-content {
+            animation: fadeInLeft 0.6s ease;
+        }
+
+        .lesson-content h3 {
+            color: #d97706;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-content h4 {
+            color: #b45309;
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .lesson-content p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .lesson-content ul, .lesson-content ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .lesson-content strong {
+            color: #d97706;
+        }
+
+        .lesson-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeInRight 0.6s ease;
+        }
+
+        .content-image {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .content-image:hover {
+            transform: scale(1.05);
+        }
+
+        .navigation-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            background: #d97706;
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-btn:hover {
+            background: #b45309;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .nav-btn:disabled {
+            background: var(--gray);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .quiz-btn {
+            background: var(--accent-yellow);
+            color: var(--primary-blue);
+        }
+
+        .quiz-btn:hover {
+            background: var(--dark-yellow);
+        }
+
+        /* Quiz Section */
+        .quiz-section {
+            padding: 4rem 0;
+            background: var(--white);
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .quiz-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .quiz-progress {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .quiz-progress-bar {
+            background: var(--light-gray);
+            border-radius: 50px;
+            height: 20px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .quiz-progress-fill {
+            background: linear-gradient(90deg, var(--success-green), var(--accent-yellow));
+            height: 100%;
+            width: 10%;
+            transition: width 0.5s ease;
+            border-radius: 50px;
+        }
+
+        .question-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 2rem;
+            border: 3px solid var(--accent-yellow);
+        }
+
+        .question-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .answer-options {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .answer-option {
+            background: var(--light-gray);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .answer-option:hover {
+            background: rgba(217, 119, 6, 0.1);
+            border-color: #d97706;
+            transform: translateX(10px);
+        }
+
+        .answer-option.selected {
+            background: rgba(251, 191, 36, 0.2);
+            border-color: var(--accent-yellow);
+        }
+
+        .answer-option.correct {
+            background: rgba(5, 150, 105, 0.2);
+            border-color: var(--success-green);
+        }
+
+        .answer-option.incorrect {
+            background: rgba(220, 38, 38, 0.2);
+            border-color: var(--danger-red);
+        }
+
+        .quiz-navigation {
+            text-align: center;
+        }
+
+        /* Quiz Results */
+        .quiz-results {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .results-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .results-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .results-icon i {
+            color: var(--accent-yellow);
+            animation: bounce 1s ease infinite;
+        }
+
+        .score-display {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin: 1rem 0;
+        }
+
+        .score-number {
+            color: var(--success-green);
+        }
+
+        .results-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+      
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-blue) 100%);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3,
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--accent-yellow);
+        }
+
+        .footer-section p {
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            opacity: 0.9;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-yellow);
+            opacity: 1;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-yellow);
+            color: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0.8;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+
+        @keyframes float-gentle {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px var(--accent-yellow); }
+            to { text-shadow: 0 0 20px var(--accent-yellow), 0 0 30px var(--accent-yellow); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .animate-fadeInRight {
+            animation: fadeInRight 0.8s ease forwards;
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .animate-slideIn {
+            animation: slideIn 0.6s ease forwards;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .lesson-container {
+                grid-template-columns: 1fr;
+                padding: 2rem;
+            }
+
+            .navigation-controls {
+                flex-direction: column;
+            }
+
+            .footer-bottom-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .results-actions {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero {
+                padding: 2rem 0;
+            }
+
+            .learning-interface,
+            .quiz-section {
+                padding: 2rem 0;
+            }
+
+            .lesson-container,
+            .question-card,
+            .results-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <img src="..\..\Maps\blhimages\BLH_logo.png"> 
+                    <span>Barangay Learning Hub</span>
+                </div>
+                <div class="nav-menu" id="nav-menu">
+                   <a href="../../index.html" class="nav-link">Home</a>
+                    <a href="../../Maps/index.html" class="nav-link">Maps</a>
+                    <a href="index.html" class="nav-link active">Modules</a>
+                    <a href="../../Books/index.html" class="nav-link">Reading Corner</a>
+                    <a href="../../Calendar.html" class="nav-link">Calendar</a>
+                    <a href="../../About Us.html" class="nav-link ">About Us</a>
+                </div>
+                <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title animate-fadeInUp">Microsoft PowerPoint Learning Module</h1>
+                    <p class="hero-subtitle animate-fadeInUp">Government Initiative for Free Community Education</p>
+                    <p class="hero-description animate-fadeInUp">Master Microsoft PowerPoint from beginner to expert level. Learn to create stunning presentations for business, education, and professional use.</p>
+                    <button class="cta-button animate-fadeInUp" onclick="startLearning()">
+                        Start Learning <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="hero-image animate-fadeInRight">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="PowerPoint Presentation" class="floating-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Module Interface -->
+        <section class="learning-interface" id="learning-interface" style="display: none;">
+            <div class="container">
+                <div class="module-header">
+                    <h2 id="module-title">Microsoft PowerPoint Learning Module</h2>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                        <span class="progress-text" id="progress-text">0%</span>
+                    </div>
+                </div>
+
+                <div class="lesson-container" id="lesson-container">
+                    <div class="lesson-content" id="lesson-content">
+                        <!-- Lesson content will be dynamically loaded here -->
+                    </div>
+                    
+                    <div class="lesson-image" id="lesson-image">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="PowerPoint Interface" class="content-image">
+                    </div>
+                </div>
+
+                <div class="navigation-controls">
+                    <button class="nav-btn prev-btn" id="prev-btn" onclick="previousLesson()">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button class="nav-btn next-btn" id="next-btn" onclick="nextLesson()">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="nav-btn quiz-btn" id="quiz-btn" onclick="startQuiz()" style="display: none;">
+                        Take Quiz <i class="fas fa-brain"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section class="quiz-section" id="quiz-section" style="display: none;">
+            <div class="container">
+                <div class="quiz-header">
+                    <h2>PowerPoint Knowledge Quiz</h2>
+                    <div class="quiz-progress">
+                        <span id="quiz-progress-text">Question 1 of 12</span>
+                        <div class="quiz-progress-bar">
+                            <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-container" id="quiz-container">
+                    <div class="question-card animate-slideIn" id="question-card">
+                        <h3 id="question-text">Loading question...</h3>
+                        <div class="answer-options" id="answer-options">
+                            <!-- Answer options will be dynamically loaded -->
+                        </div>
+                    </div>
+
+                    <div class="quiz-navigation">
+                        <button class="nav-btn" id="quiz-next-btn" onclick="nextQuestion()" disabled>
+                            Next Question <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quiz Results -->
+                <div class="quiz-results" id="quiz-results" style="display: none;">
+                    <div class="results-card animate-fadeIn">
+                        <div class="results-icon">
+                            <i class="fas fa-trophy" id="results-icon"></i>
+                        </div>
+                        <h2 id="results-title">Quiz Complete!</h2>
+                        <div class="score-display">
+                            <span class="score-number" id="final-score">0</span>
+                            <span class="score-total">/ 12</span>
+                        </div>
+                        <p id="results-message">Great job!</p>
+                        <div class="results-actions">
+                            <button class="nav-btn" onclick="retakeQuiz()">
+                                <i class="fas fa-redo"></i> Retake Quiz
+                            </button>
+                            <button class="nav-btn" onclick="backToLearning()">
+                                <i class="fas fa-book"></i> Back to Learning
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+     <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Barangay Learning Hub</h3>
+                    <p>Empowering communities through digital education and technology access.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/COBBarangayLearningHub"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="/Module/index.html">Learning Modules</a></li>
+                        <li><a href="/Module/index.html">Training Programs</a></li>
+                        <li><a href="About Us.html">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Programs</h4>
+                    <ul>
+                        <li><a href="Module/index.html">Digital Literacy</a></li>
+                        <li><a href="Module/index.html">Computer Training</a></li>
+                        <li><a href="Module/index.html">Internet Safety</a></li>
+                        <li><a href="Module/index.html">Youth Programs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Barangay Learning Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Learning Module Data - Based on the comprehensive PowerPoint lesson plan
+        const moduleData = {
+            lessons: [
+                {
+                    title: "Introduction to Microsoft PowerPoint",
+                    content: `
+                        <h3>What is Microsoft PowerPoint?</h3>
+                        <p>Microsoft PowerPoint is a presentation software used to create slideshows composed of text, images, graphs, and multimedia elements. It's widely used for business meetings, school presentations, and professional conferences.</p>
+                        
+                        <h4>The PowerPoint Interface:</h4>
+                        <p>When you open PowerPoint, you will see the following key elements:</p>
+                        <ul>
+                            <li><strong>Ribbon:</strong> A menu at the top with tabs (Home, Insert, Design, etc.) that house various tools and features.</li>
+                            <li><strong>Slides Pane:</strong> A vertical list on the left side that shows thumbnail previews of all your slides.</li>
+                            <li><strong>Slide Area:</strong> The main workspace where you create and edit the selected slide.</li>
+                            <li><strong>Notes Pane:</strong> A space below each slide where you can add speaker notes (these are not visible to the audience).</li>
+                            <li><strong>Status Bar:</strong> Located at the bottom, showing slide number, zoom level, and other status information.</li>
+                        </ul>
+
+                        <h4>Why Learn PowerPoint?</h4>
+                        <ul>
+                            <li>Essential for business presentations and professional communication</li>
+                            <li>Create engaging educational materials and training content</li>
+                            <li>Express creativity through visual storytelling</li>
+                            <li>Highly valued skill that advances your career prospects</li>
+                        </ul>
+                    `,
+                    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Understanding PowerPoint Tabs (Home & Insert)",
+                    content: `
+                        <h3>Home Tab</h3>
+                        <p>The Home tab contains the most commonly used tools for editing your slides and text. These tools allow you to:</p>
+                        <ul>
+                            <li><strong>Font settings:</strong> Change font style, size, and color.</li>
+                            <li><strong>Paragraph formatting:</strong> Align text, create lists, and adjust indentation.</li>
+                            <li><strong>Clipboard tools:</strong> Cut, copy, paste, and format text or objects.</li>
+                            <li><strong>Slides group:</strong> Add new slides, rearrange slides, or apply slide layouts.</li>
+                        </ul>
+
+                        <h3>Insert Tab</h3>
+                        <p>The Insert tab is where you add content to your slides, such as images, shapes, charts, tables, text boxes, videos, and more. This tab allows you to:</p>
+                        <ul>
+                            <li><strong>Insert pictures:</strong> From your computer, online, or stock images.</li>
+                            <li><strong>Insert shapes:</strong> Basic shapes or more complex ones, including arrows, flowcharts, and callouts.</li>
+                            <li><strong>Insert charts and tables:</strong> Add a variety of visual elements like pie charts, bar charts, and tables for data visualization.</li>
+                            <li><strong>Insert multimedia:</strong> Add audio, video files, or hyperlinks.</li>
+                        </ul>
+                    `,
+                    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Design, Transitions & Animations Tabs",
+                    content: `
+                        <h3>Design Tab</h3>
+                        <p>The Design tab is where you can customize the overall look of your presentation. It offers:</p>
+                        <ul>
+                            <li><strong>Themes:</strong> Pre-designed slide themes that affect the entire presentation's color scheme, fonts, and layouts.</li>
+                            <li><strong>Variants:</strong> Slight variations of selected themes for more personalized design.</li>
+                            <li><strong>Slide Size:</strong> Change the size of your slides for different formats (e.g., widescreen, standard).</li>
+                        </ul>
+
+                        <h3>Transitions Tab</h3>
+                        <p>The Transitions tab lets you control how one slide transitions to the next during your presentation. It provides:</p>
+                        <ul>
+                            <li><strong>Slide transitions:</strong> Choose effects like fade, push, or wipe to transition between slides.</li>
+                            <li><strong>Timing:</strong> Control the speed and timing of the transition between slides.</li>
+                        </ul>
+
+                        <h3>Animations Tab</h3>
+                        <p>The Animations tab lets you apply animation effects to text and objects on the slide, making them appear, disappear, or move. This tab includes:</p>
+                        <ul>
+                            <li><strong>Animation effects:</strong> Make text or objects animate using various styles (e.g., Fly In, Fade, Zoom).</li>
+                            <li><strong>Animation Pane:</strong> Allows you to control the order and timing of animations.</li>
+                            <li><strong>Motion Paths:</strong> Allows objects to follow a path across the screen.</li>
+                        </ul>
+                    `,
+                    image: "https://images.unsplash.com/photo-1542744094-3a31f272c490?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Slide Show, Review & View Tabs",
+                    content: `
+                        <h3>Slide Show Tab</h3>
+                        <p>The Slide Show tab helps you set up and run your presentation. It includes options like:</p>
+                        <ul>
+                            <li><strong>Start the presentation:</strong> Begin the presentation from the beginning or from the current slide.</li>
+                            <li><strong>Set up slide show:</strong> Configure options like looped slides, automatic timings, and presenter view.</li>
+                            <li><strong>Recording:</strong> Record your voice or actions to narrate the slides.</li>
+                        </ul>
+
+                        <h3>Review Tab</h3>
+                        <p>The Review tab helps with the editing and proofing of your presentation. It includes tools like:</p>
+                        <ul>
+                            <li><strong>Spelling and Grammar:</strong> Check spelling and grammar errors in your presentation.</li>
+                            <li><strong>Thesaurus:</strong> Find synonyms for selected words.</li>
+                            <li><strong>Comments:</strong> Add comments for collaborators reviewing the presentation.</li>
+                        </ul>
+
+                        <h3>View Tab</h3>
+                        <p>The View tab offers different ways to display and work with your slides:</p>
+                        <ul>
+                            <li><strong>Presentation Views:</strong> Choose from Normal View, Slide Sorter View, Reading View, and Presenter View.</li>
+                            <li><strong>Zoom and Gridlines:</strong> Adjust zoom level for better precision or add gridlines for aligning objects.</li>
+                        </ul>
+                    `,
+                    image: "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Intermediate PowerPoint Skills",
+                    content: `
+                        <h3>Working with Slide Transitions</h3>
+                        <h4>What are Slide Transitions?</h4>
+                        <p>Slide transitions control how one slide moves to the next during your presentation.</p>
+                        <h4>Applying Transitions:</h4>
+                        <ul>
+                            <li>Select a slide → Click "Transitions" tab → Choose a transition style (Fade, Push, etc.).</li>
+                            <li>You can adjust the duration and add sound effects as well.</li>
+                        </ul>
+
+                        <h3>Adding Animations</h3>
+                        <h4>What are Animations?</h4>
+                        <p>Animations are effects that make objects (text, images, shapes) appear, disappear, or move on the slide.</p>
+                        <h4>Applying Animations:</h4>
+                        <ul>
+                            <li>Select an object (text box, image, etc.) → Click "Animations" tab → Choose an animation style (Appear, Fly In, Fade, etc.).</li>
+                            <li>Adjust the animation timing and order using the "Animation Pane."</li>
+                        </ul>
+
+                        <h3>Inserting Multimedia</h3>
+                        <ul>
+                            <li><strong>Adding Images:</strong> Click "Insert" → "Pictures" → Choose "This Device" to upload an image from your computer.</li>
+                            <li><strong>Adding Videos:</strong> Click "Insert" → "Video" → Choose "This Device" to add a video file.</li>
+                            <li><strong>Audio:</strong> Click "Insert" → "Audio" → Choose "Audio on My PC" to add sound or voice recording.</li>
+                        </ul>
+                    `,
+                    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Working with Tables and Charts",
+                    content: `
+                        <h3>Inserting Tables</h3>
+                        <ul>
+                            <li>Click "Insert" → "Table" → Choose the number of rows and columns.</li>
+                            <li>Add data and format the table using the "Table Design" tab.</li>
+                        </ul>
+
+                        <h3>Inserting Charts</h3>
+                        <ul>
+                            <li>Click "Insert" → "Chart" → Choose a chart type (Bar, Pie, Line, etc.) → Add your data in the Excel sheet that pops up.</li>
+                        </ul>
+
+                        <h3>Best Practices for Data Visualization</h3>
+                        <ul>
+                            <li><strong>Choose the right chart type:</strong> Bar charts for comparisons, pie charts for parts of a whole, line charts for trends over time.</li>
+                            <li><strong>Keep it simple:</strong> Don't overcomplicate your charts with too many data series.</li>
+                            <li><strong>Use consistent colors:</strong> Match your chart colors to your presentation theme.</li>
+                            <li><strong>Label clearly:</strong> Include titles, axis labels, and legends where appropriate.</li>
+                            <li><strong>Highlight key data:</strong> Use contrasting colors to draw attention to important information.</li>
+                        </ul>
+
+                        <h3>Table Design Tips</h3>
+                        <ul>
+                            <li>Use alternating row colors for better readability</li>
+                            <li>Bold header rows to distinguish them from data</li>
+                            <li>Align numbers to the right, text to the left</li>
+                            <li>Keep table content concise and focused</li>
+                        </ul>
+                    `,
+                    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Advanced PowerPoint Skills - Master Slides",
+                    content: `
+                        <h3>What are Master Slides?</h3>
+                        <p>Master Slides are templates that define the layout, design, and style of all slides in your presentation.</p>
+
+                        <h3>Using Master Slides:</h3>
+                        <ul>
+                            <li>Click "View" → "Slide Master" → Make changes to the master slide (background, font style, placeholder size).</li>
+                            <li>This automatically applies to all slides using that master layout.</li>
+                        </ul>
+
+                        <h3>Customizing Slide Layouts</h3>
+                        <h4>Custom Layouts:</h4>
+                        <ul>
+                            <li>In the Slide Master view, you can create custom layouts that suit your needs.</li>
+                            <li>You can add or remove text boxes, images, or placeholders to create a unique layout for your presentation.</li>
+                        </ul>
+
+                        <h3>Benefits of Using Master Slides</h3>
+                        <ul>
+                            <li><strong>Consistency:</strong> Ensures all slides follow the same design standards</li>
+                            <li><strong>Efficiency:</strong> Make changes once and apply to all slides</li>
+                            <li><strong>Professional appearance:</strong> Creates a polished, cohesive look</li>
+                            <li><strong>Brand compliance:</strong> Maintain corporate or institutional branding</li>
+                        </ul>
+
+                        <h3>Master Slide Best Practices</h3>
+                        <ul>
+                            <li>Plan your design before creating the master</li>
+                            <li>Include placeholder text to guide content creation</li>
+                            <li>Test your master with different content types</li>
+                            <li>Keep layouts simple and flexible</li>
+                        </ul>
+                    `,
+                    image: "https://images.unsplash.com/photo-1542744094-3a31f272c490?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Collaboration and Advanced Features",
+                    content: `
+                        <h3>Collaborating and Sharing</h3>
+                        <h4>Sharing with Others:</h4>
+                        <ul>
+                            <li>Click "File" → "Share" → Choose to share via email, OneDrive, or give editing rights to others.</li>
+                        </ul>
+                        <h4>Comments and Review:</h4>
+                        <ul>
+                            <li>Click "Review" → "New Comment" to add comments for collaboration.</li>
+                        </ul>
+
+                        <h3>Custom Animations and Timings</h3>
+                        <h4>Advanced Animation Options:</h4>
+                        <ul>
+                            <li>Use the "Animation Pane" to control the order of animations and adjust timing (on click, after previous, with previous).</li>
+                        </ul>
+                        <h4>Slide Show Settings:</h4>
+                        <ul>
+                            <li>Click "Slide Show" → "Set Up Slide Show" to customize how the presentation runs (e.g., loop, advance automatically, or manually).</li>
+                        </ul>
+
+                        <h3>Hyperlinks and Action Buttons</h3>
+                        <h4>Adding Hyperlinks:</h4>
+                        <ul>
+                            <li>Highlight text or object → Right-click → "Link" → Enter a URL or link to another slide.</li>
+                        </ul>
+                        <h4>Action Buttons:</h4>
+                        <ul>
+                            <li>Use action buttons (under "Insert" → "Shapes") for interactive elements like navigating to a specific slide or running a program during the presentation.</li>
+                        </ul>
+                    `,
+                    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Design Tips and Best Practices",
+                    content: `
+                        <h3>Tips for Designing a Stunning Presentation</h3>
+                        <ul>
+                            <li><strong>Use Consistent Fonts and Colors:</strong> Stick to a maximum of two fonts and use the design theme to maintain color consistency.</li>
+                            <li><strong>Avoid Overcrowding:</strong> Don't add too much text to a slide. Use bullet points and keep the text concise.</li>
+                            <li><strong>Use High-Quality Images:</strong> Ensure your images are clear and relevant to the content.</li>
+                            <li><strong>White Space is Important:</strong> Leave enough space around text and images to avoid clutter.</li>
+                            <li><strong>Use Icons and Shapes:</strong> They help break up text-heavy slides and make your presentation visually appealing.</li>
+                        </ul>
+
+                        <h3>Advanced Animation and Transitions</h3>
+                        <ul>
+                            <li><strong>Use Subtle Animations:</strong> Overusing animations can distract from the message. Stick to simple transitions like "Fade" or "Push" for a professional look.</li>
+                            <li><strong>Motion Paths:</strong> Motion paths can help guide the viewer's eye during the presentation and make it more interactive.</li>
+                        </ul>
+
+                        <h3>Content Organization Tips</h3>
+                        <ul>
+                            <li>Follow the 6x6 rule: Maximum 6 bullet points with 6 words each</li>
+                            <li>Use the "Tell them" structure: Tell them what you're going to tell them, tell them, then tell them what you told them</li>
+                            <li>Include a clear call-to-action on relevant slides</li>
+                            <li>Use storytelling techniques to make content memorable</li>
+                        </ul>
+                    `,
+                    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Essential Keyboard Shortcuts & Tips",
+                    content: `
+                        <h3>Keyboard Shortcuts</h3>
+                        <ul>
+                            <li><strong>Ctrl + M:</strong> Add a new slide.</li>
+                            <li><strong>Ctrl + D:</strong> Duplicate the selected slide.</li>
+                            <li><strong>F5:</strong> Start the slideshow from the beginning.</li>
+                            <li><strong>Shift + F5:</strong> Start the slideshow from the current slide.</li>
+                            <li><strong>Ctrl + Shift + C:</strong> Copy formatting from one object.</li>
+                            <li><strong>Ctrl + Shift + V:</strong> Paste copied formatting onto another object.</li>
+                        </ul>
+
+                        <h3>Collaboration Tips</h3>
+                        <ul>
+                            <li><strong>Use Comments:</strong> When collaborating, add comments on slides to provide feedback without editing the content.</li>
+                            <li><strong>Track Changes:</strong> Enable the "Track Changes" feature for detailed revisions when collaborating with others.</li>
+                        </ul>
+
+                        <h3>Quickly Fixing Mistakes</h3>
+                        <ul>
+                            <li><strong>Undo (Ctrl + Z):</strong> Quickly undo any changes you make during your presentation.</li>
+                            <li><strong>Redo (Ctrl + Y):</strong> If you undo something by accident, simply redo it with this shortcut.</li>
+                        </ul>
+
+                        <h3>Productivity Tips</h3>
+                        <ul>
+                            <li>Use slide layouts to maintain consistency</li>
+                            <li>Create a presentation template for recurring presentations</li>
+                            <li>Use the Format Painter tool to quickly apply formatting</li>
+                            <li>Save frequently and use AutoSave when available</li>
+                            <li>Practice your presentation multiple times before delivery</li>
+                        </ul>
+                    `,
+                    image: "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Final Project & Certification",
+                    content: `
+                        <h3>Review of Key Concepts</h3>
+                        <ul>
+                            <li>Creating, editing, and saving presentations.</li>
+                            <li>Applying themes, transitions, and animations.</li>
+                            <li>Inserting multimedia (images, audio, videos).</li>
+                            <li>Using advanced tools like Slide Master, custom layouts, and animations.</li>
+                        </ul>
+
+                        <h3>Final Project</h3>
+                        <p>Create a full presentation with at least 5 slides, including:</p>
+                        <ol>
+                            <li><strong>Title slide</strong> with a theme.</li>
+                            <li><strong>Content slides</strong> with text, images, and charts.</li>
+                            <li><strong>Animations and transitions</strong> applied.</li>
+                            <li><strong>Custom slide layout</strong> and hyperlink.</li>
+                            <li><strong>Speaker notes</strong> for key points.</li>
+                        </ol>
+
+                        <h3>Certification Requirements</h3>
+                        <p>If you're completing this lesson as part of a course or workshop, completing the final project may qualify you for a certificate of completion.</p>
+
+                        <h3>Next Steps for Continued Learning</h3>
+                        <ul>
+                            <li>Practice creating presentations for different audiences</li>
+                            <li>Explore PowerPoint templates online</li>
+                            <li>Learn about advanced features like macros and add-ins</li>
+                            <li>Study presentation design principles and visual communication</li>
+                            <li>Practice public speaking and presentation delivery skills</li>
+                        </ul>
+
+                        <h3>Congratulations!</h3>
+                        <p>You have successfully completed the Microsoft PowerPoint Beginner to Expert course. You now have the skills to create professional, engaging presentations for any purpose.</p>
+                    `,
+                    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                }
+            ]
+        };
+
+        // Comprehensive Quiz Questions based on the lesson content
+        const quizQuestions = [
+            {
+                question: "What is Microsoft PowerPoint primarily used for?",
+                options: ["Creating spreadsheets", "Creating presentations and slideshows", "Editing photos", "Managing databases"],
+                correct: 1
+            },
+            {
+                question: "Which tab contains the most commonly used tools for editing slides and text?",
+                options: ["Insert Tab", "Home Tab", "Design Tab", "View Tab"],
+                correct: 1
+            },
+            {
+                question: "What does the Slide Master feature allow you to do?",
+                options: ["Add animations to slides", "Create templates that define layout and style for all slides", "Insert multimedia content", "Check spelling and grammar"],
+                correct: 1
+            },
+            {
+                question: "Which keyboard shortcut starts a slideshow from the beginning?",
+                options: ["Ctrl + M", "F5", "Ctrl + D", "Shift + F5"],
+                correct: 1
+            },
+            {
+                question: "What is the 6x6 rule in PowerPoint design?",
+                options: ["6 slides maximum per presentation", "Maximum 6 bullet points with 6 words each", "6 different fonts per slide", "6 minutes maximum per slide"],
+                correct: 1
+            },
+            {
+                question: "Which tab would you use to add images, shapes, and charts to your slides?",
+                options: ["Home Tab", "Insert Tab", "Design Tab", "Animations Tab"],
+                correct: 1
+            },
+            {
+                question: "What are slide transitions?",
+                options: ["Effects that make objects move on a slide", "How one slide moves to the next during presentation", "Different slide layouts", "Background themes"],
+                correct: 1
+            },
+            {
+                question: "Which view is best for rearranging multiple slides?",
+                options: ["Normal View", "Slide Sorter View", "Reading View", "Notes Page View"],
+                correct: 1
+            },
+            {
+                question: "What keyboard shortcut duplicates the selected slide?",
+                options: ["Ctrl + M", "Ctrl + D", "Ctrl + C", "F5"],
+                correct: 1
+            },
+            {
+                question: "Which feature helps you maintain consistent design across all slides?",
+                options: ["Animation Pane", "Slide Master", "Format Painter", "Design Ideas"],
+                correct: 1
+            },
+            {
+                question: "What should you avoid when designing professional presentations?",
+                options: ["Using consistent fonts", "Adding too much text to one slide", "Using high-quality images", "Leaving white space"],
+                correct: 1
+            },
+            {
+                question: "Which tab contains tools for checking spelling and adding comments?",
+                options: ["Home Tab", "Insert Tab", "Review Tab", "View Tab"],
+                correct: 2
+            }
+        ];
+
+        // Global variables
+        let currentLesson = 0;
+        let currentQuestion = 0;
+        let selectedAnswers = [];
+        let score = 0;
+
+        // Start learning function
+        function startLearning() {
+            document.querySelector('.hero').style.display = 'none';
+            document.getElementById('learning-interface').style.display = 'block';
+            loadLesson(0);
+        }
+
+        // Load lesson
+        function loadLesson(lessonIndex) {
+            currentLesson = lessonIndex;
+            const lesson = moduleData.lessons[lessonIndex];
+            
+            document.getElementById('lesson-content').innerHTML = lesson.content;
+            document.querySelector('.content-image').src = lesson.image;
+            
+            updateProgress();
+            updateNavigationButtons();
+        }
+
+        // Update progress
+        function updateProgress() {
+            const progress = ((currentLesson + 1) / moduleData.lessons.length) * 100;
+            document.getElementById('progress-fill').style.width = `${progress}%`;
+            document.getElementById('progress-text').textContent = `${Math.round(progress)}%`;
+        }
+
+        // Update navigation buttons
+        function updateNavigationButtons() {
+            document.getElementById('prev-btn').disabled = currentLesson === 0;
+            
+            if (currentLesson === moduleData.lessons.length - 1) {
+                document.getElementById('next-btn').style.display = 'none';
+                document.getElementById('quiz-btn').style.display = 'inline-flex';
+            } else {
+                document.getElementById('next-btn').style.display = 'inline-flex';
+                document.getElementById('quiz-btn').style.display = 'none';
+            }
+        }
+
+        // Navigation functions
+        function previousLesson() {
+            if (currentLesson > 0) {
+                loadLesson(currentLesson - 1);
+            }
+        }
+
+        function nextLesson() {
+            if (currentLesson < moduleData.lessons.length - 1) {
+                loadLesson(currentLesson + 1);
+            }
+        }
+
+        // Quiz functions
+        function startQuiz() {
+            document.getElementById('learning-interface').style.display = 'none';
+            document.getElementById('quiz-section').style.display = 'block';
+            currentQuestion = 0;
+            selectedAnswers = [];
+            score = 0;
+            loadQuestion(0);
+        }
+
+        function loadQuestion(questionIndex) {
+            currentQuestion = questionIndex;
+            const question = quizQuestions[questionIndex];
+            
+            document.getElementById('question-text').textContent = question.question;
+            
+            const answerOptions = document.getElementById('answer-options');
+            answerOptions.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'answer-option';
+                optionDiv.innerHTML = `
+                    <div style="width: 30px; height: 30px; border: 2px solid var(--gray); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <span style="font-weight: bold; color: var(--gray);">${String.fromCharCode(65 + index)}</span>
+                    </div>
+                    <span>${option}</span>
+                `;
+                optionDiv.onclick = () => selectAnswer(index, optionDiv);
+                answerOptions.appendChild(optionDiv);
+            });
+            
+            updateQuizProgress();
+            document.getElementById('quiz-next-btn').disabled = true;
+        }
+
+        function selectAnswer(answerIndex, optionElement) {
+            document.querySelectorAll('.answer-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            optionElement.classList.add('selected');
+            selectedAnswers[currentQuestion] = answerIndex;
+            document.getElementById('quiz-next-btn').disabled = false;
+        }
+
+        function nextQuestion() {
+            const question = quizQuestions[currentQuestion];
+            const selectedAnswer = selectedAnswers[currentQuestion];
+            
+            if (selectedAnswer === question.correct) {
+                score++;
+            }
+            
+            setTimeout(() => {
+                if (currentQuestion < quizQuestions.length - 1) {
+                    loadQuestion(currentQuestion + 1);
+                } else {
+                    showQuizResults();
+                }
+            }, 500);
+        }
+
+        function updateQuizProgress() {
+            const progress = ((currentQuestion + 1) / quizQuestions.length) * 100;
+            document.getElementById('quiz-progress-fill').style.width = `${progress}%`;
+            document.getElementById('quiz-progress-text').textContent = `Question ${currentQuestion + 1} of ${quizQuestions.length}`;
+            
+            if (currentQuestion === quizQuestions.length - 1) {
+                document.getElementById('quiz-next-btn').innerHTML = 'Finish Quiz <i class="fas fa-check"></i>';
+            }
+        }
+
+        function showQuizResults() {
+            document.getElementById('quiz-container').style.display = 'none';
+            document.getElementById('quiz-results').style.display = 'block';
+            
+            document.getElementById('final-score').textContent = score;
+            
+            let message;
+            if (score >= 10) {
+                message = "Excellent! You have mastered PowerPoint from beginner to expert level!";
+            } else if (score >= 8) {
+                message = "Great job! You have a strong understanding of PowerPoint.";
+            } else if (score >= 6) {
+                message = "Good work! Review the lessons to strengthen your PowerPoint skills.";
+            } else {
+                message = "Keep learning! Review the comprehensive lessons and try again.";
+            }
+            
+            document.getElementById('results-message').textContent = message;
+        }
+
+        function retakeQuiz() {
+            startQuiz();
+        }
+
+        function backToLearning() {
+            document.getElementById('quiz-section').style.display = 'none';
+            document.getElementById('learning-interface').style.display = 'block';
+            loadLesson(0);
+        }
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+            const navMenu = document.getElementById('nav-menu');
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+        });
+    </script>
+</body>
+</html>

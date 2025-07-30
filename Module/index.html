@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Modules - Barangay Learning Hub</title>
+    <link rel="icon" href="..\BLH_logo.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1e3a8a;
+            --light-blue: #3b82f6;
+            --accent-yellow: #fbbf24;
+            --dark-yellow: #f59e0b;
+            --success-green: #059669;
+            --white: #ffffff;
+            --light-gray: #f8fafc;
+            --gray: #64748b;
+            --text-dark: #1e293b;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-blue) 100%);
+            box-shadow: var(--shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar {
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .nav-brand i {
+            margin-right: 0.5rem;
+            color: var(--accent-yellow);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--accent-yellow);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: var(--white);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-blue) 100%);
+            color: var(--white);
+            padding: 120px 0 80px;
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-description {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 80px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-blue);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--accent-yellow) 0%, var(--dark-yellow) 100%);
+            border-radius: 2px;
+        }
+
+        .section-description {
+            text-align: center;
+            font-size: 1.125rem;
+            color: var(--gray);
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Search Container */
+        .search-container {
+            margin-bottom: 3rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-box {
+            position: relative;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+            z-index: 1;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: var(--white);
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--light-blue);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        /* Module Grid */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .module-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-yellow);
+        }
+.nav-brand img {
+    width: 40px;
+    height: 40px;
+    margin-right: 0.5rem;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+        .module-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .module-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .module-card:hover .module-image img {
+            transform: scale(1.05);
+        }
+
+        .module-content {
+            padding: 1.5rem;
+        }
+
+        .module-content h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--primary-blue);
+        }
+
+        .module-content p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .module-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .module-info span {
+            font-size: 0.85rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            width: fit-content;
+        }
+
+        .participants {
+            background: var(--light-gray);
+            color: var(--text-dark);
+        }
+
+        .date {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--light-blue);
+        }
+
+        .status {
+            font-weight: 600;
+        }
+
+.status.completed {
+    background: rgba(5, 150, 105, 0.1);
+    color: var(--success-green);
+}
+
+.status.ongoing {
+    background: rgba(251, 191, 36, 0.1);
+    color: var(--dark-yellow);
+}
+
+.status.upcoming {
+    background: rgba(220, 38, 38, 0.1);
+    color: var(--danger-red);
+}
+
+        .module-btn {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-blue) 100%);
+            color: var(--white);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .module-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 58, 138, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-blue) 100%);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3,
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--accent-yellow);
+        }
+
+        .footer-section p {
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            opacity: 0.9;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-yellow);
+            opacity: 1;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-yellow);
+            color: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: var(--primary-blue);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: var(--shadow);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-toggle.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .nav-toggle.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .nav-toggle.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .modules-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 100px 0 60px;
+            }
+
+            .main-content {
+                padding: 60px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.75rem;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .module-content {
+                padding: 1rem;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            margin: 10% auto;
+            padding: 0;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-blue) 100%);
+            color: var(--white);
+            padding: 1.5rem;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .close {
+            color: var(--white);
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            background: none;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .close:hover,
+        .close:focus {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .modal-icon {
+            font-size: 4rem;
+            color: var(--accent-yellow);
+            margin-bottom: 1rem;
+        }
+
+        .modal-message {
+            font-size: 1.125rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .modal-footer {
+            padding: 0 2rem 2rem;
+            text-align: center;
+        }
+
+        .modal-btn {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-blue) 100%);
+            color: var(--white);
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 58, 138, 0.3);
+        }
+
+        @media (max-width: 480px) {
+            .modal-content {
+                margin: 20% auto;
+                width: 95%;
+            }
+
+            .modal-header {
+                padding: 1rem;
+            }
+
+            .modal-title {
+                font-size: 1.25rem;
+            }
+
+            .modal-body {
+                padding: 1.5rem;
+            }
+
+            .modal-icon {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                     <img src="..\Maps\blhimages\BLH_logo.png">     
+                    <span>Barangay Learning Hub</span>
+                </div>
+                <div class="nav-menu" id="nav-menu">
+                    <a href="index.html" class="nav-link ">Home</a>
+                    <a href="Maps/index.html" class="nav-link">Maps</a>
+                    <a href="Module/index.html" class="nav-link active">Modules</a>
+                    <a href="../Books/index.html" class="nav-link">Reading Corner</a>
+                    <a href="../Calendar.html" class="nav-link">Calendar</a>
+                    <a href="About Us.html" class="nav-link ">About Us</a>
+                </div>
+                <div class="nav-toggle" id="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">Digital Learning Modules</h1>
+            <p class="hero-description">Explore our comprehensive collection of digital literacy training modules designed for all skill levels.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <h2 class="section-title">Learning Modules</h2>
+            <p class="section-description">Choose from our wide range of digital literacy modules to enhance your skills and knowledge in various technology areas.</p>
+            
+            <!-- Search Bar -->
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="moduleSearch" placeholder="Search for modules...">
+                </div>
+            </div>
+
+            <!-- Modules Grid -->
+            <div class="modules-grid" id="ai">
+                <!-- Module 1: Introduction to Programming -->
+                <div class="module-card" data-module="ai">
+                    <div class="module-image">
+                        <img src="../BLHTRAINING/AI TOOLS.jpeg" alt="Ethical Use of AI">
+                    </div>
+                    <div class="module-content">
+                        <h3>Ethical Use of AI</h3>
+                        <p>Understanding how to use artificial intelligence in a responsible, fair, and non-harmful way.</p>
+                        <div class="module-info">
+                            <span class="participants">Participants: College</span>
+                            <span class="date">Date: November 10, 2024</span>
+                            <span class="status completed">Completed</span>
+                        </div>
+                        <button class="module-btn" onclick="redirectToModule('ai')">View Module</button>
+                    </div>
+                </div>
+
+                <!-- Module 2: Web Development Fundamentals -->
+                <div class="module-card" data-module="basics-of-computer">
+                    <div class="module-image">
+                        <img src="../BLHTRAINING/Basics of Computer.jpeg" alt="Basics of Computer">
+                    </div>
+                    <div class="module-content">
+                        <h3>Basics of Computer</h3>
+                        <p>Learning about computer parts, how they work, and performing basic tasks like typing and saving files.</p>
+                        <div class="module-info">
+                            <span class="participants">Participants: Junior High School</span>
+                            <span class="date">Date: November 15, 2024</span>
+                            <span class="status completed">Completed</span>
+                        </div>
+                        <button class="module-btn" onclick="redirectToModule('basics-of-computer')">View Module</button>
+                    </div>
+                </div>
+
+                <!-- Module 3: Data Science Essentials -->
+                <div class="module-card" data-module="Clipchamp">
+                    <div class="module-image">
+                        <img src="../BLHTRAINING/Clipchamp.jpeg" alt="Clipchamp">
+                    </div>
+                    <div class="module-content">
+                        <h3>Clipchamp</h3>
+                        <p>An easy-to-use video editing tool that helps you create and edit videos online.</p>
+                        <div class="module-info">
+                            <span class="participants">Participants: College</span>
+                            <span class="date">Date: November 20, 2024</span>
+                            <span class="status completed">Completed</span>
+                        </div>
+                        <button class="module-btn" onclick="redirectToModule('Clipchamp')">View Module</button>
+                    </div>
+                </div>
+
+                <!-- Module 4: Mobile App Development -->
+                <div class="module-card" data-module="Gmail">
+                    <div class="module-image">
+                        <img src="../BLHTRAINING/Introduction to Gmail.jpeg" alt="Gmail">
+                    </div>
+                    <div class="module-content">
+                        <h3>Gmail</h3>
+                        <p>Google's email platform for sending, receiving, and organizing emails for personal or professional use.</p>
+                        <div class="module-info">
+                            <span class="participants">Participants: Senior Citizen</span>
+                            <span class="date">Date: November 25, 2024</span>
+                            <span class="status completed">Completed</span>
+                        </div>
+                        <button class="module-btn" onclick="redirectToModule('Gmail')">View Module</button>
+                    </div>
+                </div>
+
+                <!-- Module 5: Game Development Basics -->
+                <div class="module-card" data-module="Graphic-Design">
+                    <div class="module-image">
+                        <img src="../BLHTRAINING/Graphic Design.jpeg" alt="Graphic Design">
+                    </div>
+                    <div class="module-content">
+                        <h3>Graphic Design</h3>
+                        <p>Creating visual content like posters, logos, and layouts using tools such as Canva or Photoshop.</p>
+                        <div class="module-info">
+                            <span class="participants">Participants: Senior High School</span>
+                            <span class="date">Date: November 30, 2024</span>
+                            <span class="status completed">Completed</span>
+                        </div>
+                        <button class="module-btn" onclick="redirectToModule('Graphic-Design')">View Module</button>
+                    </div>
+                </div>
+
+                <!-- Module 6: Artificial Intelligence Overview -->
+                <div class="module-card" data-module="mock-up">
+                    <div class="module-image">
+                        <img src="../BLHTRAINING/Online Gov't Services Mock-up Registration.jpeg" alt="Online Gov't Services Mock-up Registration">
+                    </div>
+                    <div class="module-content">
+                        <h3>Online Gov't Services Mock-up Registration</h3>
+                        <p>A visual draft or sample of a design (website, app, or layout) used to present and plan ideas.</p>
+                        <div class="module-info">
+                            <span class="participants">Participants: Farmers and Fisherfolks</span>
+                            <span class="date">Date: December 5, 2024</span>
+                            <span class="status completed">Completed</span>
+                        </div>
+                        <button class="module-btn" onclick="redirectToModule('mock-up')">View Module</button>
+                    </div>
+                </div>
+
+                <!-- Module 7: UI/UX Design Principles -->
+                <div class="module-card" data-module="ms-excel">
+                    <div class="module-image">
+                        <img src="../BLHTRAINING/Microsoft Excel.jpeg" alt="Microsoft Excel">
+                    </div>
+                    <div class="module-content">
+                        <h3>Microsoft Excel</h3>
+                        <p>A spreadsheet tool used for organizing data, making calculations, and creating charts or tables.</p>
+                        <div class="module-info">
+                            <span class="participants">Participants: ALS</span>
+                            <span class="date">Date: December 8, 2024</span>
+                            <span class="status completed">Completed</span>
+                        </div>
+                        <button class="module-btn" onclick="redirectToModule('ms-excel')">View Module</button>
+                    </div>
+                </div>
+
+                <!-- Module 8: Database Management Systems -->
+                <div class="module-card" data-module="ms-powerpoint">
+                    <div class="module-image">
+                        <img src="../BLHTRAINING/Microsoft Powerpoint.jpeg" alt="Microsoft Powerpoint">
+                    </div>
+                    <div class="module-content">
+                        <h3>Microsoft Powerpoint</h3>
+                        <p>A presentation software for creating slideshows with text, images, transitions, and animations.</p>
+                        <div class="module-info">
+                            <span class="participants">Participants: Senior High School</span>
+                            <span class="date">Date: December 11, 2024</span>
+                            <span class="status completed">Completed</span>
+                        </div>
+                        <button class="module-btn" onclick="redirectToModule('ms-powerpoint')">View Module</button>
+                    </div>
+                </div>
+
+                <!-- Module 9: Network Security Fundamentals -->
+                <div class="module-card" data-module="ms-publisher">
+                    <div class="module-image">
+                        <img src="../BLHTRAINING/Microsoft Publisher.jpeg" alt="Microsoft Publisher">
+                    </div>
+                    <div class="module-content">
+                        <h3>Microsoft Publisher</h3>
+                        <p>A desktop publishing tool used to design brochures, flyers, newsletters, and marketing materials.</p>
+                        <div class="module-info">
+                            <span class="participants">Participants: Grade School</span>
+                            <span class="date">Date: December 14, 2024</span>
+                            <span class="status completed">Completed</span>
+                        </div>
+                        <button class="module-btn" onclick="redirectToModule('ms-publisher')">View Module</button>
+                    </div>
+                </div>
+
+                <!-- Module 10: Project Management Essentials -->
+                <div class="module-card" data-module="ms-word">
+                    <div class="module-image">
+                        <img src="../BLHTRAINING/Microsoft Word.jpeg" alt="Microsoft Word ">
+                    </div>
+                    <div class="module-content">
+                        <h3>Microsoft Word</h3>
+                        <p>A word processing application for creating and editing documents like letters, essays, or reports.</p>
+                        <div class="module-info">
+                            <span class="participants">Participants: Grade School</span>
+                            <span class="date">Date: December 17, 2024</span>
+                            <span class="status completed">Completed</span>
+                        </div>
+                        <button class="module-btn" onclick="redirectToModule('ms-word')">View Module</button>
+                    </div>
+                </div>
+
+                <!-- Module 11: Digital Citizenship -->
+                <div class="module-card" data-module="drc">
+                    <div class="module-image">
+                        <img src="../BLHTRAINING/Responsible Digital Citizen.jpeg" alt="Digital Responsible Citizenship">
+                    </div>
+                    <div class="module-content">
+                        <h3>Digital Responsible Citizenship</h3>
+                        <p>Practicing safe, respectful, and ethical behavior while using technology and engaging online.</p>
+                        <div class="module-info">
+                            <span class="participants">Participants: College</span>
+                            <span class="date">Date: December 20, 2024</span>
+                            <span class="status completed">Completed</span>
+                        </div>
+                        <button class="module-btn" onclick="redirectToModule('drc')">View Module</button>
+                    </div>
+                </div>
+
+                <!-- Module 12: Cybersecurity Fundamentals -->
+                <div class="module-card" data-module="say-what-you-see">
+                    <div class="module-image">
+                        <img src="../BLHTRAINING/Say What you See.jpeg" alt="Say What You See">
+                    </div>
+                    <div class="module-content">
+                        <h3>Say What You See</h3>
+                        <p>An activity where users describe what they see in an image to improve observation and communication skills.</p>
+                        <div class="module-info">
+                            <span class="participants">Participants: Junior High</span>
+                            <span class="date">Date: June 04, 2025</span>
+                            <span class="status completed">Completed</span>
+                        </div>
+                        <button class="module-btn" onclick="redirectToModule('say-what-you-see')">View Module</button>
+                    </div>
+                </div>
+
+
+                 <div class="module-card" data-module="Strikingly">
+                    <div class="module-image">
+                        <img src="../BLHTRAINING/Strikingly.jpeg" alt="Strikingly">
+                    </div>
+                    <div class="module-content">
+                        <h3>Strikingly</h3>
+                        <p>A beginner-friendly website builder that helps users create professional websites with no coding.</p>
+                        <div class="module-info">
+                            <span class="participants">Participants: College</span>
+                            <span class="date">Date: March 5, 2024</span>
+                            <span class="status completed">Completed</span>
+                        </div>
+                        <button class="module-btn" onclick="redirectToModule('Strikingly')">View Module</button>
+                    </div>
+                </div>
+
+
+                 <div class="module-card" data-module="hour-of-code">
+                    <div class="module-image">
+                        <img src="../BLHTRAINING/Hour of Code.jpeg" alt="Hour of Code">
+                    </div>
+                    <div class="module-content">
+                        <h3>Hour of Code</h3>
+                        <p>An introduction to coding through fun, one-hour tutorials that teach basic programming skills.</p>
+                        <div class="module-info">
+                            <span class="participants">Participants: Grade School</span>
+                            <span class="date">Date: August ??, 2025</span>
+                            <span class="status upcoming">Upcoming</span>
+                        </div>
+                        <button class="module-btn" onclick="redirectToModule('hour-of-code')">View Module</button>
+                    </div>
+                </div>
+
+
+
+                 <div class="module-card" data-module="video-conferencing">
+                    <div class="module-image">
+                        <img src="../BLHTRAINING/Video COnferencing.jpeg" alt="Video Conferencing">
+                    </div>
+                    <div class="module-content">
+                        <h3>Video Conferencing</h3>
+                        <p>Using tools like Zoom or Google Meet to communicate face-to-face online for learning or meetings.</p>
+                        <div                    class="module-info">
+                            <span class="participants">Participants: Junior High School</span>
+                            <span class="date">Date: September ??, 2025</span>
+                            <span class="status upcoming">Upcoming</span>
+                        </div>
+                        <button class="module-btn" onclick="redirectToModule('video-conferencing')">View Module</button>
+                    </div>
+                </div>
+
+
+
+                 <div class="module-card" data-module="E-Commerce">
+                    <div class="module-image">
+                        <img src="../BLHTRAINING/E-commerce.jpeg" alt="E-Commerce">
+                    </div>
+                    <div class="module-content">
+                        <h3> E-Commerce</h3>
+                        <p>Buying and selling products or services online using digital platforms and secure payment systems.</p>
+                        <div class="module-info">
+                            <span class="participants">Participants: Community</span>
+                            <span class="date">Date: October ??, 2025</span>
+                            <span class="status upcoming">Available</span>
+                        </div>
+                        <button class="module-btn" onclick="redirectToModule('E-Commerce')">View Module</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Barangay Learning Hub</h3>
+                    <p>Empowering communities through digital education and technology access.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/COBBarangayLearningHub"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="/Module/index.html">Learning Modules</a></li>
+                        <li><a href="/Module/index.html">Training Programs</a></li>
+                        <li><a href="About Us.html">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Programs</h4>
+                    <ul>
+                        <li><a href="Module/index.html">Digital Literacy</a></li>
+                        <li><a href="Module/index.html">Computer Training</a></li>
+                        <li><a href="Module/index.html">Internet Safety</a></li>
+                        <li><a href="Module/index.html">Youth Programs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Barangay Learning Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal for Module Not Available -->
+    <div id="moduleModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Module Not Available</h2>
+                <button class="close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <p class="modal-message">
+                    This module is currently under development and will be available soon. 
+                    Please check back later or explore our other available modules.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn" onclick="closeModal()">Got it</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Navigation Toggle
+        const navToggle = document.getElementById('nav-toggle');
+        const navMenu = document.getElementById('nav-menu');
+
+        if (navToggle && navMenu) {
+            navToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                navToggle.classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                });
+            });
+        }
+
+        // Module Redirect Function
+        function redirectToModule(moduleId) {
+            // Define redirect URLs for each module
+            const moduleUrls = {
+                'ai': 'TRAINING-AI/AI/ai.html',
+                'basics-of-computer': 'TRAINING-AI/Basics of Computer.html',
+                'Clipchamp': 'TRAINING-AI/Clipchamp.html',
+                'Gmail': 'TRAINING-AI/Gmail.html',
+                'Graphic-Design': 'TRAINING-AI/Graphic Design.html',
+                'mock-up': 'TRAINING-AI/MOCK-UP.html',
+                'ms-excel': 'TRAINING-AI/MS Excel.html',
+                'ms-powerpoint':'TRAINING-AI/MS Powerpoint.html',
+                'ms-publisher': 'TRAINING-AI/MS Publisher.html',
+                'ms-word': 'TRAINING-AI/MS Word.html',
+                'drc':'TRAINING-AI/RDC.html',
+                'say-what-you-see': 'Say What you see.html',
+                'Strikingly': 'Strikingly.html'
+            };
+
+            // Modules that are not yet available
+            const unavailableModules = ['hour-of-code', 'video-conferencing', 'E-Commerce'];
+
+            if (unavailableModules.includes(moduleId)) {
+                openModal();
+            } else if (moduleUrls[moduleId]) {
+                window.open(moduleUrls[moduleId], '_blank');
+            } else {
+                openModal();
+            }
+        }
+
+        // Modal Functions
+        function openModal() {
+            document.getElementById('moduleModal').style.display = 'block';
+            // Disable body scroll when modal is open
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('moduleModal').style.display = 'none';
+            // Re-enable body scroll when modal is closed
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('moduleModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Search Functionality
+        const moduleSearch = document.getElementById('moduleSearch');
+        const modulesGrid = document.getElementById('modulesGrid');
+
+        if (moduleSearch && modulesGrid) {
+            moduleSearch.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const moduleCards = modulesGrid.querySelectorAll('.module-card');
+
+                moduleCards.forEach(card => {
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    const description = card.querySelector('p').textContent.toLowerCase();
+                    const participants = card.querySelector('.participants').textContent.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || description.includes(searchTerm) || participants.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        let lastScrollTop = 0;
+        const header = document.querySelector('.header');
+
+        window.addEventListener('scroll', () => {
+            if (!header) return;
+
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Scrolling down
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                // Scrolling up
+                header.style.transform = 'translateY(0)';
+            }
+
+            lastScrollTop = scrollTop;
+        });
+    </script>
+</body>
+</html>

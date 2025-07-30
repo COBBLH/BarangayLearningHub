@@ -1,0 +1,1322 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Services Registration Module - Barangay Learning Hub</title>
+    <link rel="icon" href="..\..\BLH_logo.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1e3a8a;
+            --light-blue: #3b82f6;
+            --accent-yellow: #fbbf24;
+            --dark-yellow: #f59e0b;
+            --success-green: #059669;
+            --danger-red: #dc2626;
+            --warning-orange: #ea580c;
+            --purple: #7c3aed;
+            --cyan: #0891b2;
+            --pink: #be185d;
+            --white: #ffffff;
+            --light-gray: #f8fafc;
+            --gray: #64748b;
+            --dark-gray: #334155;
+            --text-dark: #1e293b;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-blue) 100%);
+            box-shadow: var(--shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar {
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .nav-brand i {
+            margin-right: 0.5rem;
+            color: var(--accent-yellow);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+.nav-brand img {
+    width: 40px;
+    height: 40px;
+    margin-right: 0.5rem;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--accent-yellow);
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--light-blue) 0%, var(--accent-yellow) 100%);
+            padding: 4rem 0;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 20s infinite linear;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--white);
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            background: var(--accent-yellow);
+            color: var(--primary-blue);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cta-button:hover {
+            background: var(--dark-yellow);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .floating-image {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            animation: float-gentle 3s ease-in-out infinite;
+        }
+
+        /* Learning Interface */
+        .learning-interface {
+            padding: 4rem 0;
+            background: var(--light-gray);
+        }
+
+        .module-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .module-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            background: var(--white);
+            border-radius: 50px;
+            height: 30px;
+            max-width: 400px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--light-blue), var(--accent-yellow));
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 50px;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .lesson-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .lesson-content {
+            animation: fadeInLeft 0.6s ease;
+        }
+
+        .lesson-content h3 {
+            color: var(--primary-blue);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-content h4 {
+            color: var(--primary-blue);
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .lesson-content p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .lesson-content ul, .lesson-content ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .lesson-content strong {
+            color: var(--primary-blue);
+        }
+
+        .lesson-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeInRight 0.6s ease;
+        }
+
+        .content-image {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .content-image:hover {
+            transform: scale(1.05);
+        }
+
+        .navigation-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-btn:hover {
+            background: var(--light-blue);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .nav-btn:disabled {
+            background: var(--gray);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .quiz-btn {
+            background: var(--accent-yellow);
+            color: var(--primary-blue);
+        }
+
+        .quiz-btn:hover {
+            background: var(--dark-yellow);
+        }
+
+        /* Quiz Section */
+        .quiz-section {
+            padding: 4rem 0;
+            background: var(--white);
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .quiz-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .quiz-progress {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .quiz-progress-bar {
+            background: var(--light-gray);
+            border-radius: 50px;
+            height: 20px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .quiz-progress-fill {
+            background: linear-gradient(90deg, var(--success-green), var(--accent-yellow));
+            height: 100%;
+            width: 10%;
+            transition: width 0.5s ease;
+            border-radius: 50px;
+        }
+
+        .question-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 2rem;
+            border: 3px solid var(--accent-yellow);
+        }
+
+        .question-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .answer-options {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .answer-option {
+            background: var(--light-gray);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .answer-option:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: var(--light-blue);
+            transform: translateX(10px);
+        }
+
+        .answer-option.selected {
+            background: rgba(251, 191, 36, 0.2);
+            border-color: var(--accent-yellow);
+        }
+
+        .answer-option.correct {
+            background: rgba(5, 150, 105, 0.2);
+            border-color: var(--success-green);
+        }
+
+        .answer-option.incorrect {
+            background: rgba(220, 38, 38, 0.2);
+            border-color: var(--danger-red);
+        }
+
+        .quiz-navigation {
+            text-align: center;
+        }
+
+        /* Quiz Results */
+        .quiz-results {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .results-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .results-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .results-icon i {
+            color: var(--accent-yellow);
+            animation: bounce 1s ease infinite;
+        }
+
+        .score-display {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin: 1rem 0;
+        }
+
+        .score-number {
+            color: var(--success-green);
+        }
+
+        .results-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-blue) 100%);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3,
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--accent-yellow);
+        }
+
+        .footer-section p {
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            opacity: 0.9;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-yellow);
+            opacity: 1;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-yellow);
+            color: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0.8;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+
+        @keyframes float-gentle {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px var(--accent-yellow); }
+            to { text-shadow: 0 0 20px var(--accent-yellow), 0 0 30px var(--accent-yellow); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .animate-fadeInRight {
+            animation: fadeInRight 0.8s ease forwards;
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .animate-slideIn {
+            animation: slideIn 0.6s ease forwards;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .lesson-container {
+                grid-template-columns: 1fr;
+                padding: 2rem;
+            }
+
+            .navigation-controls {
+                flex-direction: column;
+            }
+
+            .footer-bottom-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .results-actions {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero {
+                padding: 2rem 0;
+            }
+
+            .learning-interface,
+            .quiz-section {
+                padding: 2rem 0;
+            }
+
+            .lesson-container,
+            .question-card,
+            .results-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <img src="..\..\Maps\blhimages\BLH_logo.png"> 
+                    <span>Barangay Learning Hub</span>
+                </div>
+                <div class="nav-menu" id="nav-menu">
+                   <a href="../../index.html" class="nav-link">Home</a>
+                    <a href="../../Maps/index.html" class="nav-link">Maps</a>
+                    <a href="index.html" class="nav-link active">Modules</a>
+                    <a href="../../Books/index.html" class="nav-link">Reading Corner</a>
+                    <a href="../../Calendar.html" class="nav-link">Calendar</a>
+                    <a href="../../About Us.html" class="nav-link ">About Us</a>
+                </div>
+                <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title animate-fadeInUp">Government Services Registration Module</h1>
+                    <p class="hero-subtitle animate-fadeInUp">Government Initiative for Free Community Education</p>
+                    <p class="hero-description animate-fadeInUp">Learn how to access and register for various online government services including NBI Clearance, Police Clearance, Passport, and PSA certificates.</p>
+                    <button class="cta-button animate-fadeInUp" onclick="startLearning()">
+                        Start Learning <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="hero-image animate-fadeInRight">
+                    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Government Services" class="floating-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Module Interface -->
+        <section class="learning-interface" id="learning-interface" style="display: none;">
+            <div class="container">
+                <div class="module-header">
+                    <h2 id="module-title">Government Services Registration Module</h2>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                        <span class="progress-text" id="progress-text">0%</span>
+                    </div>
+                </div>
+
+                <div class="lesson-container" id="lesson-container">
+                    <div class="lesson-content" id="lesson-content">
+                        <!-- Lesson content will be dynamically loaded here -->
+                    </div>
+                    
+                    <div class="lesson-image" id="lesson-image">
+                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Government Services" class="content-image">
+                    </div>
+                </div>
+
+                <div class="navigation-controls">
+                    <button class="nav-btn prev-btn" id="prev-btn" onclick="previousLesson()">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button class="nav-btn next-btn" id="next-btn" onclick="nextLesson()">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="nav-btn quiz-btn" id="quiz-btn" onclick="startQuiz()" style="display: none;">
+                        Take Quiz <i class="fas fa-brain"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section class="quiz-section" id="quiz-section" style="display: none;">
+            <div class="container">
+                <div class="quiz-header">
+                    <h2>Government Services Registration Quiz</h2>
+                    <div class="quiz-progress">
+                        <span id="quiz-progress-text">Question 1 of 10</span>
+                        <div class="quiz-progress-bar">
+                            <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-container" id="quiz-container">
+                    <div class="question-card animate-slideIn" id="question-card">
+                        <h3 id="question-text">Loading question...</h3>
+                        <div class="answer-options" id="answer-options">
+                            <!-- Answer options will be dynamically loaded -->
+                        </div>
+                    </div>
+
+                    <div class="quiz-navigation">
+                        <button class="nav-btn" id="quiz-next-btn" onclick="nextQuestion()" disabled>
+                            Next Question <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quiz Results -->
+                <div class="quiz-results" id="quiz-results" style="display: none;">
+                    <div class="results-card animate-fadeIn">
+                        <div class="results-icon">
+                            <i class="fas fa-trophy" id="results-icon"></i>
+                        </div>
+                        <h2 id="results-title">Quiz Complete!</h2>
+                        <div class="score-display">
+                            <span class="score-number" id="final-score">0</span>
+                            <span class="score-total">/ 10</span>
+                        </div>
+                        <p id="results-message">Great job!</p>
+                        <div class="results-actions">
+                            <button class="nav-btn" onclick="retakeQuiz()">
+                                <i class="fas fa-redo"></i> Retake Quiz
+                            </button>
+                            <button class="nav-btn" onclick="backToLearning()">
+                                <i class="fas fa-book"></i> Back to Learning
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+     <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Barangay Learning Hub</h3>
+                    <p>Empowering communities through digital education and technology access.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/COBBarangayLearningHub"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="/Module/index.html">Learning Modules</a></li>
+                        <li><a href="/Module/index.html">Training Programs</a></li>
+                        <li><a href="About Us.html">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Programs</h4>
+                    <ul>
+                        <li><a href="Module/index.html">Digital Literacy</a></li>
+                        <li><a href="Module/index.html">Computer Training</a></li>
+                        <li><a href="Module/index.html">Internet Safety</a></li>
+                        <li><a href="Module/index.html">Youth Programs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Barangay Learning Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Learning Module Data
+        const moduleData = {
+            lessons: [
+                {
+                    title: "Introduction to Government Services Registration",
+                    content: `
+                        <h3>Learning Objectives</h3>
+                        <p>This training aims to equip Farmers and Fishermen with the knowledge and skills to access and register for various online government services, specifically NBI Clearance, Police Clearance, Passport, and PSA form. Participants will learn how to fill out forms, navigate and complete the online registration process for each service, making it easier for them to access government services and opportunities.</p>
+                        
+                        <h4>What You Will Learn:</h4>
+                        <ol>
+                            <li><strong>Online Registration:</strong> Learn how to access and register for NBI Clearance, Police Clearance, Passport, and PSA form online using offline mock-up forms</li>
+                            <li><strong>Form Completion:</strong> Practice filling out forms and submitting applications</li>
+                            <li><strong>Requirements Preparation:</strong> Familiarize yourself with the required documents and information needed for each service</li>
+                        </ol>
+
+                        <h4>Benefits of Online Registration:</h4>
+                        <ul>
+                            <li><strong>Convenience:</strong> Register from the comfort of your home</li>
+                            <li><strong>Time-Saving:</strong> Avoid long queues and waiting times</li>
+                            <li><strong>Accessibility:</strong> Available 24/7 for registration</li>
+                            <li><strong>Efficiency:</strong> Faster processing and appointment scheduling</li>
+                        </ul>
+
+                        <h4>Do's and Don'ts</h4>
+                        <p><strong>DO:</strong> Read instructions carefully, double-check your information for accuracy, and submit promptly.</p>
+                        <p><strong>DON'T:</strong> Rush, use incorrect information, or ignore any required fields.</p>
+                    `,
+                    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "NBI Clearance Registration",
+                    content: `
+                        <h3>What is NBI Clearance?</h3>
+                        <p>The National Bureau of Investigation (NBI) Clearance is an important document in the Philippines, often used for employment, travel, and various legal transactions. This document certifies that the individual in question does not have any pending criminal cases filed with the NBI at the time of issuance.</p>
+                        
+                        <h4>Purpose of NBI Clearance:</h4>
+                        <ul>
+                            <li><strong>Employment:</strong> Both domestic and overseas</li>
+                            <li><strong>Travel abroad:</strong> Required for visa applications</li>
+                            <li><strong>Business permits:</strong> For business registration</li>
+                            <li><strong>Professional licensing:</strong> For professional certifications</li>
+                            <li><strong>Legal documents:</strong> For judicial processes and government applications</li>
+                        </ul>
+
+                        <h4>How to Apply for NBI Online Registration:</h4>
+                        <p>To apply for Online Registration in NBI Clearance, you need a computer, mobile phone, or tablet to access the NBI Clearance Online Registration and Application Services.</p>
+
+                        <h4>Requirements:</h4>
+                        <ul>
+                            <li><strong>Two Valid Government-Issued IDs:</strong> Passport, driver's license, UMID, Voter's ID, PhilHealth ID, TIN ID, etc.</li>
+                            <li><strong>Payment:</strong> ₱155 total (₱130 clearance fee + ₱25 service fee)</li>
+                            <li><strong>Application Form:</strong> Printed copy of online application</li>
+                            <li><strong>For First-Time Job Seekers:</strong> Barangay Certificate and Oath of Undertaking (FREE)</li>
+                        </ul>
+
+                        <h4>Payment Options:</h4>
+                        <p>Standard fee: ₱155 | Door-to-door delivery: ₱369</p>
+                    `,
+                    image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Police Clearance Registration",
+                    content: `
+                        <h3>What is Police Clearance?</h3>
+                        <p>A police clearance, or PNP clearance, is a document issued by the Philippine National Police (PNP) that certifies whether an individual has a criminal record in the Philippines. It's commonly required for job applications, government-issued ID applications, NBI clearance requests, firearm registration, and bank transactions.</p>
+                        
+                        <h4>How to Apply for Police Clearance Online:</h4>
+                        <p>The National Police Clearance System (NPCS) offers a nationwide online application system for police clearance, seeking to improve the process for criminal records check.</p>
+
+                        <h4>Application Process:</h4>
+                        <ol>
+                            <li><strong>Visit NPCS Website:</strong> Go to pnpclearance.ph</li>
+                            <li><strong>Register and Log In:</strong> Create an account for first-time applicants</li>
+                            <li><strong>Complete Application:</strong> Fill out the online application form</li>
+                            <li><strong>Set Appointment:</strong> Choose date and time at designated police station</li>
+                            <li><strong>Pay Fee:</strong> ₱180 processing fee via GCash, Maya, 7/11, or Palawan Express</li>
+                        </ol>
+
+                        <h4>Requirements for Appointment:</h4>
+                        <ul>
+                            <li><strong>Two Valid IDs:</strong> Original, not expired, with clear photo and signature</li>
+                            <li><strong>Reference Number:</strong> From your online appointment</li>
+                            <li><strong>Proof of Payment:</strong> Payment confirmation</li>
+                            <li><strong>Biometrics:</strong> Picture and signature capture at police station</li>
+                        </ul>
+
+                        <h4>For First-Time Job Seekers:</h4>
+                        <p>Present FTJS Certification and valid ID for free processing under RA 11261.</p>
+                    `,
+                    image: "https://images.unsplash.com/photo-1593115057322-e94b77572f20?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "PSA Certificate Registration",
+                    content: `
+                        <h3>Philippines Statistics Authority (PSA)</h3>
+                        <p>The PSA Serbilis website (www.psaserbilis.com.ph) is PSA's online facility for submitting requests for copy issuance of civil registry records (birth, marriage and death certificates) and issuance of certification of no marriage record (CENOMAR).</p>
+                        
+                        <h4>How to Apply for PSA Online Appointment:</h4>
+                        <p>To schedule a PSA online appointment, you need a working email address, mobile number, and access to the PSA CRS Appointment System website.</p>
+
+                        <h4>Application Steps:</h4>
+                        <ol>
+                            <li><strong>Visit CRS Website:</strong> Go to appointment.psa.gov.ph</li>
+                            <li><strong>Choose PSA CRS Outlet:</strong> Select your preferred location</li>
+                            <li><strong>Enter Details:</strong> Full name, email, mobile number</li>
+                            <li><strong>Select Certificate Type:</strong> Birth, marriage, death, or CENOMAR</li>
+                            <li><strong>Choose Date and Time:</strong> Select appointment schedule</li>
+                            <li><strong>Review and Save:</strong> Double-check details and save appointment slip</li>
+                        </ol>
+
+                        <h4>PSA Certificate Fees (2025):</h4>
+                        <ul>
+                            <li><strong>Birth Certificate:</strong> ₱365 (includes processing and courier)</li>
+                            <li><strong>Marriage Certificate:</strong> ₱365 (includes processing and courier)</li>
+                            <li><strong>Death Certificate:</strong> ₱365 (includes processing and courier)</li>
+                            <li><strong>CENOMAR:</strong> ₱420 (includes processing and courier)</li>
+                        </ul>
+
+                        <h4>What to Bring:</h4>
+                        <ul>
+                            <li>Printed or electronic copy of appointment slip with QR code</li>
+                            <li>Valid government-issued ID</li>
+                        </ul>
+                    `,
+                    image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Passport Application Registration",
+                    content: `
+                        <h3>Philippine Passport Application</h3>
+                        <p>A passport is a government-issued document that verifies a person's identity and nationality for international travel. It allows the holder to enter and exit a country, and to access local aid and protection.</p>
+                        
+                        <h4>How to Apply for Philippine Passport:</h4>
+                        <ol>
+                            <li><strong>Set Online Appointment:</strong> Visit www.passport.gov.ph</li>
+                            <li><strong>Appear on Appointment Date:</strong> Bring complete documentary requirements</li>
+                            <li><strong>Submit Requirements:</strong> Present all necessary documents</li>
+                            <li><strong>Pay Processing Fee:</strong> Pay at designated banks or payment centers</li>
+                        </ol>
+
+                        <h4>Passport Processing Fees (2025):</h4>
+                        <ul>
+                            <li><strong>Regular Processing:</strong> ₱950 (15-20 working days)</li>
+                            <li><strong>Expedited Processing:</strong> ₱1,200 (7-10 working days)</li>
+                            <li><strong>Lost/Mutilated Penalty:</strong> ₱350 additional fee</li>
+                        </ul>
+
+                        <h4>Processing Times:</h4>
+                        <ul>
+                            <li><strong>Metro Manila:</strong> 15 days regular, 7 days expedited</li>
+                            <li><strong>Outside Metro Manila:</strong> 20 days regular, 10 days expedited</li>
+                            <li><strong>Foreign Service Posts:</strong> 4-6 weeks</li>
+                        </ul>
+
+                        <h4>Basic Requirements:</h4>
+                        <ul>
+                            <li>Confirmed online appointment</li>
+                            <li>Personal appearance</li>
+                            <li>Accomplished application form</li>
+                            <li>Original and photocopy of PSA authenticated birth certificate</li>
+                        </ul>
+
+                        <h4>Dress Code Tips:</h4>
+                        <p>Dress neatly and casually. Men should wear collared shirts with pants; women should wear modest blouses with skirts or pants. Avoid shorts, tank tops, flip-flops, and offensive designs.</p>
+                    `,
+                    image: "https://images.unsplash.com/photo-1548094990-c16ca90f1f0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                }
+            ]
+        };
+
+        // Quiz Questions
+        const quizQuestions = [
+            {
+                question: "What is the total fee for NBI Clearance including service fee?",
+                options: ["₱130", "₱155", "₱180", "₱365"],
+                correct: 1
+            },
+            {
+                question: "Which website is used for Police Clearance online application?",
+                options: ["nbiclearance.com", "pnpclearance.ph", "passport.gov.ph", "psaserbilis.com.ph"],
+                correct: 1
+            },
+            {
+                question: "How much does a PSA Birth Certificate cost with delivery?",
+                options: ["₱155", "₱180", "₱365", "₱420"],
+                correct: 2
+            },
+            {
+                question: "What is the regular processing time for passport in Metro Manila?",
+                options: ["7 working days", "10 working days", "15 working days", "20 working days"],
+                correct: 2
+            },
+            {
+                question: "How many valid IDs are required for NBI Clearance appointment?",
+                options: ["1 ID", "2 IDs", "3 IDs", "No ID required"],
+                correct: 1
+            },
+            {
+                question: "What does CENOMAR stand for?",
+                options: ["Certificate of No Marriage Record", "Central Office Marriage Record", "Civil Entry Marriage Record", "Certificate of Marriage"],
+                correct: 0
+            },
+            {
+                question: "What is the processing fee for Police Clearance?",
+                options: ["₱130", "₱155", "₱180", "₱200"],
+                correct: 2
+            },
+            {
+                question: "Which document certifies no pending criminal cases with NBI?",
+                options: ["Police Clearance", "NBI Clearance", "PSA Certificate", "Passport"],
+                correct: 1
+            },
+            {
+                question: "What should you wear when getting NBI or Police clearance?",
+                options: ["Shorts and sandals", "Tank tops", "Neat casual attire", "Formal suit"],
+                correct: 2
+            },
+            {
+                question: "What is required for first-time job seekers to get FREE NBI clearance?",
+                options: ["Payment receipt", "Barangay Certificate and Oath", "Two IDs only", "Online application"],
+                correct: 1
+            }
+        ];
+
+        // Global variables
+        let currentLesson = 0;
+        let currentQuestion = 0;
+        let selectedAnswers = [];
+        let score = 0;
+
+        // Start learning function
+        function startLearning() {
+            document.querySelector('.hero').style.display = 'none';
+            document.getElementById('learning-interface').style.display = 'block';
+            loadLesson(0);
+        }
+
+        // Load lesson
+        function loadLesson(lessonIndex) {
+            currentLesson = lessonIndex;
+            const lesson = moduleData.lessons[lessonIndex];
+            
+            document.getElementById('lesson-content').innerHTML = lesson.content;
+            document.querySelector('.content-image').src = lesson.image;
+            
+            updateProgress();
+            updateNavigationButtons();
+        }
+
+        // Update progress
+        function updateProgress() {
+            const progress = ((currentLesson + 1) / moduleData.lessons.length) * 100;
+            document.getElementById('progress-fill').style.width = `${progress}%`;
+            document.getElementById('progress-text').textContent = `${Math.round(progress)}%`;
+        }
+
+        // Update navigation buttons
+        function updateNavigationButtons() {
+            document.getElementById('prev-btn').disabled = currentLesson === 0;
+            
+            if (currentLesson === moduleData.lessons.length - 1) {
+                document.getElementById('next-btn').style.display = 'none';
+                document.getElementById('quiz-btn').style.display = 'inline-flex';
+            } else {
+                document.getElementById('next-btn').style.display = 'inline-flex';
+                document.getElementById('quiz-btn').style.display = 'none';
+            }
+        }
+
+        // Navigation functions
+        function previousLesson() {
+            if (currentLesson > 0) {
+                loadLesson(currentLesson - 1);
+            }
+        }
+
+        function nextLesson() {
+            if (currentLesson < moduleData.lessons.length - 1) {
+                loadLesson(currentLesson + 1);
+            }
+        }
+
+        // Quiz functions
+        function startQuiz() {
+            document.getElementById('learning-interface').style.display = 'none';
+            document.getElementById('quiz-section').style.display = 'block';
+            currentQuestion = 0;
+            selectedAnswers = [];
+            score = 0;
+            loadQuestion(0);
+        }
+
+        function loadQuestion(questionIndex) {
+            currentQuestion = questionIndex;
+            const question = quizQuestions[questionIndex];
+            
+            document.getElementById('question-text').textContent = question.question;
+            
+            const answerOptions = document.getElementById('answer-options');
+            answerOptions.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'answer-option';
+                optionDiv.innerHTML = `
+                    <div style="width: 30px; height: 30px; border: 2px solid var(--gray); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <span style="font-weight: bold; color: var(--gray);">${String.fromCharCode(65 + index)}</span>
+                    </div>
+                    <span>${option}</span>
+                `;
+                optionDiv.onclick = () => selectAnswer(index, optionDiv);
+                answerOptions.appendChild(optionDiv);
+            });
+            
+            updateQuizProgress();
+            document.getElementById('quiz-next-btn').disabled = true;
+        }
+
+        function selectAnswer(answerIndex, optionElement) {
+            document.querySelectorAll('.answer-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            optionElement.classList.add('selected');
+            selectedAnswers[currentQuestion] = answerIndex;
+            document.getElementById('quiz-next-btn').disabled = false;
+        }
+
+        function nextQuestion() {
+            const question = quizQuestions[currentQuestion];
+            const selectedAnswer = selectedAnswers[currentQuestion];
+            
+            if (selectedAnswer === question.correct) {
+                score++;
+            }
+            
+            setTimeout(() => {
+                if (currentQuestion < quizQuestions.length - 1) {
+                    loadQuestion(currentQuestion + 1);
+                } else {
+                    showQuizResults();
+                }
+            }, 500);
+        }
+
+        function updateQuizProgress() {
+            const progress = ((currentQuestion + 1) / quizQuestions.length) * 100;
+            document.getElementById('quiz-progress-fill').style.width = `${progress}%`;
+            document.getElementById('quiz-progress-text').textContent = `Question ${currentQuestion + 1} of ${quizQuestions.length}`;
+            
+            if (currentQuestion === quizQuestions.length - 1) {
+                document.getElementById('quiz-next-btn').innerHTML = 'Finish Quiz <i class="fas fa-check"></i>';
+            }
+        }
+
+        function showQuizResults() {
+            document.getElementById('quiz-container').style.display = 'none';
+            document.getElementById('quiz-results').style.display = 'block';
+            
+            document.getElementById('final-score').textContent = score;
+            
+            let message;
+            if (score >= 8) {
+                message = "Excellent! You're ready to register for government services online!";
+            } else if (score >= 6) {
+                message = "Good job! You have a solid understanding of the registration process.";
+            } else {
+                message = "Keep learning! Review the lessons and try again.";
+            }
+            
+            document.getElementById('results-message').textContent = message;
+        }
+
+        function retakeQuiz() {
+            startQuiz();
+        }
+
+        function backToLearning() {
+            document.getElementById('quiz-section').style.display = 'none';
+            document.getElementById('learning-interface').style.display = 'block';
+            loadLesson(0);
+        }
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+            const navMenu = document.getElementById('nav-menu');
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tools Learning Module - Barangay Learning Hub</title>
+    <link rel="icon" href="..\..\..\BLH_logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="ai-module-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+       <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                     <img src="..\..\..\Maps\blhimages\BLH_logo.png">  
+                    <span>Barangay Learning Hub</span>
+                </div>
+                <div class="nav-menu" id="nav-menu">
+                   <a href="../../index.html" class="nav-link">Home</a>
+                    <a href="../../Maps/index.html" class="nav-link">Maps</a>
+                    <a href="index.html" class="nav-link active">Modules</a>
+                    <a href="../../Books/index.html" class="nav-link">Reading Corner</a>
+                    <a href="../../Calendar.html" class="nav-link">Calendar</a>
+                    <a href="../../About Us.html" class="nav-link ">About Us</a>
+                </div>
+                <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title animate-fadeInUp">AI Tools Learning Module</h1>
+                    <p class="hero-subtitle animate-fadeInUp">Government Initiative for Free Community Education</p>
+                    <p class="hero-description animate-fadeInUp">Explore the world of Artificial Intelligence tools like ChatGPT and Ideogram, and learn how to use them effectively in your daily life and work.</p>
+                    <button class="cta-button animate-fadeInUp" onclick="startLearning()">
+                        Start Learning <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="hero-image animate-fadeInRight">
+                    <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="AI Brain Network" class="floating-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Module Interface -->
+        <section class="learning-interface" id="learning-interface" style="display: none;">
+            <div class="container">
+                <div class="module-header">
+                    <h2 id="module-title">AI Tools Learning Module</h2>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                        <span class="progress-text" id="progress-text">0%</span>
+                    </div>
+                </div>
+
+                <div class="lesson-container" id="lesson-container">
+                    <div class="lesson-content" id="lesson-content">
+                        <!-- Lesson content will be dynamically loaded here -->
+                    </div>
+                    
+                    <div class="lesson-image" id="lesson-image">
+                        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="AI Technology" class="content-image">
+                    </div>
+                </div>
+
+                <div class="navigation-controls">
+                    <button class="nav-btn prev-btn" id="prev-btn" onclick="previousLesson()">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button class="nav-btn next-btn" id="next-btn" onclick="nextLesson()">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="nav-btn quiz-btn" id="quiz-btn" onclick="startQuiz()" style="display: none;">
+                        Take Quiz <i class="fas fa-brain"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section class="quiz-section" id="quiz-section" style="display: none;">
+            <div class="container">
+                <div class="quiz-header">
+                    <h2>AI Knowledge Quiz</h2>
+                    <div class="quiz-progress">
+                        <span id="quiz-progress-text">Question 1 of 10</span>
+                        <div class="quiz-progress-bar">
+                            <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-container" id="quiz-container">
+                    <div class="question-card animate-slideIn" id="question-card">
+                        <h3 id="question-text">Loading question...</h3>
+                        <div class="answer-options" id="answer-options">
+                            <!-- Answer options will be dynamically loaded -->
+                        </div>
+                    </div>
+
+                    <div class="quiz-navigation">
+                        <button class="nav-btn" id="quiz-next-btn" onclick="nextQuestion()" disabled>
+                            Next Question <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quiz Results -->
+                <div class="quiz-results" id="quiz-results" style="display: none;">
+                    <div class="results-card animate-fadeIn">
+                        <div class="results-icon">
+                            <i class="fas fa-trophy" id="results-icon"></i>
+                        </div>
+                        <h2 id="results-title">Quiz Complete!</h2>
+                        <div class="score-display">
+                            <span class="score-number" id="final-score">0</span>
+                            <span class="score-total">/ 10</span>
+                        </div>
+                        <p id="results-message">Great job!</p>
+                        <div class="results-actions">
+                            <button class="nav-btn" onclick="retakeQuiz()">
+                                <i class="fas fa-redo"></i> Retake Quiz
+                            </button>
+                            <button class="nav-btn" onclick="backToLearning()">
+                                <i class="fas fa-book"></i> Back to Learning
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Barangay Learning Hub</h3>
+                    <p>Empowering communities through digital education and technology access.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/COBBarangayLearningHub"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#modules">Learning Modules</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Programs</h4>
+                    <ul>
+                        <li><a href="#modules">Digital Literacy</a></li>
+                        <li><a href="#modules">AI Tools Training</a></li>
+                        <li><a href="#modules">Computer Skills</a></li>
+                        <li><a href="#modules">Youth Programs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Barangay Learning Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="ai-module-script.js"></script>
+</body>
+</html>

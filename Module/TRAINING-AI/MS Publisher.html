@@ -1,0 +1,1361 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Publisher Learning Module - Barangay Learning Hub</title>
+    <link rel="icon" href="..\..\BLH_logo.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1e3a8a;
+            --light-blue: #3b82f6;
+            --accent-yellow: #fbbf24;
+            --dark-yellow: #f59e0b;
+            --success-green: #059669;
+            --danger-red: #dc2626;
+            --warning-orange: #ea580c;
+            --purple: #7c3aed;
+            --cyan: #0891b2;
+            --pink: #be185d;
+            --white: #ffffff;
+            --light-gray: #f8fafc;
+            --gray: #64748b;
+            --dark-gray: #334155;
+            --text-dark: #1e293b;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-blue) 100%);
+            box-shadow: var(--shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar {
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .nav-brand i {
+            margin-right: 0.5rem;
+            color: var(--accent-yellow);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+.nav-brand img {
+    width: 40px;
+    height: 40px;
+    margin-right: 0.5rem;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--accent-yellow);
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--light-blue) 0%, var(--accent-yellow) 100%);
+            padding: 4rem 0;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 20s infinite linear;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--white);
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            background: var(--accent-yellow);
+            color: var(--primary-blue);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cta-button:hover {
+            background: var(--dark-yellow);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .floating-image {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            animation: float-gentle 3s ease-in-out infinite;
+        }
+
+        /* Learning Interface */
+        .learning-interface {
+            padding: 4rem 0;
+            background: var(--light-gray);
+        }
+
+        .module-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .module-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            background: var(--white);
+            border-radius: 50px;
+            height: 30px;
+            max-width: 400px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--light-blue), var(--accent-yellow));
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 50px;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .lesson-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .lesson-content {
+            animation: fadeInLeft 0.6s ease;
+        }
+
+        .lesson-content h3 {
+            color: var(--primary-blue);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-content h4 {
+            color: var(--primary-blue);
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .lesson-content p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .lesson-content ul, .lesson-content ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .lesson-content strong {
+            color: var(--primary-blue);
+        }
+
+        .lesson-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeInRight 0.6s ease;
+        }
+
+        .content-image {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .content-image:hover {
+            transform: scale(1.05);
+        }
+
+        .navigation-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-btn:hover {
+            background: var(--light-blue);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .nav-btn:disabled {
+            background: var(--gray);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .quiz-btn {
+            background: var(--accent-yellow);
+            color: var(--primary-blue);
+        }
+
+        .quiz-btn:hover {
+            background: var(--dark-yellow);
+        }
+
+        /* Quiz Section */
+        .quiz-section {
+            padding: 4rem 0;
+            background: var(--white);
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .quiz-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .quiz-progress {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .quiz-progress-bar {
+            background: var(--light-gray);
+            border-radius: 50px;
+            height: 20px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .quiz-progress-fill {
+            background: linear-gradient(90deg, var(--success-green), var(--accent-yellow));
+            height: 100%;
+            width: 10%;
+            transition: width 0.5s ease;
+            border-radius: 50px;
+        }
+
+        .question-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 2rem;
+            border: 3px solid var(--accent-yellow);
+        }
+
+        .question-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .answer-options {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .answer-option {
+            background: var(--light-gray);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .answer-option:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: var(--light-blue);
+            transform: translateX(10px);
+        }
+
+        .answer-option.selected {
+            background: rgba(251, 191, 36, 0.2);
+            border-color: var(--accent-yellow);
+        }
+
+        .answer-option.correct {
+            background: rgba(5, 150, 105, 0.2);
+            border-color: var(--success-green);
+        }
+
+        .answer-option.incorrect {
+            background: rgba(220, 38, 38, 0.2);
+            border-color: var(--danger-red);
+        }
+
+        .quiz-navigation {
+            text-align: center;
+        }
+
+        /* Quiz Results */
+        .quiz-results {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .results-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .results-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .results-icon i {
+            color: var(--accent-yellow);
+            animation: bounce 1s ease infinite;
+        }
+
+        .score-display {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin: 1rem 0;
+        }
+
+        .score-number {
+            color: var(--success-green);
+        }
+
+        .results-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+       /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-blue) 100%);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3,
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--accent-yellow);
+        }
+
+        .footer-section p {
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            opacity: 0.9;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-yellow);
+            opacity: 1;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-yellow);
+            color: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0.8;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+
+        @keyframes float-gentle {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px var(--accent-yellow); }
+            to { text-shadow: 0 0 20px var(--accent-yellow), 0 0 30px var(--accent-yellow); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .animate-fadeInRight {
+            animation: fadeInRight 0.8s ease forwards;
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .animate-slideIn {
+            animation: slideIn 0.6s ease forwards;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .lesson-container {
+                grid-template-columns: 1fr;
+                padding: 2rem;
+            }
+
+            .navigation-controls {
+                flex-direction: column;
+            }
+
+            .footer-bottom-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .results-actions {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero {
+                padding: 2rem 0;
+            }
+
+            .learning-interface,
+            .quiz-section {
+                padding: 2rem 0;
+            }
+
+            .lesson-container,
+            .question-card,
+            .results-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <img src="..\..\Maps\blhimages\BLH_logo.png"> 
+                    <span>Barangay Learning Hub</span>
+                </div>
+                <div class="nav-menu" id="nav-menu">
+                   <a href="../../index.html" class="nav-link">Home</a>
+                    <a href="../../Maps/index.html" class="nav-link">Maps</a>
+                    <a href="index.html" class="nav-link active">Modules</a>
+                    <a href="../../Books/index.html" class="nav-link">Reading Corner</a>
+                    <a href="../../Calendar.html" class="nav-link">Calendar</a>
+                    <a href="../../About Us.html" class="nav-link ">About Us</a>
+                </div>
+                <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title animate-fadeInUp">Microsoft Publisher Learning Module</h1>
+                    <p class="hero-subtitle animate-fadeInUp">Government Initiative for Free Community Education</p>
+                    <p class="hero-description animate-fadeInUp">Master desktop publishing with Microsoft Publisher. Create professional brochures, newsletters, business cards, invitations, and marketing materials with ease.</p>
+                    <button class="cta-button animate-fadeInUp" onclick="startLearning()">
+                        Start Learning <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="hero-image animate-fadeInRight">
+                    <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Microsoft Publisher Design" class="floating-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Module Interface -->
+        <section class="learning-interface" id="learning-interface" style="display: none;">
+            <div class="container">
+                <div class="module-header">
+                    <h2 id="module-title">Microsoft Publisher Learning Module</h2>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                        <span class="progress-text" id="progress-text">0%</span>
+                    </div>
+                </div>
+
+                <div class="lesson-container" id="lesson-container">
+                    <div class="lesson-content" id="lesson-content">
+                        <!-- Lesson content will be dynamically loaded here -->
+                    </div>
+                    
+                    <div class="lesson-image" id="lesson-image">
+                        <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Microsoft Publisher" class="content-image">
+                    </div>
+                </div>
+
+                <div class="navigation-controls">
+                    <button class="nav-btn prev-btn" id="prev-btn" onclick="previousLesson()">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button class="nav-btn next-btn" id="next-btn" onclick="nextLesson()">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="nav-btn quiz-btn" id="quiz-btn" onclick="startQuiz()" style="display: none;">
+                        Take Quiz <i class="fas fa-brain"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section class="quiz-section" id="quiz-section" style="display: none;">
+            <div class="container">
+                <div class="quiz-header">
+                    <h2>Microsoft Publisher Knowledge Quiz</h2>
+                    <div class="quiz-progress">
+                        <span id="quiz-progress-text">Question 1 of 15</span>
+                        <div class="quiz-progress-bar">
+                            <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-container" id="quiz-container">
+                    <div class="question-card animate-slideIn" id="question-card">
+                        <h3 id="question-text">Loading question...</h3>
+                        <div class="answer-options" id="answer-options">
+                            <!-- Answer options will be dynamically loaded -->
+                        </div>
+                    </div>
+
+                    <div class="quiz-navigation">
+                        <button class="nav-btn" id="quiz-next-btn" onclick="nextQuestion()" disabled>
+                            Next Question <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quiz Results -->
+                <div class="quiz-results" id="quiz-results" style="display: none;">
+                    <div class="results-card animate-fadeIn">
+                        <div class="results-icon">
+                            <i class="fas fa-trophy" id="results-icon"></i>
+                        </div>
+                        <h2 id="results-title">Quiz Complete!</h2>
+                        <div class="score-display">
+                            <span class="score-number" id="final-score">0</span>
+                            <span class="score-total">/ 15</span>
+                        </div>
+                        <p id="results-message">Great job!</p>
+                        <div class="results-actions">
+                            <button class="nav-btn" onclick="retakeQuiz()">
+                                <i class="fas fa-redo"></i> Retake Quiz
+                            </button>
+                            <button class="nav-btn" onclick="backToLearning()">
+                                <i class="fas fa-book"></i> Back to Learning
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+   <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Barangay Learning Hub</h3>
+                    <p>Empowering communities through digital education and technology access.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/COBBarangayLearningHub"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="/Module/index.html">Learning Modules</a></li>
+                        <li><a href="/Module/index.html">Training Programs</a></li>
+                        <li><a href="About Us.html">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Programs</h4>
+                    <ul>
+                        <li><a href="Module/index.html">Digital Literacy</a></li>
+                        <li><a href="Module/index.html">Computer Training</a></li>
+                        <li><a href="Module/index.html">Internet Safety</a></li>
+                        <li><a href="Module/index.html">Youth Programs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Barangay Learning Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Learning Module Data
+        const moduleData = {
+            lessons: [
+                {
+                    title: "Introduction to Microsoft Publisher",
+                    content: `
+                        <h3>What is Microsoft Publisher?</h3>
+                        <p>Microsoft Publisher is a desktop publishing program that can be used to create a variety of publications. Using Publisher, you can easily create business cards, greeting cards, calendars, newsletters and much, much more.</p>
+                        
+                        <h4>Understanding Desktop Publishing</h4>
+                        <p>Microsoft Publisher is a desktop publishing application that enables you to create rich documents that use a variety of visual elements, such as fonts and images. While Microsoft Word also enables you to create elaborate documents, Publisher focuses more on page layout and visual appeal than providing the best possible environment for composing or editing text.</p>
+
+                        <h4>What You Can Create with MS Publisher:</h4>
+                        <ul>
+                            <li><strong>Personalized Birthday cards</strong></li>
+                            <li><strong>Event Posters</strong></li>
+                            <li><strong>Newsletter for businesses and organizations</strong></li>
+                            <li><strong>Business cards</strong></li>
+                            <li><strong>Flyers and programs</strong></li>
+                            <li><strong>Postcards and brochures</strong></li>
+                            <li><strong>Invitations</strong></li>
+                            <li><strong>Photo Album</strong></li>
+                        </ul>
+
+                        <p>You can create advertisements for your business, event announcements, awards, and much more. You can even create bookmarks and stickers using Publisher. The primary difference between Publisher and other desktop publishing software programs is that Publisher makes the tasks easier for you to complete.</p>
+                    `,
+                    image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Layout and Design Principles",
+                    content: `
+                        <h3>Introduction to Layout and Design</h3>
+                        <p>Since MS Publisher is a desktop publishing software program, it's just as important to learn more about layout and design. Before we delve into the technical aspects of Publisher, let's learn some basic principles of good design that will help you create more professional and beautiful publications.</p>
+                        
+                        <h4>Essential Design Principles:</h4>
+                        <ul>
+                            <li><strong>Alignment:</strong> Refers to the placement of text and graphics so that they line up on a page. It helps to create attractive pages and can be used to group items, create order, or organize page elements. Alignment can be horizontal, vertical, or you can line up text and objects along their top, bottom, left, or right edges.</li>
+                            
+                            <li><strong>Balance:</strong> Achieved by making sure elements are evenly distributed on a page. You don't want to have one section with dozens of pictures and the next with none – or everything lined up on one side of the page and nothing on the other.</li>
+                            
+                            <li><strong>White Space:</strong> The space in your layout and design that has nothing in it. It's important to have enough white space so the page is easy to look at and read. You don't want to cram in pictures and text as it looks like a traffic jam for the eyes.</li>
+                            
+                            <li><strong>Proximity:</strong> When you place objects close together on a page, you group them together and suggest a relationship. If you place objects far apart, it suggests lack of a relationship. Group objects that are related close together.</li>
+                            
+                            <li><strong>Contrast:</strong> Use big and small elements, different shapes, and even different colors of text to achieve contrast. It makes for a more attractive design and helps elements stand out.</li>
+                            
+                            <li><strong>Unity:</strong> All the different objects and pieces in your design should tie together and become a whole.</li>
+                            
+                            <li><strong>Consistency and Repetition:</strong> Repeating use of design styles, font types, and design elements helps someone to easier navigate your design and find what they need. This is especially important for monthly newsletters or brochures.</li>
+                        </ul>
+                    `,
+                    image: "https://images.unsplash.com/photo-1558655146-d09347e92766?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Getting Started in MS Publisher",
+                    content: `
+                        <h3>The Publisher Start Screen</h3>
+                        <p>Whenever you open Publisher, you will see the Start screen that allows you to decide exactly what you wish to do within the program.</p>
+                        
+                        <h4>Three Ways to Start:</h4>
+                        <ol>
+                            <li><strong>Open an existing publication</strong> that's stored on your computer or on the web</li>
+                            <li><strong>Select a template</strong> to use to create a new publication</li>
+                            <li><strong>Start a new, blank publication</strong></li>
+                        </ol>
+
+                        <p>Each file that you create in Publisher is called a publication. The publications you create can be saved in Publisher's default .pub format.</p>
+
+                        <h4>Opening an Existing Publication:</h4>
+                        <p>An existing publication is defined as a publication you created in Publisher and saved in the default .pub format. To open an existing publication from the Start screen, look at the column on the left hand side of the screen. If you have any existing publications, you will see them listed. Simply click on a publication to open it. If you don't see the publication listed, click "Open Other Publications" to search your computer and OneDrive.</p>
+
+                        <h4>Creating from Templates:</h4>
+                        <p>Microsoft Publisher offers hundreds of templates from dozens of categories. These featured templates provide professionally designed layouts that you can customize for your needs. Simply click on any template to see a larger preview, then click the Create button to start working with it.</p>
+
+                        <h4>Creating Blank Publications:</h4>
+                        <p>A blank publication is a template without any design elements or formatting. Choose from different page sizes like 8.5" X 11" or 11" X 8.5", or click "More Blank Page Sizes" for additional options.</p>
+                    `,
+                    image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Navigating MS Publisher Interface",
+                    content: `
+                        <h3>Understanding the Publisher Workspace</h3>
+                        <p>If you have used Word, you will notice differences, but there will be many similar features. Publisher uses the Ribbon like many other Office programs. The Ribbon is organized into different tabbed sections at the top, each with their own set of tools.</p>
+                        
+                        <h4>Key Interface Components:</h4>
+                        
+                        <h4>The Title Bar:</h4>
+                        <p>At the very top of the Publisher window, you will see the Title Bar showing the name of the publication currently open. By default, new publications are named Publication1, Publication2, etc. To the right, you'll find the Help button (question mark) and standard window controls (minimize, maximize, close).</p>
+
+                        <h4>The Ribbon Tabs:</h4>
+                        <ul>
+                            <li><strong>Insert Tab:</strong> Contains tools to insert Pictures, Text Boxes, and WordArt</li>
+                            <li><strong>Review Tab:</strong> Provides basic proofreading and editing tools</li>
+                            <li><strong>View Tab:</strong> Helpful tools for layout and design including Boundaries, Guides, Rulers, Page Navigation, Scratch Area, and Baselines</li>
+                            <li><strong>Page Design Tab:</strong> Tools for page layout, margins, orientation, page size, guides, and color schemes</li>
+                        </ul>
+
+                        <h4>Essential Workspace Elements:</h4>
+                        <ul>
+                            <li><strong>Publication Page:</strong> The white space where you create designs, insert objects and decide the layout</li>
+                            <li><strong>Zoom Slider:</strong> Located in the lower right corner for zooming in and out of documents</li>
+                            <li><strong>Rulers:</strong> Along the top and left side for measuring and precise object placement</li>
+                            <li><strong>Page Navigator:</strong> Shows thumbnails of all pages for easy navigation</li>
+                            <li><strong>Status Bar:</strong> Shows current page number and provides view and zoom controls</li>
+                            <li><strong>Quick Access Toolbar:</strong> Provides shortcuts to Save, Undo, Redo, and Touch/Mouse Mode</li>
+                        </ul>
+
+                        <h4>The Backstage View:</h4>
+                        <p>Located under the File tab, the Backstage View allows you to manage your publication as a whole. You can save, open, print, share, or export publications, and set Publisher preferences.</p>
+                    `,
+                    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Working with Publications and Templates",
+                    content: `
+                        <h3>Creating Professional Publications</h3>
+                        <p>Publisher's strength lies in its extensive template library and intuitive design tools that make creating professional publications accessible to everyone.</p>
+                        
+                        <h4>Using the Page Navigator:</h4>
+                        <p>The Page Navigator appears on the left side of the screen and shows thumbnails of all pages in your file. You can easily navigate between pages by clicking on thumbnails, and right-click for additional options like inserting new pages, duplicating pages, deleting pages, moving pages up or down, renaming pages, or creating Master Pages.</p>
+
+                        <h4>Inserting New Pages:</h4>
+                        <p>When you right-click on a page in the Page Navigator and select "Insert Page," you can specify the number of new pages, choose whether they come before or after the current page, and decide if you want blank pages, pages with one text box, or duplicated content from existing pages.</p>
+
+                        <h4>Status Bar Functions:</h4>
+                        <p>The Status Bar shows your current page and total pages. When you select an object, clicking the arrow cursor icon displays a pop-up with positioning and sizing options including X and Y coordinates, width, height, rotation, spacing, text character stretching, and kerning adjustments.</p>
+
+                        <h4>View Options:</h4>
+                        <ul>
+                            <li><strong>Single Page:</strong> Default view showing one page at a time</li>
+                            <li><strong>Two Page Spread:</strong> Shows two pages side by side</li>
+                            <li><strong>Zoom Slider:</strong> Move left to increase zoom, right to decrease</li>
+                        </ul>
+
+                        <h4>Saving Your Work:</h4>
+                        <p>Use the File tab to access save options. Choose "Save" to keep the same filename, format, and location, or "Save As" to change the name, format (such as PDF, JPEG, or Word), or save location. You can save to OneDrive for cloud storage, your computer, or other locations like SharePoint.</p>
+
+                        <h4>Quick Access Toolbar Customization:</h4>
+                        <p>The Quick Access Toolbar provides shortcuts to frequently used tools. By default, it includes Save, Undo, Redo, and Touch/Mouse Mode, but you can customize it to include any tools you use regularly.</p>
+                    `,
+                    image: "https://images.unsplash.com/photo-1542744094-24638eff58bb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Creating Brochures and Invitations",
+                    content: `
+                        <h3>Step-by-Step Brochure Creation</h3>
+                        <p>Creating professional brochures in Publisher is straightforward when you follow the systematic approach and understand the available options.</p>
+                        
+                        <h4>1. Choose a Brochure Design:</h4>
+                        <p>Microsoft Publisher organizes brochure designs according to their intended purpose. Select "Brochures" from Available Templates, then choose from the display of templates. Click on any design to see a larger preview in the upper right of the screen.</p>
+
+                        <h4>2. Select Panel Configuration:</h4>
+                        <p>Decide between a 3-panel or 4-panel brochure from the Page size section. Consider folding a sheet of paper in thirds or quarters to help decide which design works best for your content and printing needs.</p>
+
+                        <h4>3. Include Necessary Forms:</h4>
+                        <p>The Forms dropdown offers several options:</p>
+                        <ul>
+                            <li><strong>None:</strong> For presentation-only brochures</li>
+                            <li><strong>Order form:</strong> For sales brochures where customers can order products</li>
+                            <li><strong>Response form:</strong> To solicit customer feedback or product suggestions</li>
+                            <li><strong>Sign-up form:</strong> For service registration</li>
+                        </ul>
+
+                        <h4>4. Choose Color and Font Schemes:</h4>
+                        <p>Each template comes with default schemes, but you can select different options from the Color Scheme and Font Scheme dropdowns. You can also create custom schemes by selecting "Create new." For consistent branding, use the same schemes across all your marketing materials.</p>
+
+                        <h4>5. Insert Company Information:</h4>
+                        <p>Publisher prompts for business information the first time you use it. Subsequently, select from the Business Information dropdown or create new information sets. This data will automatically populate throughout your brochure.</p>
+
+                        <h4>6. Customize Content:</h4>
+                        <ul>
+                            <li><strong>Replace placeholder text:</strong> Click on text and type your content. Text automatically resizes to fit boxes, or you can disable AutoFit for manual sizing control.</li>
+                            <li><strong>Replace placeholder images:</strong> Right-click images, select "Change Picture," and choose your image source.</li>
+                        </ul>
+
+                        <h4>7. Final Steps:</h4>
+                        <p>Save your brochure with a descriptive name. Before printing, review everything carefully. For professional printing, save or convert to PDF format, as most printers prefer this format.</p>
+                    `,
+                    image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                }
+            ]
+        };
+
+        // Quiz Questions based on the provided content
+        const quizQuestions = [
+            {
+                question: "What is Microsoft Publisher primarily used for?",
+                options: ["Word processing", "Desktop publishing", "Spreadsheet creation", "Database management"],
+                correct: 1
+            },
+            {
+                question: "Which of the following can you create with MS Publisher?",
+                options: ["Business cards", "Newsletters", "Event posters", "All of the above"],
+                correct: 3
+            },
+            {
+                question: "What is the main difference between Microsoft Word and Publisher?",
+                options: ["Word focuses on text, Publisher focuses on layout and visual appeal", "Publisher is newer than Word", "Word is more expensive", "There is no difference"],
+                correct: 0
+            },
+            {
+                question: "What does 'white space' refer to in design?",
+                options: ["Space colored white", "Empty areas without content", "Text highlights", "Background images"],
+                correct: 1
+            },
+            {
+                question: "What design principle suggests placing related objects close together?",
+                options: ["Contrast", "Balance", "Proximity", "Unity"],
+                correct: 2
+            },
+            {
+                question: "How many ways can you start a new project in Publisher?",
+                options: ["Two", "Three", "Four", "Five"],
+                correct: 1
+            },
+            {
+                question: "What is the default file format for Publisher documents?",
+                options: [".doc", ".pdf", ".pub", ".jpg"],
+                correct: 2
+            },
+            {
+                question: "Where is the Page Navigator typically located?",
+                options: ["Top of the screen", "Right side of the screen", "Bottom of the screen", "Left side of the screen"],
+                correct: 3
+            },
+            {
+                question: "What does the Status Bar show by default?",
+                options: ["File size", "Current page and total pages", "Print settings", "Color scheme"],
+                correct: 1
+            },
+            {
+                question: "Which tab contains tools to insert pictures and text boxes?",
+                options: ["Home", "Insert", "Review", "Page Design"],
+                correct: 1
+            },
+            {
+                question: "What is the purpose of rulers in Publisher?",
+                options: ["To measure text", "To measure and align objects precisely", "To create lines", "To set margins only"],
+                correct: 1
+            },
+            {
+                question: "How many panel options are available for brochures?",
+                options: ["2 (3-panel and 4-panel)", "3 (2-panel, 3-panel, 4-panel)", "4 (2, 3, 4, 5-panel)", "Only 3-panel"],
+                correct: 0
+            },
+            {
+                question: "What should you do before printing a brochure professionally?",
+                options: ["Convert to PDF format", "Increase the font size", "Remove all images", "Change to black and white"],
+                correct: 0
+            },
+            {
+                question: "Which design principle involves using different sizes and shapes for visual interest?",
+                options: ["Balance", "Proximity", "Contrast", "Alignment"],
+                correct: 2
+            },
+            {
+                question: "What does the Backstage View allow you to do?",
+                options: ["Edit text only", "Insert images only", "Manage the publication as a whole", "Change font colors only"],
+                correct: 2
+            }
+        ];
+
+        // Global variables
+        let currentLesson = 0;
+        let currentQuestion = 0;
+        let selectedAnswers = [];
+        let score = 0;
+
+        // Start learning function
+        function startLearning() {
+            document.querySelector('.hero').style.display = 'none';
+            document.getElementById('learning-interface').style.display = 'block';
+            loadLesson(0);
+        }
+
+        // Load lesson
+        function loadLesson(lessonIndex) {
+            currentLesson = lessonIndex;
+            const lesson = moduleData.lessons[lessonIndex];
+            
+            document.getElementById('lesson-content').innerHTML = lesson.content;
+            document.querySelector('.content-image').src = lesson.image;
+            
+            updateProgress();
+            updateNavigationButtons();
+        }
+
+        // Update progress
+        function updateProgress() {
+            const progress = ((currentLesson + 1) / moduleData.lessons.length) * 100;
+            document.getElementById('progress-fill').style.width = `${progress}%`;
+            document.getElementById('progress-text').textContent = `${Math.round(progress)}%`;
+        }
+
+        // Update navigation buttons
+        function updateNavigationButtons() {
+            document.getElementById('prev-btn').disabled = currentLesson === 0;
+            
+            if (currentLesson === moduleData.lessons.length - 1) {
+                document.getElementById('next-btn').style.display = 'none';
+                document.getElementById('quiz-btn').style.display = 'inline-flex';
+            } else {
+                document.getElementById('next-btn').style.display = 'inline-flex';
+                document.getElementById('quiz-btn').style.display = 'none';
+            }
+        }
+
+        // Navigation functions
+        function previousLesson() {
+            if (currentLesson > 0) {
+                loadLesson(currentLesson - 1);
+            }
+        }
+
+        function nextLesson() {
+            if (currentLesson < moduleData.lessons.length - 1) {
+                loadLesson(currentLesson + 1);
+            }
+        }
+
+        // Quiz functions
+        function startQuiz() {
+            document.getElementById('learning-interface').style.display = 'none';
+            document.getElementById('quiz-section').style.display = 'block';
+            currentQuestion = 0;
+            selectedAnswers = [];
+            score = 0;
+            loadQuestion(0);
+        }
+
+        function loadQuestion(questionIndex) {
+            currentQuestion = questionIndex;
+            const question = quizQuestions[questionIndex];
+            
+            document.getElementById('question-text').textContent = question.question;
+            
+            const answerOptions = document.getElementById('answer-options');
+            answerOptions.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'answer-option';
+                optionDiv.innerHTML = `
+                    <div style="width: 30px; height: 30px; border: 2px solid var(--gray); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <span style="font-weight: bold; color: var(--gray);">${String.fromCharCode(65 + index)}</span>
+                    </div>
+                    <span>${option}</span>
+                `;
+                optionDiv.onclick = () => selectAnswer(index, optionDiv);
+                answerOptions.appendChild(optionDiv);
+            });
+            
+            updateQuizProgress();
+            document.getElementById('quiz-next-btn').disabled = true;
+        }
+
+        function selectAnswer(answerIndex, optionElement) {
+            document.querySelectorAll('.answer-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            optionElement.classList.add('selected');
+            selectedAnswers[currentQuestion] = answerIndex;
+            document.getElementById('quiz-next-btn').disabled = false;
+        }
+
+        function nextQuestion() {
+            const question = quizQuestions[currentQuestion];
+            const selectedAnswer = selectedAnswers[currentQuestion];
+            
+            if (selectedAnswer === question.correct) {
+                score++;
+            }
+            
+            setTimeout(() => {
+                if (currentQuestion < quizQuestions.length - 1) {
+                    loadQuestion(currentQuestion + 1);
+                } else {
+                    showQuizResults();
+                }
+            }, 500);
+        }
+
+        function updateQuizProgress() {
+            const progress = ((currentQuestion + 1) / quizQuestions.length) * 100;
+            document.getElementById('quiz-progress-fill').style.width = `${progress}%`;
+            document.getElementById('quiz-progress-text').textContent = `Question ${currentQuestion + 1} of ${quizQuestions.length}`;
+            
+            if (currentQuestion === quizQuestions.length - 1) {
+                document.getElementById('quiz-next-btn').innerHTML = 'Finish Quiz <i class="fas fa-check"></i>';
+            }
+        }
+
+        function showQuizResults() {
+            document.getElementById('quiz-container').style.display = 'none';
+            document.getElementById('quiz-results').style.display = 'block';
+            
+            document.getElementById('final-score').textContent = score;
+            
+            let message;
+            if (score >= 13) {
+                message = "Excellent! You have mastered Microsoft Publisher fundamentals!";
+            } else if (score >= 10) {
+                message = "Good job! You have a solid understanding of Publisher basics.";
+            } else if (score >= 7) {
+                message = "Not bad! Review the lessons to strengthen your knowledge.";
+            } else {
+                message = "Keep learning! Review all lessons and try again.";
+            }
+            
+            document.getElementById('results-message').textContent = message;
+        }
+
+        function retakeQuiz() {
+            startQuiz();
+        }
+
+        function backToLearning() {
+            document.getElementById('quiz-section').style.display = 'none';
+            document.getElementById('learning-interface').style.display = 'block';
+            loadLesson(0);
+        }
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+            const navMenu = document.getElementById('nav-menu');
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+        });
+    </script>
+</body>
+</html>

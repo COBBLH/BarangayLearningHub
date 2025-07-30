@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading Corner - Barangay Learning Hub</title>
+    <link rel="stylesheet" href="books.css">
+     <link rel="icon" href="../BLH_logo.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <img src="..\Maps\blhimages\BLH_logo.png">  
+                    <span>Barangay Learning Hub</span>
+                </div>
+                <div class="nav-menu" id="nav-menu">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="../Maps/index.html" class="nav-link">Maps</a>
+                    <a href="../Module/index.html" class="nav-link">Modules</a>
+                    <a href="index.html" class="nav-link active">Reading Corner</a>
+                    <a href="../Calendar.html" class="nav-link">Calendar</a>
+                    <a href="../About Us.html" class="nav-link ">About Us</a>
+                </div>
+                <div class="nav-toggle" id="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Reading Corner</h1>
+                    <p class="hero-subtitle">Take a Book, Share a Book</p>
+                    <p class="hero-description">
+                        A community-based initiative that promotes literacy by encouraging the free exchange of books. 
+                        Find and explore books available in our Barangay Learning Hubs.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="https://www.facebook.com/messages/t/115788764470825" class="cta-button" target="_blank">
+                            <i class="fas fa-book-open"></i>
+                            Donate a Book
+                        </a>
+                        <a href="https://www.facebook.com/messages/t/115788764470825" class="cta-button secondary" target="_blank">
+                            <i class="fas fa-envelope"></i>
+                            Message Us
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="swiper books-slider">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="../image/SAN JOSE/A1.jpg" alt="Book Cover"></div>
+                            <div class="swiper-slide"><img src="../image/SAN JOSE/A2.jpg" alt="Book Cover"></div>
+                            <div class="swiper-slide"><img src="../image/TALISAY/A3.jpg" alt="Book Cover"></div>
+                            <div class="swiper-slide"><img src="../image/TALISAY/A4.jpg" alt="Book Cover"></div>
+                            <div class="swiper-slide"><img src="../image/TALISAY/A5.jpg" alt="Book Cover"></div>
+                            <div class="swiper-slide"><img src="../image/TALISAY/A6.jpg" alt="Book Cover"></div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="container">
+                <h2 class="section-title">Find Your Next Book</h2>
+                <p class="section-description">Search through our collection of books available across all learning hub locations.</p>
+                
+                <div class="search-container">
+                    <!-- Search Box -->
+                    <div class="search-box-wrapper">
+                        <input type="text" id="book-search" class="search-box" placeholder="Search for books by title or author...">
+                        <i class="fas fa-search search-icon"></i>
+                    </div>
+                    
+                    <div class="filters">
+                        <!-- Location Filter -->
+                        <div class="filter-group">
+                            <label for="location-filter"><i class="fas fa-map-marker-alt"></i> Location:</label>
+                            <select id="location-filter" class="filter">
+                                <option value="all">ALL LOCATIONS</option>
+                                <option value="cupang-north">Cupang North</option>
+                                <option value="san-jose">San Jose</option>
+                                <option value="talisay">Talisay</option>
+                                <option value="pto-rivas-itaas">Pto Rivas Itaas</option>
+                            </select>
+                        </div>
+
+                        <!-- Category Filter -->
+                        <div class="filter-group">
+                            <label for="category-filter"><i class="fas fa-tag"></i> Category:</label>
+                            <select id="category-filter" class="filter">
+                                <option value="all">ALL CATEGORIES</option>
+                                <option value="adult">ADULT</option>
+                                <option value="young-adult">YOUNG ADULT</option>
+                                <option value="children">CHILDREN</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Books List Section -->
+        <section class="books-section">
+            <div class="container">
+                <!-- Books Grid will be populated by JavaScript -->
+                <div id="books-list" class="books-grid">
+                    <!-- Loading animation -->
+                    <div class="book-loading">
+                        <div class="book">
+                            <div class="book__page"></div>
+                            <div class="book__page"></div>
+                            <div class="book__page"></div>
+                        </div>
+                        <p>Loading books...</p>
+                    </div>
+                </div>
+                
+                <!-- No results message (hidden by default) -->
+                <div class="no-results-message" style="display: none;">
+                    <i class="fas fa-search"></i>
+                    <h3>No books found</h3>
+                    <p>Try adjusting your search criteria or browse all books.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Barangay Learning Hub</h3>
+                    <p>Empowering communities through digital education and technology access.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/COBBarangayLearningHub"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="/Module/index.html">Learning Modules</a></li>
+                        <li><a href="/Module/index.html">Training Programs</a></li>
+                        <li><a href="About Us.html">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Programs</h4>
+                    <ul>
+                        <li><a href="Module/index.html">Digital Literacy</a></li>
+                        <li><a href="Module/index.html">Computer Training</a></li>
+                        <li><a href="Module/index.html">Internet Safety</a></li>
+                        <li><a href="Module/index.html">Youth Programs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Barangay Learning Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="book.js"></script>
+</body>
+</html>

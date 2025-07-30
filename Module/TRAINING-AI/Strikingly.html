@@ -1,0 +1,1466 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strikingly Learning Module - Barangay Learning Hub</title>
+    <link rel="icon" href="..\..\BLH_logo.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1e3a8a;
+            --light-blue: #3b82f6;
+            --accent-yellow: #fbbf24;
+            --dark-yellow: #f59e0b;
+            --success-green: #059669;
+            --danger-red: #dc2626;
+            --warning-orange: #ea580c;
+            --purple: #7c3aed;
+            --cyan: #0891b2;
+            --pink: #be185d;
+            --white: #ffffff;
+            --light-gray: #f8fafc;
+            --gray: #64748b;
+            --dark-gray: #334155;
+            --text-dark: #1e293b;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-blue) 100%);
+            box-shadow: var(--shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar {
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .nav-brand i {
+            margin-right: 0.5rem;
+            color: var(--accent-yellow);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+.nav-brand img {
+    width: 40px;
+    height: 40px;
+    margin-right: 0.5rem;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--accent-yellow);
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--light-blue) 0%, var(--accent-yellow) 100%);
+            padding: 4rem 0;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 20s infinite linear;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--white);
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            background: var(--accent-yellow);
+            color: var(--primary-blue);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cta-button:hover {
+            background: var(--dark-yellow);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .floating-image {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            animation: float-gentle 3s ease-in-out infinite;
+        }
+
+        /* Learning Interface */
+        .learning-interface {
+            padding: 4rem 0;
+            background: var(--light-gray);
+        }
+
+        .module-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .module-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            background: var(--white);
+            border-radius: 50px;
+            height: 30px;
+            max-width: 400px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--light-blue), var(--accent-yellow));
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 50px;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .lesson-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .lesson-content {
+            animation: fadeInLeft 0.6s ease;
+        }
+
+        .lesson-content h3 {
+            color: var(--primary-blue);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-content p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .lesson-content ul, .lesson-content ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .lesson-content strong {
+            color: var(--primary-blue);
+        }
+
+        .lesson-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeInRight 0.6s ease;
+        }
+
+        .content-image {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .content-image:hover {
+            transform: scale(1.05);
+        }
+
+        .navigation-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-btn:hover {
+            background: var(--light-blue);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .nav-btn:disabled {
+            background: var(--gray);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .quiz-btn {
+            background: var(--accent-yellow);
+            color: var(--primary-blue);
+        }
+
+        .quiz-btn:hover {
+            background: var(--dark-yellow);
+        }
+
+        /* Quiz Section */
+        .quiz-section {
+            padding: 4rem 0;
+            background: var(--white);
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .quiz-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .quiz-progress {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .quiz-progress-bar {
+            background: var(--light-gray);
+            border-radius: 50px;
+            height: 20px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .quiz-progress-fill {
+            background: linear-gradient(90deg, var(--success-green), var(--accent-yellow));
+            height: 100%;
+            width: 10%;
+            transition: width 0.5s ease;
+            border-radius: 50px;
+        }
+
+        .question-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 2rem;
+            border: 3px solid var(--accent-yellow);
+        }
+
+        .question-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .answer-options {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .answer-option {
+            background: var(--light-gray);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .answer-option:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: var(--light-blue);
+            transform: translateX(10px);
+        }
+
+        .answer-option.selected {
+            background: rgba(251, 191, 36, 0.2);
+            border-color: var(--accent-yellow);
+        }
+
+        .answer-option.correct {
+            background: rgba(5, 150, 105, 0.2);
+            border-color: var(--success-green);
+        }
+
+        .answer-option.incorrect {
+            background: rgba(220, 38, 38, 0.2);
+            border-color: var(--danger-red);
+        }
+
+        .quiz-navigation {
+            text-align: center;
+        }
+
+        /* Quiz Results */
+        .quiz-results {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .results-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .results-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .results-icon i {
+            color: var(--accent-yellow);
+            animation: bounce 1s ease infinite;
+        }
+
+        .score-display {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin: 1rem 0;
+        }
+
+        .score-number {
+            color: var(--success-green);
+        }
+
+        .results-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+  /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-blue) 100%);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3,
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--accent-yellow);
+        }
+
+        .footer-section p {
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            opacity: 0.9;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-yellow);
+            opacity: 1;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-yellow);
+            color: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0.8;
+        }
+
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+
+        @keyframes float-gentle {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px var(--accent-yellow); }
+            to { text-shadow: 0 0 20px var(--accent-yellow), 0 0 30px var(--accent-yellow); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .animate-fadeInRight {
+            animation: fadeInRight 0.8s ease forwards;
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .animate-slideIn {
+            animation: slideIn 0.6s ease forwards;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .lesson-container {
+                grid-template-columns: 1fr;
+                padding: 2rem;
+            }
+
+            .navigation-controls {
+                flex-direction: column;
+            }
+
+            .footer-bottom-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .results-actions {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero {
+                padding: 2rem 0;
+            }
+
+            .learning-interface,
+            .quiz-section {
+                padding: 2rem 0;
+            }
+
+            .lesson-container,
+            .question-card,
+            .results-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <img src="..\..\Maps\blhimages\BLH_logo.png"> 
+                    <span>Barangay Learning Hub</span>
+                </div>
+                <div class="nav-menu" id="nav-menu">
+                   <a href="../../index.html" class="nav-link">Home</a>
+                    <a href="../../Maps/index.html" class="nav-link">Maps</a>
+                    <a href="index.html" class="nav-link active">Modules</a>
+                    <a href="../../Books/index.html" class="nav-link">Reading Corner</a>
+                    <a href="../../Calendar.html" class="nav-link">Calendar</a>
+                    <a href="../../About Us.html" class="nav-link ">About Us</a>
+                </div>
+                <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title animate-fadeInUp">Strikingly Website Builder</h1>
+                    <p class="hero-subtitle animate-fadeInUp">Government Initiative for Free Community Education</p>
+                    <p class="hero-description animate-fadeInUp">Master the Strikingly website builder to create professional, mobile-optimized websites without any coding knowledge. Perfect for businesses, portfolios, and personal projects.</p>
+                    <button class="cta-button animate-fadeInUp" onclick="startLearning()">
+                        Start Learning <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="hero-image animate-fadeInRight">
+                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Website Building with Strikingly" class="floating-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Module Interface -->
+        <section class="learning-interface" id="learning-interface" style="display: none;">
+            <div class="container">
+                <div class="module-header">
+                    <h2 id="module-title">Strikingly Website Builder Module</h2>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                        <span class="progress-text" id="progress-text">0%</span>
+                    </div>
+                </div>
+
+                <div class="lesson-container" id="lesson-container">
+                    <div class="lesson-content" id="lesson-content">
+                        <!-- Lesson content will be dynamically loaded here -->
+                    </div>
+                    
+                    <div class="lesson-image" id="lesson-image">
+                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Website Building" class="content-image">
+                    </div>
+                </div>
+
+                <div class="navigation-controls">
+                    <button class="nav-btn prev-btn" id="prev-btn" onclick="previousLesson()">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button class="nav-btn next-btn" id="next-btn" onclick="nextLesson()">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="nav-btn quiz-btn" id="quiz-btn" onclick="startQuiz()" style="display: none;">
+                        Take Quiz <i class="fas fa-brain"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section class="quiz-section" id="quiz-section" style="display: none;">
+            <div class="container">
+                <div class="quiz-header">
+                    <h2>Strikingly Knowledge Quiz</h2>
+                    <div class="quiz-progress">
+                        <span id="quiz-progress-text">Question 1 of 15</span>
+                        <div class="quiz-progress-bar">
+                            <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-container" id="quiz-container">
+                    <div class="question-card animate-slideIn" id="question-card">
+                        <h3 id="question-text">Loading question...</h3>
+                        <div class="answer-options" id="answer-options">
+                            <!-- Answer options will be dynamically loaded -->
+                        </div>
+                    </div>
+
+                    <div class="quiz-navigation">
+                        <button class="nav-btn" id="quiz-next-btn" onclick="nextQuestion()" disabled>
+                            Next Question <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quiz Results -->
+                <div class="quiz-results" id="quiz-results" style="display: none;">
+                    <div class="results-card animate-fadeIn">
+                        <div class="results-icon">
+                            <i class="fas fa-trophy" id="results-icon"></i>
+                        </div>
+                        <h2 id="results-title">Quiz Complete!</h2>
+                        <div class="score-display">
+                            <span class="score-number" id="final-score">0</span>
+                            <span class="score-total">/ 15</span>
+                        </div>
+                        <p id="results-message">Great job!</p>
+                        <div class="results-actions">
+                            <button class="nav-btn" onclick="retakeQuiz()">
+                                <i class="fas fa-redo"></i> Retake Quiz
+                            </button>
+                            <button class="nav-btn" onclick="backToLearning()">
+                                <i class="fas fa-book"></i> Back to Learning
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <div class="nav-brand">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Barangay Learning Hub</span>
+                        </div>
+                        <p>Empowering communities through free digital education and skill development programs.</p>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#modules">Learning Modules</a></li>
+                        <li><a href="#reading-corner">Reading Corner</a></li>
+                        <li><a href="#about">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Learning Modules</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Computer Basics</a></li>
+                        <li><a href="#">Strikingly</a></li>
+                        <li><a href="#">AI Tools</a></li>
+                        <li><a href="#">Data Analysis</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Barangay Hall, Main Street</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>(123) 456-7890</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@barangaylearning.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 Barangay Learning Hub. All rights reserved.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Learning Module Data - Complete Strikingly Tutorial
+        const moduleData = {
+            lessons: [
+                {
+                    title: "Getting Started with Strikingly",
+                    content: `
+                        <h3>How to Use the Strikingly Website Builder</h3>
+                        <p>Strikingly is a powerful website builder that makes creating professional websites simple and accessible for everyone. This comprehensive guide will walk you through every aspect of building your website.</p>
+                        
+                        <h4>Signing up With Strikingly</h4>
+                        <p>You'll need to sign up with Strikingly if you haven't done so already. The process is incredibly simple:</p>
+                        <ol>
+                            <li>Type in your name</li>
+                            <li>Enter your email address</li>
+                            <li>Create a password</li>
+                            <li>Click on the "Get Started. It's Free!" button</li>
+                        </ol>
+
+                        <h4>Using Strikingly Templates</h4>
+                        <p>The Strikingly website builder is one of the few such tools that doesn't take you through a questionnaire to get started. Once you sign up, you'll reach a screen where you can choose your website template. The menu bar at the top allows you to select your industry to help you narrow down your potential template options.</p>
+                    `,
+                    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Changing Templates and Customizing Styles",
+                    content: `
+                        <h3>Changing a Strikingly Template</h3>
+                        <p>To change a Strikingly template:</p>
+                        <ol>
+                            <li>In the Strikingly Editor's left-hand "Site Design" menu, click on the "Styles" block at the top of that menu to open the "Edit Styles" menu.</li>
+                            <li>In the "Edit Styles" menu, select "Change Template" to reach the "Switch Template" menu.</li>
+                            <li>From there, you can automatically preview any new templates by clicking on them.</li>
+                            <li>Once you find a template you prefer, click on the "Switch to This Template" button in the upper-right corner.</li>
+                            <li>The Strikingly website builder will automatically update your website with your new template and return you to the Strikingly Editor.</li>
+                        </ol>
+
+                        <h4>Changing a Template's Accent Color</h4>
+                        <p>To change a template's accent color:</p>
+                        <ol>
+                            <li>From the "Site Design" menu, click on the "Styles" block to open the "Edit Styles" menu.</li>
+                            <li>Select "Color Scheme" to open a drop-down menu with a color-picker tool.</li>
+                            <li>Use the color-picker tool to adjust the color, tone, shade, and brightness of your color scheme. You can even swap your primary and secondary colors, if desired.</li>
+                        </ol>
+                    `,
+                    image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Customizing Fonts and Buttons",
+                    content: `
+                        <h3>Changing the Fonts</h3>
+                        <p>To change the fonts:</p>
+                        <ol>
+                            <li>From the "Site Design" menu, click on the "Styles" block to open the "Edit Styles" menu.</li>
+                            <li>Select "Fonts" to open this drop-down menu.</li>
+                            <li>To update the title font, click on "Title" to open the "Font Library."</li>
+                            <li>Hover over each font in the "Font Library" to see its "weight" options (i.e., how bold it'll appear on your site) and a preview on your screen of what it'll look like in your template.</li>
+                            <li>Click on your preferred font to instantly update the title font throughout your template.</li>
+                            <li>Repeat these steps to update the fonts for your site's headings, text, and buttons.</li>
+                        </ol>
+
+                        <h4>Changing the Buttons</h4>
+                        <p>To change the buttons:</p>
+                        <ol>
+                            <li>From the "Site Design" menu, click on the "Styles" block to open the "Edit Styles" menu.</li>
+                            <li>Select "Buttons" to open the "Buttons" drop-down menu.</li>
+                            <li>Click on "Color" to choose from a limited selection of options.</li>
+                            <li>Click on the current color button to open a color-picker tool from which you can choose your own unique color. Click on the "Done" button when you finish making your changes.</li>
+                            <li>Next, click on "Shape" in the "Buttons" drop-down menu. You can choose to have your buttons appear "Square," "Rounded," or as a "Pill" shape.</li>
+                            <li>Make your choice and Strikingly will automatically update all the buttons across your site.</li>
+                        </ol>
+                    `,
+                    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Customizing the Homepage Header",
+                    content: `
+                        <h3>Customizing the Homepage Header in Strikingly</h3>
+                        <p>To customize the homepage header:</p>
+                        <ol>
+                            <li>Ensure the header image already appears in your preferred location. If not, follow the instructions in the "Changing a Strikingly Template" section to select the type of homepage header with your desired image position.</li>
+                            <li>Next, click on the "Styles" block in the "Site Design" menu to open the "Edit Styles" menu.</li>
+                            <li>Select "Header & Navigation" to open the corresponding drop-down menu from which you can adjust the majority of elements within your homepage header area.</li>
+                            <li>Click on "Color" to open the "Color" drop-down menu. If you want to use a header image, make sure to select the "Transparent" option.</li>
+                        </ol>
+
+                        <h4>Changing a Header Image</h4>
+                        <p>To change a header image:</p>
+                        <ol>
+                            <li>In the Strikingly Editor, click on the "Background" button within your homepage header area. This'll open a drop-down menu with several options, including the option to choose, edit, or upload photos.</li>
+                            <li>The Strikingly website builder will automatically suggest several free, stock images from which you can choose. Simply hover your mouse over any of the suggested images to preview how it'll look as your header image.</li>
+                            <li>To upload your own photos, click on the "Upload Image" button to open a pop-up "Upload Images" window.</li>
+                            <li>Use this window to upload an image from your computer, link an image from the internet, or access the "Strikingly Library" of images.</li>
+                            <li>Once you upload your image or choose one from the "Strikingly Library," it'll automatically appear in your homepage header area.</li>
+                        </ol>
+                    `,
+                    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Adding Videos and Slideshows",
+                    content: `
+                        <h3>Adding a Video to the Header</h3>
+                        <p>To add a video to the header:</p>
+                        <ol>
+                            <li>In the Strikingly Editor, click on the "Background" button within your homepage header area to open the "Background" drop-down menu.</li>
+                            <li>Select the "Video" tab at the top of the "Background" drop-down menu. Strikingly will suggest several stock videos you can preview by hovering your mouse over them.</li>
+                            <li>Click on the "Embed Video" button and enter the appropriate YouTube or Vimeo link in the pop-up box.</li>
+                            <li>As always, the Strikingly Editor will automatically apply your changes.</li>
+                        </ol>
+
+                        <h4>Adding a Slideshow to the Header</h4>
+                        <p>To add an image-only slideshow to the header:</p>
+                        <ol>
+                            <li>In the Strikingly Editor's left-hand "Site Design" menu, click on the "Add New Section" button.</li>
+                            <li>The "Add a New Section" menu will then appear. In the left-hand column of this menu, select "Image & Video."</li>
+                            <li>From the available section options that then appear, select the "Banner Image Slider" section.</li>
+                            <li>This'll automatically place your new slider on your Strikingly Editor, but not in your homepage header area.</li>
+                            <li>To move the image slider to the homepage header area, hover your mouse over the three horizontal lines to the left of the "Banner" page section in the "Site Design" menu.</li>
+                            <li>Click and drag the "Banner" page to the top of the navigation (ie., the sections list) to place it in your homepage header area.</li>
+                        </ol>
+                    `,
+                    image: "https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Setting up Pages and Navigation",
+                    content: `
+                        <h3>Setting up Pages and Site Navigation in Strikingly</h3>
+                        <p>As your website will most likely have multiple pages, the navigation menu should allow visitors to easily find and move between those pages. But, as a best practice, try to limit your navigation menu to just five or six items.</p>
+
+                        <h4>Adding a Page in Strikingly</h4>
+                        <p>Most Strikingly website templates feature one long, single page. The navigation menu can take visitors to specific sections within this lone page. To have a site with multiple pages and other advanced features, you must purchase a Strikingly Pro plan or higher.</p>
+
+                        <p>Before you can add pages to your Strikingly website, you must first activate the multiple pages functionality on your template.</p>
+
+                        <h5>To activate multiple pages:</h5>
+                        <ol>
+                            <li>First, ensure you have a Strikingly Pro plan or higher to gain access to this feature.</li>
+                            <li>In the "Site Design" menu, click on the "Add Another Page" button to open the "Settings & Multiple Pages" menu.</li>
+                            <li>Click on the green "Activate Multiple Pages" button. A pop-up window will then appear, asking if you're sure you want to perform this action. Simply click on the "OK" button to continue.</li>
+                            <li>Your template can now support multiple pages.</li>
+                        </ol>
+
+                        <h5>To add a page:</h5>
+                        <ol>
+                            <li>In the "Site Design" menu, you'll now find a "Pages" section. Click on it to open the "Select Page" drop-down menu.</li>
+                            <li>Click on the green "Manage Pages" button to open the "Manage Pages" menu.</li>
+                            <li>Click on the green "+ Add New Page" button and type the page title into the text box.</li>
+                            <li>Click on the green checkmark to immediately add your new page to your website and its navigation menu.</li>
+                        </ol>
+                    `,
+                    image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Working with Sections and Content",
+                    content: `
+                        <h3>Working With Strikingly Sections</h3>
+                        <p>When you add a new page to your Strikingly website, it won't include any content. In order to add content to it, you must first add sections. The Strikingly website builder offers multiple options for sections that vary based on the purpose of the content.</p>
+
+                        <h4>Adding a Section</h4>
+                        <p>To add a section:</p>
+                        <ol>
+                            <li>In the Strikingly Editor's left-hand "Site Design" menu, click on the green "Add New Section" button under "Sections."</li>
+                            <li>The "Add a New Section" menu will then appear with a list of section types plus multiple layout options for each.</li>
+                            <li>Scroll through the available sections and click on the one you like to instantly add it to your page.</li>
+                        </ol>
+
+                        <h4>Using the "Sections" Menu</h4>
+                        <p>To move, duplicate, or delete a section:</p>
+                        <ol>
+                            <li>To move a section, go to the "Sections" portion of the "Site Design" menu.</li>
+                            <li>Click on the three horizontal lines to the left of the section you want to move. Drag and place the section in the order in which you'd like it to appear on your page.</li>
+                            <li>To duplicate a section, go to the "Sections" portion of the "Site Design" menu and click on the "Settings" icon to the right of the section you want to reproduce.</li>
+                            <li>From the "Section Settings" drop-down menu that then appears, select "Duplicate" to automatically place a copy of this section immediately below the existing section.</li>
+                            <li>To delete a section, simply click on the "X" to the right of the section. The Strikingly website builder will then instantly remove that section from your site.</li>
+                        </ol>
+                    `,
+                    image: "https://images.unsplash.com/photo-1544396821-4dd40b938f0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Images and Media Management",
+                    content: `
+                        <h3>Working With Images and Other Media in Strikingly</h3>
+                        <p>The Strikingly website builder allows you to add a variety of media to your website, including:</p>
+                        <ul>
+                            <li>Images (e.g., .gif, .jpeg, .png, .bmp, and .ico files up to 10 megabytes)</li>
+                            <li>Video (e.g., embedded videos from Vimeo and YouTube)</li>
+                            <li>Audio (e.g., embedded tracks or playlists from SoundCloud)</li>
+                        </ul>
+
+                        <h4>Adjusting Images</h4>
+                        <p>Here's where you'll find images when creating your Strikingly website:</p>
+                        <ul>
+                            <li>As a "Background Image" in various sections</li>
+                            <li>As individual images in "Big Media" sections</li>
+                            <li>In some "Simple Blog" sections</li>
+                            <li>In "Photo Galleries" sections</li>
+                            <li>In "Grid" and "Banner & Image Slider" sections</li>
+                        </ul>
+
+                        <h4>To change an image:</h4>
+                        <ol>
+                            <li>Hover your mouse over the image you want to change until the "Edit" button appears.</li>
+                            <li>Click on the "Edit" button to open the "Image/Video" menu.</li>
+                            <li>Click on the "Replace" icon to open the "Upload Images" pop-up window. From there, you can upload your own image, choose from images you previously uploaded, and peruse the "Strikingly Library" of images.</li>
+                            <li>Select your chosen image to have it automatically replace the existing photo.</li>
+                            <li>Click on the green "Save" button to confirm your changes.</li>
+                        </ol>
+                    `,
+                    image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Connecting with Visitors and Social Media",
+                    content: `
+                        <h3>Connecting With Website Visitors Using Strikingly</h3>
+                        <p>The Strikingly website builder provides multiple ways for you to connect with your site visitors. Specifically, you can:</p>
+                        <ul>
+                            <li>Add social media icons that direct people to your business's social media channels</li>
+                            <li>Embed a social media feed from Instagram or Twitter</li>
+                            <li>Add an email subscription form</li>
+                            <li>Add a contact form</li>
+                        </ul>
+
+                        <h4>Adding Social Media Icons</h4>
+                        <p>Strikingly provides premade icons for the following social media platforms:</p>
+                        <ul>
+                            <li>Facebook</li>
+                            <li>Facebook Messenger</li>
+                            <li>Twitter</li>
+                            <li>Instagram</li>
+                            <li>Pinterest</li>
+                            <li>LinkedIn</li>
+                            <li>YouTube</li>
+                            <li>Snapchat</li>
+                            <li>TikTok</li>
+                        </ul>
+
+                        <h4>To add social media icons:</h4>
+                        <ol>
+                            <li>In the Strikingly website editor, scroll all the way down to your site's "Footer" where you'll find a section with some social media icons already placed. Hover over them until the "Edit" button appears.</li>
+                            <li>Click on the "Edit" button to open the "Share/Links" menu. Click on the "Links" tab.</li>
+                            <li>Enter the addresses of the social media accounts you'd like to connect to your business website. Make sure to check the box next to "Sync across header & footer."</li>
+                            <li>Click on the green "Save" button to add the appropriate social media icon to your header and footer.</li>
+                        </ol>
+                    `,
+                    image: "https://images.unsplash.com/photo-1611262588024-d12430b98920?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Publishing Your Website",
+                    content: `
+                        <h3>Publish Your Strikingly Website</h3>
+                        <p>Once you finish building and customizing your Strikingly website, it's time to go live on the internet.</p>
+
+                        <p>To publish your Strikingly website, simply click on the "Publish" button at the bottom of the "Site Design" menu.</p>
+
+                        <h4>Before Publishing - Final Checklist:</h4>
+                        <ul>
+                            <li>Review all your content for spelling and grammar</li>
+                            <li>Test all links and buttons</li>
+                            <li>Check image quality and loading times</li>
+                            <li>Verify contact forms are working</li>
+                            <li>Ensure mobile responsiveness</li>
+                            <li>Set up SEO settings (page titles, descriptions)</li>
+                            <li>Configure analytics if needed</li>
+                        </ul>
+
+                        <h4>After Publishing:</h4>
+                        <ul>
+                            <li>Test your live website thoroughly</li>
+                            <li>Share your website URL on social media</li>
+                            <li>Submit your site to search engines</li>
+                            <li>Monitor website performance and visitor behavior</li>
+                            <li>Keep content updated regularly</li>
+                        </ul>
+
+                        <p><strong>Congratulations!</strong> You've successfully learned how to use Strikingly to create professional websites. Remember that building a great website is an ongoing process - keep experimenting with different features and updating your content to engage your visitors.</p>
+                    `,
+                    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                }
+            ]
+        };
+
+        // Quiz Questions - Comprehensive Strikingly Quiz
+        const quizQuestions = [
+            {
+                question: "What is the first step to get started with Strikingly?",
+                options: ["Choose a template", "Sign up for an account", "Upload images", "Set up payment"],
+                correct: 1
+            },
+            {
+                question: "What information do you need to provide when signing up for Strikingly?",
+                options: ["Name, email, and password", "Only email address", "Credit card information", "Social media accounts"],
+                correct: 0
+            },
+            {
+                question: "How do you change a Strikingly template?",
+                options: ["Go to Settings > Template", "Site Design > Styles > Change Template", "Upload new template file", "Contact support"],
+                correct: 1
+            },
+            {
+                question: "Where do you find the color scheme options in Strikingly?",
+                options: ["In the header settings", "Site Design > Styles > Color Scheme", "In the footer options", "Template gallery"],
+                correct: 1
+            },
+            {
+                question: "What font customization options are available in Strikingly?",
+                options: ["Only font size", "Title, headings, text, and buttons", "Only title fonts", "Color only"],
+                correct: 1
+            },
+            {
+                question: "What button shapes can you choose from in Strikingly?",
+                options: ["Only square", "Square, Rounded, or Pill", "Only rounded", "Custom shapes only"],
+                correct: 1
+            },
+            {
+                question: "What should you select for header color if you want to use a header image?",
+                options: ["White", "Black", "Transparent", "Custom color"],
+                correct: 2
+            },
+            {
+                question: "What video platforms can you embed in Strikingly headers?",
+                options: ["Only YouTube", "YouTube and Vimeo", "Any video platform", "Only Vimeo"],
+                correct: 1
+            },
+            {
+                question: "What Strikingly plan do you need for multiple pages?",
+                options: ["Free plan", "Pro plan or higher", "Any paid plan", "VIP plan only"],
+                correct: 1
+            },
+            {
+                question: "How many navigation menu items are recommended as best practice?",
+                options: ["Up to 10 items", "No limit", "5-6 items", "3-4 items only"],
+                correct: 2
+            },
+            {
+                question: "What types of media can you add to Strikingly websites?",
+                options: ["Only images", "Images and videos only", "Images, videos, and audio", "Text content only"],
+                correct: 2
+            },
+            {
+                question: "What is the maximum file size for images in Strikingly?",
+                options: ["5 megabytes", "10 megabytes", "15 megabytes", "No limit"],
+                correct: 1
+            },
+            {
+                question: "Which social media platforms have premade icons in Strikingly?",
+                options: ["Only Facebook and Twitter", "Facebook, Instagram, LinkedIn, YouTube, TikTok and others", "Only major platforms", "Custom icons only"],
+                correct: 1
+            },
+            {
+                question: "How do you publish your Strikingly website?",
+                options: ["Contact Strikingly support", "Upload files manually", "Click the 'Publish' button", "Submit for review"],
+                correct: 2
+            },
+            {
+                question: "What should you do before publishing your website?",
+                options: ["Just click publish immediately", "Review content, test links, and check mobile responsiveness", "Only check spelling", "Upload more images"],
+                correct: 1
+            }
+        ];
+
+        // Global variables
+        let currentLesson = 0;
+        let currentQuestion = 0;
+        let selectedAnswers = [];
+        let score = 0;
+
+        // Start learning function
+        function startLearning() {
+            document.querySelector('.hero').style.display = 'none';
+            document.getElementById('learning-interface').style.display = 'block';
+            loadLesson(0);
+        }
+
+        // Load lesson
+        function loadLesson(lessonIndex) {
+            currentLesson = lessonIndex;
+            const lesson = moduleData.lessons[lessonIndex];
+            
+            document.getElementById('lesson-content').innerHTML = lesson.content;
+            document.querySelector('.content-image').src = lesson.image;
+            
+            updateProgress();
+            updateNavigationButtons();
+        }
+
+        // Update progress
+        function updateProgress() {
+            const progress = ((currentLesson + 1) / moduleData.lessons.length) * 100;
+            document.getElementById('progress-fill').style.width = `${progress}%`;
+            document.getElementById('progress-text').textContent = `${Math.round(progress)}%`;
+        }
+
+        // Update navigation buttons
+        function updateNavigationButtons() {
+            document.getElementById('prev-btn').disabled = currentLesson === 0;
+            
+            if (currentLesson === moduleData.lessons.length - 1) {
+                document.getElementById('next-btn').style.display = 'none';
+                document.getElementById('quiz-btn').style.display = 'inline-flex';
+            } else {
+                document.getElementById('next-btn').style.display = 'inline-flex';
+                document.getElementById('quiz-btn').style.display = 'none';
+            }
+        }
+
+        // Navigation functions
+        function previousLesson() {
+            if (currentLesson > 0) {
+                loadLesson(currentLesson - 1);
+            }
+        }
+
+        function nextLesson() {
+            if (currentLesson < moduleData.lessons.length - 1) {
+                loadLesson(currentLesson + 1);
+            }
+        }
+
+        // Quiz functions
+        function startQuiz() {
+            document.getElementById('learning-interface').style.display = 'none';
+            document.getElementById('quiz-section').style.display = 'block';
+            currentQuestion = 0;
+            selectedAnswers = [];
+            score = 0;
+            loadQuestion(0);
+        }
+
+        function loadQuestion(questionIndex) {
+            currentQuestion = questionIndex;
+            const question = quizQuestions[questionIndex];
+            
+            document.getElementById('question-text').textContent = question.question;
+            
+            const answerOptions = document.getElementById('answer-options');
+            answerOptions.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'answer-option';
+                optionDiv.innerHTML = `
+                    <div style="width: 30px; height: 30px; border: 2px solid var(--gray); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <span style="font-weight: bold; color: var(--gray);">${String.fromCharCode(65 + index)}</span>
+                    </div>
+                    <span>${option}</span>
+                `;
+                optionDiv.onclick = () => selectAnswer(index, optionDiv);
+                answerOptions.appendChild(optionDiv);
+            });
+            
+            updateQuizProgress();
+            document.getElementById('quiz-next-btn').disabled = true;
+        }
+
+        function selectAnswer(answerIndex, optionElement) {
+            document.querySelectorAll('.answer-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            optionElement.classList.add('selected');
+            selectedAnswers[currentQuestion] = answerIndex;
+            document.getElementById('quiz-next-btn').disabled = false;
+        }
+
+        function nextQuestion() {
+            const question = quizQuestions[currentQuestion];
+            const selectedAnswer = selectedAnswers[currentQuestion];
+            
+            if (selectedAnswer === question.correct) {
+                score++;
+            }
+            
+            setTimeout(() => {
+                if (currentQuestion < quizQuestions.length - 1) {
+                    loadQuestion(currentQuestion + 1);
+                } else {
+                    showQuizResults();
+                }
+            }, 500);
+        }
+
+        function updateQuizProgress() {
+            const progress = ((currentQuestion + 1) / quizQuestions.length) * 100;
+            document.getElementById('quiz-progress-fill').style.width = `${progress}%`;
+            document.getElementById('quiz-progress-text').textContent = `Question ${currentQuestion + 1} of ${quizQuestions.length}`;
+            
+            if (currentQuestion === quizQuestions.length - 1) {
+                document.getElementById('quiz-next-btn').innerHTML = 'Finish Quiz <i class="fas fa-check"></i>';
+            }
+        }
+
+        function showQuizResults() {
+            document.getElementById('quiz-container').style.display = 'none';
+            document.getElementById('quiz-results').style.display = 'block';
+            
+            document.getElementById('final-score').textContent = score;
+            
+            let message;
+            if (score >= 13) {
+                message = "Excellent! You've mastered Strikingly and are ready to build amazing websites!";
+            } else if (score >= 10) {
+                message = "Great job! You have a solid understanding of Strikingly website building.";
+            } else if (score >= 7) {
+                message = "Good work! You understand the basics. Review the lessons for advanced features.";
+            } else {
+                message = "Keep learning! Review the lessons and try the quiz again to improve your skills.";
+            }
+            
+            document.getElementById('results-message').textContent = message;
+        }
+
+        function retakeQuiz() {
+            startQuiz();
+        }
+
+        function backToLearning() {
+            document.getElementById('quiz-section').style.display = 'none';
+            document.getElementById('learning-interface').style.display = 'block';
+            loadLesson(0);
+        }
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+            const navMenu = document.getElementById('nav-menu');
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+        });
+    </script>
+</body>
+</html>

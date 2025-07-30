@@ -1,0 +1,1346 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gmail Learning Module - Barangay Learning Hub</title>
+    <link rel="icon" href="..\..\BLH_logo.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-red: #dc2626;
+            --light-red: #ef4444;
+            --accent-blue: #3b82f6;
+            --dark-blue: #1e40af;
+            --success-green: #059669;
+            --danger-red: #dc2626;
+            --warning-orange: #ea580c;
+            --purple: #7c3aed;
+            --cyan: #0891b2;
+            --pink: #be185d;
+            --white: #ffffff;
+            --light-gray: #f8fafc;
+            --gray: #64748b;
+            --dark-gray: #334155;
+            --text-dark: #1e293b;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            
+            --primary-blue: #1e3a8a;
+            --light-blue: #3b82f6;
+            --accent-yellow: #fbbf24;
+            --dark-yellow: #f59e0b;
+            --success-green: #059669;
+            --danger-red: #dc2626;
+            --warning-orange: #ea580c;
+            --purple: #7c3aed;
+            --cyan: #0891b2;
+            --pink: #be185d;
+            --white: #ffffff;
+            --light-gray: #f8fafc;
+            --gray: #64748b;
+            --dark-gray: #334155;
+            --text-dark: #1e293b;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+       
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+  /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-blue) 100%);
+            box-shadow: var(--shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        .navbar {
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .nav-brand i {
+            margin-right: 0.5rem;
+            color: var(--accent-yellow);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+.nav-brand img {
+    width: 40px;
+    height: 40px;
+    margin-right: 0.5rem;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--accent-yellow);
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--light-red) 0%, var(--primary-red) 100%);
+            padding: 4rem 0;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 20s infinite linear;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--white);
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            background: var(--white);
+            color: var(--primary-red);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cta-button:hover {
+            background: var(--light-gray);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .floating-image {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            animation: float-gentle 3s ease-in-out infinite;
+        }
+
+        /* Learning Interface */
+        .learning-interface {
+            padding: 4rem 0;
+            background: var(--light-gray);
+        }
+
+        .module-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .module-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-red);
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            background: var(--white);
+            border-radius: 50px;
+            height: 30px;
+            max-width: 400px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--light-red), var(--primary-red));
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 50px;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: 600;
+            color: var(--primary-red);
+        }
+
+        .lesson-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .lesson-content {
+            animation: fadeInLeft 0.6s ease;
+        }
+
+        .lesson-content h3 {
+            color: var(--primary-red);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-content h4 {
+            color: var(--dark-gray);
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .lesson-content p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .lesson-content ul, .lesson-content ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .lesson-content strong {
+            color: var(--primary-red);
+        }
+
+        .lesson-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeInRight 0.6s ease;
+        }
+
+        .content-image {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .content-image:hover {
+            transform: scale(1.05);
+        }
+
+        .navigation-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            background: var(--primary-red);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-btn:hover {
+            background: var(--light-red);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .nav-btn:disabled {
+            background: var(--gray);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .quiz-btn {
+            background: var(--white);
+            color: var(--primary-red);
+            border: 2px solid var(--primary-red);
+        }
+
+        .quiz-btn:hover {
+            background: var(--primary-red);
+            color: var(--white);
+        }
+
+        /* Quiz Section */
+        .quiz-section {
+            padding: 4rem 0;
+            background: var(--white);
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .quiz-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-red);
+            margin-bottom: 1rem;
+        }
+
+        .quiz-progress {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .quiz-progress-bar {
+            background: var(--light-gray);
+            border-radius: 50px;
+            height: 20px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .quiz-progress-fill {
+            background: linear-gradient(90deg, var(--success-green), var(--primary-red));
+            height: 100%;
+            width: 10%;
+            transition: width 0.5s ease;
+            border-radius: 50px;
+        }
+
+        .question-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 2rem;
+            border: 3px solid var(--primary-red);
+        }
+
+        .question-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-red);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .answer-options {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .answer-option {
+            background: var(--light-gray);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .answer-option:hover {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: var(--light-red);
+            transform: translateX(10px);
+        }
+
+        .answer-option.selected {
+            background: rgba(220, 38, 38, 0.2);
+            border-color: var(--primary-red);
+        }
+
+        .answer-option.correct {
+            background: rgba(5, 150, 105, 0.2);
+            border-color: var(--success-green);
+        }
+
+        .answer-option.incorrect {
+            background: rgba(220, 38, 38, 0.2);
+            border-color: var(--danger-red);
+        }
+
+        .quiz-navigation {
+            text-align: center;
+        }
+
+        /* Quiz Results */
+        .quiz-results {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .results-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .results-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .results-icon i {
+            color: var(--primary-red);
+            animation: bounce 1s ease infinite;
+        }
+
+        .score-display {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-red);
+            margin: 1rem 0;
+        }
+
+        .score-number {
+            color: var(--success-green);
+        }
+
+        .results-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+      
+/* Footer */
+.footer {
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-blue) 100%);
+    color: var(--white);
+    padding: 3rem 0 1rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section h3,
+.footer-section h4 {
+    margin-bottom: 1rem;
+    color: var(--accent-yellow);
+}
+
+.footer-section p {
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section a {
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    opacity: 0.9;
+}
+
+.footer-section a:hover {
+    color: var(--accent-yellow);
+    opacity: 1;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-links a {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    background: var(--accent-yellow);
+    color: var(--primary-blue);
+    transform: translateY(-2px);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    opacity: 0.8;
+}
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+
+        @keyframes float-gentle {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px var(--white); }
+            to { text-shadow: 0 0 20px var(--white), 0 0 30px var(--white); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .animate-fadeInRight {
+            animation: fadeInRight 0.8s ease forwards;
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .animate-slideIn {
+            animation: slideIn 0.6s ease forwards;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .lesson-container {
+                grid-template-columns: 1fr;
+                padding: 2rem;
+            }
+
+            .navigation-controls {
+                flex-direction: column;
+            }
+
+            .footer-bottom-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .results-actions {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero {
+                padding: 2rem 0;
+            }
+
+            .learning-interface,
+            .quiz-section {
+                padding: 2rem 0;
+            }
+
+            .lesson-container,
+            .question-card,
+            .results-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <img src="..\..\Maps\blhimages\BLH_logo.png">   
+                    <span>Barangay Learning Hub</span>
+                </div>
+                <div class="nav-menu" id="nav-menu">
+                   <a href="../../index.html" class="nav-link">Home</a>
+                    <a href="../../Maps/index.html" class="nav-link">Maps</a>
+                    <a href="index.html" class="nav-link active">Modules</a>
+                    <a href="../../Books/index.html" class="nav-link">Reading Corner</a>
+                    <a href="../../Calendar.html" class="nav-link">Calendar</a>
+                    <a href="../../About Us.html" class="nav-link ">About Us</a>
+                </div>
+                <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title animate-fadeInUp">Gmail Learning Module</h1>
+                    <p class="hero-subtitle animate-fadeInUp">Government Initiative for Free Community Education</p>
+                    <p class="hero-description animate-fadeInUp">Master Google's free email service and learn to communicate effectively online.</p>
+                    <button class="cta-button animate-fadeInUp" onclick="startLearning()">
+                        Start Learning <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="hero-image animate-fadeInRight">
+                    <img src="https://images.unsplash.com/photo-1596526131083-e8c633c948d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Gmail interface on computer screen" class="floating-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Module Interface -->
+        <section class="learning-interface" id="learning-interface" style="display: none;">
+            <div class="container">
+                <div class="module-header">
+                    <h2 id="module-title">Gmail Learning Module</h2>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                        <span class="progress-text" id="progress-text">0%</span>
+                    </div>
+                </div>
+
+                <div class="lesson-container" id="lesson-container">
+                    <div class="lesson-content" id="lesson-content">
+                        <!-- Lesson content will be dynamically loaded here -->
+                    </div>
+                    
+                    <div class="lesson-image" id="lesson-image">
+                        <img src="https://images.unsplash.com/photo-1596526131083-e8c633c948d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Gmail interface" class="content-image">
+                    </div>
+                </div>
+
+                <div class="navigation-controls">
+                    <button class="nav-btn prev-btn" id="prev-btn" onclick="previousLesson()">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button class="nav-btn next-btn" id="next-btn" onclick="nextLesson()">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="nav-btn quiz-btn" id="quiz-btn" onclick="startQuiz()" style="display: none;">
+                        Take Quiz <i class="fas fa-brain"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section class="quiz-section" id="quiz-section" style="display: none;">
+            <div class="container">
+                <div class="quiz-header">
+                    <h2>Gmail Knowledge Quiz</h2>
+                    <div class="quiz-progress">
+                        <span id="quiz-progress-text">Question 1 of 10</span>
+                        <div class="quiz-progress-bar">
+                            <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-container" id="quiz-container">
+                    <div class="question-card animate-slideIn" id="question-card">
+                        <h3 id="question-text">Loading question...</h3>
+                        <div class="answer-options" id="answer-options">
+                            <!-- Answer options will be dynamically loaded -->
+                        </div>
+                    </div>
+
+                    <div class="quiz-navigation">
+                        <button class="nav-btn" id="quiz-next-btn" onclick="nextQuestion()" disabled>
+                            Next Question <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quiz Results -->
+                <div class="quiz-results" id="quiz-results" style="display: none;">
+                    <div class="results-card animate-fadeIn">
+                        <div class="results-icon">
+                            <i class="fas fa-trophy" id="results-icon"></i>
+                        </div>
+                        <h2 id="results-title">Quiz Complete!</h2>
+                        <div class="score-display">
+                            <span class="score-number" id="final-score">0</span>
+                            <span class="score-total">/ 10</span>
+                        </div>
+                        <p id="results-message">Great job!</p>
+                        <div class="results-actions">
+                            <button class="nav-btn" onclick="retakeQuiz()">
+                                <i class="fas fa-redo"></i> Retake Quiz
+                            </button>
+                            <button class="nav-btn" onclick="backToLearning()">
+                                <i class="fas fa-book"></i> Back to Learning
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+  <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Barangay Learning Hub</h3>
+                    <p>Empowering communities through digital education and technology access.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/COBBarangayLearningHub"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="/Module/index.html">Learning Modules</a></li>
+                        <li><a href="/Module/index.html">Training Programs</a></li>
+                        <li><a href="About Us.html">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Programs</h4>
+                    <ul>
+                        <li><a href="Module/index.html">Digital Literacy</a></li>
+                        <li><a href="Module/index.html">Computer Training</a></li>
+                        <li><a href="Module/index.html">Internet Safety</a></li>
+                        <li><a href="Module/index.html">Youth Programs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Barangay Learning Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Learning Module Data - Based on the provided text content
+        const moduleData = {
+            lessons: [
+                {
+                    title: "Understanding Gmail",
+                    content: `
+                        <h3>Introduction</h3>
+                        <p>Gmail is a free email service provided by Google. In many ways, Gmail is like any other email service: You can send and receive emails, block spam, create an address book, and perform other basic email tasks. But it also has some more unique features that help make it one of the most popular online email services.</p>
+                        <p>In this lesson, we'll talk about some of the features and advantages of Gmail, and we'll give an overview of the Gmail window.</p>
+                        
+                        <h4>Gmail features</h4>
+                        <p>Gmail offers several useful features to make your email experience as smooth as possible, including:</p>
+                        <ul>
+                            <li><strong>Spam filtering:</strong> Spam is another name for junk email. Gmail uses advanced technologies to keep spam out of your inbox. Most spam is automatically sent to a separate spam folder, and after 30 days it is deleted.</li>
+                            <li><strong>Conversation View:</strong> An email conversation occurs whenever you send emails back and forth with another person (or a group of people), often about a specific topic or event. Gmail groups these emails together by default, which keeps your inbox more organized.</li>
+                            <li><strong>Built-in chat:</strong> Instead of sending an email, you can send someone an instant message or use the voice and video chat feature if your computer has a microphone and/or webcam.</li>
+                            <li><strong>Call Phone:</strong> This feature is similar to voice chat, except it allows you to dial an actual phone number to call any phone worldwide. It's free to call anywhere in the United States or Canada, and you can make calls to other countries at relatively low rates.</li>
+                        </ul>
+
+                        <h4>Get to know the Gmail interface</h4>
+                        <p>When you're working with Gmail, you'll primarily be using the main Gmail interface. This window contains your inbox, and it allows you to navigate to your contacts, mail settings, and more. Also, if you use other Google services like YouTube or Calendar, you'll be able to access them from the top of the Gmail window.</p>
+                    `,
+                    image: "https://images.unsplash.com/photo-1596526131083-e8c633c948d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Setting up a Gmail account",
+                    content: `
+                        <h3>Creating Your Gmail Account</h3>
+                        <p>To create a Gmail address, you'll first need to create a Google account. Gmail will redirect you to the Google account sign-up page. You'll need to provide some basic information like your name, birth date, gender, and location. You will also need to choose a name for your new Gmail address. Once you create an account, you'll be able to start adding contacts and adjusting your mail settings.</p>
+                        
+                        <h4>To create an account:</h4>
+                        <ol>
+                            <li>Go to <strong>www.gmail.com</strong></li>
+                            <li>Click <strong>Create account</strong></li>
+                            <li>The sign-up form will appear. Follow the directions by entering the required information</li>
+                            <li>Next, enter your phone number to verify your account. Google uses a two-step verification process for your security</li>
+                            <li>You will receive a text message from Google with a verification code. Enter the code to complete the account verification</li>
+                            <li>Next, you will see a form to enter some of your personal information, like your name and birthday</li>
+                            <li>Review Google's Terms of Service and Privacy Policy, then click <strong>I agree</strong></li>
+                            <li>Your account will be created</li>
+                        </ol>
+
+                        <h4>Signing in to your account</h4>
+                        <p>When you first create your account, you will be automatically signed in. Most of the time, however, you'll need to sign in to your account and sign out when you're done with it. Signing out is especially important if you're using a shared computer (for example, at a library or office) because it prevents others from viewing your emails.</p>
+                        
+                        <h4>To sign in:</h4>
+                        <ol>
+                            <li>Go to <strong>www.gmail.com</strong></li>
+                            <li>Type your username (your email address) and password, then click <strong>Next</strong></li>
+                        </ol>
+
+                        <h4>To sign out:</h4>
+                        <p>In the top-right corner of the page, locate the circle that has your first initial (if you've already selected an avatar image, it will show the image instead). To sign out, click the circle and select <strong>Sign out</strong>.</p>
+                    `,
+                    image: "https://images.unsplash.com/photo-1484807352052-23338990c6c6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Composing and Sending Email",
+                    content: `
+                        <h3>Introduction</h3>
+                        <p>Now that you've created a Gmail account, you can start sending email messages. Writing an email can be as simple as typing a message, or you can use text formatting, attachments, and a signature to customize your message.</p>
+                        <p>In this lesson, we'll show you how to compose an email, add an attachment, and create a signature that will appear on all of the messages you send.</p>
+                        
+                        <h4>To compose an email:</h4>
+                        <ol>
+                            <li>In the left menu pane, click the <strong>Compose</strong> button</li>
+                            <li>The compose window will appear in the lower-right corner of the page</li>
+                            <li>Add one or more recipients to the <strong>To:</strong> field. You can do this by typing one or more email addresses, separated by commas, or you can click To: to select recipients from your contacts, then click Select</li>
+                            <li>Type a subject for the message</li>
+                            <li>In the body field, type your message. When you're done, click <strong>Send</strong></li>
+                        </ol>
+
+                        <h4>Adding attachments</h4>
+                        <p>An attachment is simply a file (like an image or document) that is sent along with your email. For example, if you are applying for a job, you might send your resume as an attachment, with the body of the email being the cover letter. It's a good idea to include a message in the body of your email explaining what the attachment is, especially if the recipient isn't expecting an attachment.</p>
+                        
+                        <h4>To add an attachment:</h4>
+                        <ol>
+                            <li>While composing an email, click the paper clip icon at the bottom of the compose window</li>
+                            <li>A file upload dialog box will appear. Choose the file you want to attach, then click <strong>Open</strong></li>
+                            <li>The attachment will begin to upload. Most attachments will upload within a few seconds, but larger ones can take longer</li>
+                            <li>When you're ready to send your email, click <strong>Send</strong></li>
+                        </ol>
+
+                        <p><strong>Important:</strong> Remember to attach your file before you click Send. Forgetting to attach a file is a surprisingly common mistake.</p>
+
+                        <h4>Email formatting</h4>
+                        <p>Gmail allows you to add various types of formatting to your text. Click the formatting button at the bottom of the compose window to see different formatting options.</p>
+                    `,
+                    image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Responding to Email",
+                    content: `
+                        <h3>Reading Email</h3>
+                        <p>By default, any email you receive will go to your inbox. You'll be able to tell which emails are unread because they'll be bold. You can also see the name of the sender, the subject of the email, and the first few words of the email body. This means even before you select an email, you can tell quite a few things about it.</p>
+                        
+                        <h4>To read an Email</h4>
+                        <ol>
+                            <li>From your inbox, click the email you want to read</li>
+                            <li>The email will open in the same window</li>
+                        </ol>
+
+                        <h4>Opening Attachments</h4>
+                        <p>Sometimes you'll receive emails that contain attachments. Generally, you will need to download an attachment to view it. However, many common file types, like Word documents and images, can be viewed within a browser window. If the attachment is an image, you'll also see a smaller copy of the image—called a thumbnail—inside the body of the email. You can tell which emails contain attachments because they will have a paper clip icon to the right of the subject.</p>
+
+                        <h4>To open an Attachment</h4>
+                        <ol>
+                            <li>Open the email message that contains the attachment</li>
+                            <li>Click the Download icon to save the attachment to your computer. If your computer asks whether you want to Open or Save it, choose Save. You can then locate the file on your computer and double-click it to open it</li>
+                        </ol>
+
+                        <p><strong>Important:</strong> You should generally only open an attachment if it's from a trusted source. Some attachments can contain viruses, especially .exe files. If you don't recognize the sender—or if you don't know why someone is sending you the attachment—it's safest not to open it.</p>
+
+                        <h4>Replying to Emails</h4>
+                        <p>Most of the time, you will be replying to an email someone else sends you instead of composing a new message. When you reply, the recipient's email address will automatically appear in the To: field, so you won't need to worry about choosing the recipient.</p>
+
+                        <h4>To reply to an Email Message</h4>
+                        <ol>
+                            <li>While viewing the message, click <strong>Reply</strong> at the bottom of the message. If the message was sent to multiple recipients, you will also have the option to <strong>Reply to all</strong>. You can also click the Reply arrow to respond to the message</li>
+                            <li>You may want to double-check the To: and Cc: fields to make sure you're sending your message to the correct people. If you are replying to all recipients, the additional recipients will appear in the Cc: field</li>
+                            <li>Type your message in the Body field, then click <strong>Send</strong></li>
+                        </ol>
+
+                        <h4>Forwarding Emails</h4>
+                        <p>You can also choose to forward an email. This basically works the same as replying, but it's used to send the email to someone who wasn't one of the original recipients. Just like a reply, the original message will appear as a quote. It's usually a good idea to include a brief message of your own to explain why you're forwarding the email.</p>
+
+                        <h4>To forward an Email</h4>
+                        <ol>
+                            <li>While viewing the message, click <strong>Forward</strong> at the bottom of the message. You can also select Forward from the More drop-down menu next to the Reply arrow</li>
+                            <li>Type the recipient's email address in the To: field, or click To to choose a recipient from your contacts. If the person is in your contacts, you can start typing his or her name and that contact's email address should appear</li>
+                            <li>Type your message in the Body field, then click <strong>Send</strong></li>
+                        </ol>
+                    `,
+                    image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Creating Filters",
+                    content: `
+                        <h3>Introduction</h3>
+                        <p>Filters can save you a lot of time by automatically performing actions like labeling or deleting messages as soon as they arrive in your inbox. You can create filters that look for a specific sender, recipient, subject, or specific words that are contained in the body of the email.</p>
+                        
+                        <h4>Search Mail</h4>
+                        <p>The search mail feature allows you to perform a Google search in your email. This means you can find any message, no matter how new or old. It searches every part of the message, so you can find a message even if you don't remember who sent it or if you never labeled it.</p>
+
+                        <h4>To search for a message:</h4>
+                        <ol>
+                            <li>At the top of the page, type some search terms in the Gmail search box</li>
+                            <li>Your inbox will display your search results. You can click an email to read it, or you can try a different search</li>
+                        </ol>
+
+                        <p><strong>Tip:</strong> If you're still not finding what you're looking for, you can click Show search options to perform an advanced search.</p>
+
+                        <h4>Creating Filters</h4>
+                        <p>Filters are powerful tools that help you automatically organize your emails. You can set up filters to:</p>
+                        <ul>
+                            <li>Automatically label emails from specific senders</li>
+                            <li>Mark emails as important based on keywords</li>
+                            <li>Forward emails to another address</li>
+                            <li>Delete spam or unwanted emails automatically</li>
+                            <li>Archive emails that match certain criteria</li>
+                        </ul>
+
+                        <h4>Benefits of Using Filters</h4>
+                        <ul>
+                            <li><strong>Time saving:</strong> No need to manually sort emails</li>
+                            <li><strong>Better organization:</strong> Keep your inbox clean and organized</li>
+                            <li><strong>Reduced stress:</strong> Important emails won't get lost in clutter</li>
+                            <li><strong>Improved productivity:</strong> Focus on what matters most</li>
+                        </ul>
+                    `,
+                    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                }
+            ]
+        };
+
+        // Quiz Questions based on Gmail content
+        const quizQuestions = [
+            {
+                question: "What is Gmail?",
+                options: ["A paid email service", "A free email service by Google", "A social media platform", "A file storage service"],
+                correct: 1
+            },
+            {
+                question: "How long does Gmail keep spam emails before automatically deleting them?",
+                options: ["7 days", "15 days", "30 days", "60 days"],
+                correct: 2
+            },
+            {
+                question: "What is Conversation View in Gmail?",
+                options: ["A way to video chat", "A feature that groups related emails together", "A spam filter", "A search function"],
+                correct: 1
+            },
+            {
+                question: "What should you do first when creating a Gmail account?",
+                options: ["Choose a password", "Go to www.gmail.com", "Enter your phone number", "Verify your email"],
+                correct: 1
+            },
+            {
+                question: "Where do you click to compose a new email in Gmail?",
+                options: ["The red Compose button", "The + button", "The New button", "The Create button"],
+                correct: 0
+            },
+            {
+                question: "What is an email attachment?",
+                options: ["A signature", "A file sent with an email", "A link to a website", "A spam filter"],
+                correct: 1
+            },
+            {
+                question: "What should you generally avoid opening from unknown senders?",
+                options: ["The email subject", "Email attachments", "The sender's name", "The email date"],
+                correct: 1
+            },
+            {
+                question: "What happens when you reply to an email?",
+                options: ["A new email is created", "The recipient's address automatically appears in the To field", "The email is deleted", "The email is archived"],
+                correct: 1
+            },
+            {
+                question: "What is the purpose of email filters in Gmail?",
+                options: ["To delete all emails", "To automatically organize incoming emails", "To change email colors", "To print emails"],
+                correct: 1
+            },
+            {
+                question: "Why is it important to sign out of Gmail on shared computers?",
+                options: ["To save battery", "To prevent others from viewing your emails", "To improve internet speed", "To update Gmail"],
+                correct: 1
+            }
+        ];
+
+        // Global variables
+        let currentLesson = 0;
+        let currentQuestion = 0;
+        let selectedAnswers = [];
+        let score = 0;
+
+        // Start learning function
+        function startLearning() {
+            document.querySelector('.hero').style.display = 'none';
+            document.getElementById('learning-interface').style.display = 'block';
+            loadLesson(0);
+        }
+
+        // Load lesson
+        function loadLesson(lessonIndex) {
+            currentLesson = lessonIndex;
+            const lesson = moduleData.lessons[lessonIndex];
+            
+            document.getElementById('lesson-content').innerHTML = lesson.content;
+            document.querySelector('.content-image').src = lesson.image;
+            
+            updateProgress();
+            updateNavigationButtons();
+        }
+
+        // Update progress
+        function updateProgress() {
+            const progress = ((currentLesson + 1) / moduleData.lessons.length) * 100;
+            document.getElementById('progress-fill').style.width = `${progress}%`;
+            document.getElementById('progress-text').textContent = `${Math.round(progress)}%`;
+        }
+
+        // Update navigation buttons
+        function updateNavigationButtons() {
+            document.getElementById('prev-btn').disabled = currentLesson === 0;
+            
+            if (currentLesson === moduleData.lessons.length - 1) {
+                document.getElementById('next-btn').style.display = 'none';
+                document.getElementById('quiz-btn').style.display = 'inline-flex';
+            } else {
+                document.getElementById('next-btn').style.display = 'inline-flex';
+                document.getElementById('quiz-btn').style.display = 'none';
+            }
+        }
+
+        // Navigation functions
+        function previousLesson() {
+            if (currentLesson > 0) {
+                loadLesson(currentLesson - 1);
+            }
+        }
+
+        function nextLesson() {
+            if (currentLesson < moduleData.lessons.length - 1) {
+                loadLesson(currentLesson + 1);
+            }
+        }
+
+        // Quiz functions
+        function startQuiz() {
+            document.getElementById('learning-interface').style.display = 'none';
+            document.getElementById('quiz-section').style.display = 'block';
+            currentQuestion = 0;
+            selectedAnswers = [];
+            score = 0;
+            loadQuestion(0);
+        }
+
+        function loadQuestion(questionIndex) {
+            currentQuestion = questionIndex;
+            const question = quizQuestions[questionIndex];
+            
+            document.getElementById('question-text').textContent = question.question;
+            
+            const answerOptions = document.getElementById('answer-options');
+            answerOptions.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'answer-option';
+                optionDiv.innerHTML = `
+                    <div style="width: 30px; height: 30px; border: 2px solid var(--gray); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <span style="font-weight: bold; color: var(--gray);">${String.fromCharCode(65 + index)}</span>
+                    </div>
+                    <span>${option}</span>
+                `;
+                optionDiv.onclick = () => selectAnswer(index, optionDiv);
+                answerOptions.appendChild(optionDiv);
+            });
+            
+            updateQuizProgress();
+            document.getElementById('quiz-next-btn').disabled = true;
+        }
+
+        function selectAnswer(answerIndex, optionElement) {
+            document.querySelectorAll('.answer-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            optionElement.classList.add('selected');
+            selectedAnswers[currentQuestion] = answerIndex;
+            document.getElementById('quiz-next-btn').disabled = false;
+        }
+
+        function nextQuestion() {
+            const question = quizQuestions[currentQuestion];
+            const selectedAnswer = selectedAnswers[currentQuestion];
+            
+            if (selectedAnswer === question.correct) {
+                score++;
+            }
+            
+            setTimeout(() => {
+                if (currentQuestion < quizQuestions.length - 1) {
+                    loadQuestion(currentQuestion + 1);
+                } else {
+                    showQuizResults();
+                }
+            }, 500);
+        }
+
+        function updateQuizProgress() {
+            const progress = ((currentQuestion + 1) / quizQuestions.length) * 100;
+            document.getElementById('quiz-progress-fill').style.width = `${progress}%`;
+            document.getElementById('quiz-progress-text').textContent = `Question ${currentQuestion + 1} of ${quizQuestions.length}`;
+            
+            if (currentQuestion === quizQuestions.length - 1) {
+                document.getElementById('quiz-next-btn').innerHTML = 'Finish Quiz <i class="fas fa-check"></i>';
+            }
+        }
+
+        function showQuizResults() {
+            document.getElementById('quiz-container').style.display = 'none';
+            document.getElementById('quiz-results').style.display = 'block';
+            
+            document.getElementById('final-score').textContent = score;
+            
+            let message;
+            if (score >= 8) {
+                message = "Excellent! You've mastered Gmail basics!";
+            } else if (score >= 6) {
+                message = "Good job! You have a solid understanding of Gmail.";
+            } else {
+                message = "Keep learning! Review the lessons and try again.";
+            }
+            
+            document.getElementById('results-message').textContent = message;
+        }
+
+        function retakeQuiz() {
+            startQuiz();
+        }
+
+        function backToLearning() {
+            document.getElementById('quiz-section').style.display = 'none';
+            document.getElementById('learning-interface').style.display = 'block';
+            loadLesson(0);
+        }
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+            const navMenu = document.getElementById('nav-menu');
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+        });
+    </script>
+</body>
+</html>

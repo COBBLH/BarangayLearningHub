@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clipchamp Video Editing Module - Barangay Learning Hub</title>
+    <link rel="icon" href="..\..\BLH_logo.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1e3a8a;
+            --light-blue: #3b82f6;
+            --accent-yellow: #fbbf24;
+            --dark-yellow: #f59e0b;
+            --success-green: #059669;
+            --danger-red: #dc2626;
+            --warning-orange: #ea580c;
+            --purple: #7c3aed;
+            --cyan: #0891b2;
+            --pink: #be185d;
+            --white: #ffffff;
+            --light-gray: #f8fafc;
+            --gray: #64748b;
+            --dark-gray: #334155;
+            --text-dark: #1e293b;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-blue) 100%);
+            box-shadow: var(--shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar {
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .nav-brand i {
+            margin-right: 0.5rem;
+            color: var(--accent-yellow);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--accent-yellow);
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--purple) 0%, var(--accent-yellow) 100%);
+            padding: 4rem 0;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 20s infinite linear;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--white);
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            background: var(--accent-yellow);
+            color: var(--purple);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cta-button:hover {
+            background: var(--dark-yellow);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .floating-image {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            animation: float-gentle 3s ease-in-out infinite;
+        }
+
+        /* Learning Interface */
+        .learning-interface {
+            padding: 4rem 0;
+            background: var(--light-gray);
+        }
+
+        .module-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .module-header h2 {
+            font-size: 2.5rem;
+            color: var(--purple);
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            background: var(--white);
+            border-radius: 50px;
+            height: 30px;
+            max-width: 400px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--purple), var(--accent-yellow));
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 50px;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: 600;
+            color: var(--purple);
+        }
+
+        .lesson-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .lesson-content {
+            animation: fadeInLeft 0.6s ease;
+        }
+
+        .lesson-content h3 {
+            color: var(--purple);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-content p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .lesson-content ul, .lesson-content ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .lesson-content strong {
+            color: var(--purple);
+        }
+
+        .lesson-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeInRight 0.6s ease;
+        }
+
+        .content-image {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .content-image:hover {
+            transform: scale(1.05);
+        }
+
+        .navigation-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            background: var(--purple);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-btn:hover {
+            background: var(--light-blue);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .nav-btn:disabled {
+            background: var(--gray);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .quiz-btn {
+            background: var(--accent-yellow);
+            color: var(--purple);
+        }
+
+        .quiz-btn:hover {
+            background: var(--dark-yellow);
+        }
+
+        /* Quiz Section */
+        .quiz-section {
+            padding: 4rem 0;
+            background: var(--white);
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .quiz-header h2 {
+            font-size: 2.5rem;
+            color: var(--purple);
+            margin-bottom: 1rem;
+        }
+
+        .quiz-progress {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .quiz-progress-bar {
+            background: var(--light-gray);
+            border-radius: 50px;
+            height: 20px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .quiz-progress-fill {
+            background: linear-gradient(90deg, var(--success-green), var(--accent-yellow));
+            height: 100%;
+            width: 10%;
+            transition: width 0.5s ease;
+            border-radius: 50px;
+        }
+
+        .question-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 2rem;
+            border: 3px solid var(--accent-yellow);
+        }
+
+        .question-card h3 {
+            font-size: 1.5rem;
+            color: var(--purple);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .answer-options {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .answer-option {
+            background: var(--light-gray);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .answer-option:hover {
+            background: rgba(124, 58, 237, 0.1);
+            border-color: var(--purple);
+            transform: translateX(10px);
+        }
+
+        .answer-option.selected {
+            background: rgba(251, 191, 36, 0.2);
+            border-color: var(--accent-yellow);
+        }
+
+        .answer-option.correct {
+            background: rgba(5, 150, 105, 0.2);
+            border-color: var(--success-green);
+        }
+
+        .answer-option.incorrect {
+            background: rgba(220, 38, 38, 0.2);
+            border-color: var(--danger-red);
+        }
+
+        .quiz-navigation {
+            text-align: center;
+        }
+
+        /* Quiz Results */
+        .quiz-results {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .results-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .results-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .results-icon i {
+            color: var(--accent-yellow);
+            animation: bounce 1s ease infinite;
+        }
+
+        .score-display {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--purple);
+            margin: 1rem 0;
+        }
+
+        .score-number {
+            color: var(--success-green);
+        }
+
+        .results-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+      
+/* Footer */
+.footer {
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-blue) 100%);
+    color: var(--white);
+    padding: 3rem 0 1rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section h3,
+.footer-section h4 {
+    margin-bottom: 1rem;
+    color: var(--accent-yellow);
+}
+
+.footer-section p {
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section a {
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    opacity: 0.9;
+}
+
+.footer-section a:hover {
+    color: var(--accent-yellow);
+    opacity: 1;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-links a {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    background: var(--accent-yellow);
+    color: var(--primary-blue);
+    transform: translateY(-2px);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    opacity: 0.8;
+}
+
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+
+        @keyframes float-gentle {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px var(--accent-yellow); }
+            to { text-shadow: 0 0 20px var(--accent-yellow), 0 0 30px var(--accent-yellow); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .animate-fadeInRight {
+            animation: fadeInRight 0.8s ease forwards;
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .animate-slideIn {
+            animation: slideIn 0.6s ease forwards;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .lesson-container {
+                grid-template-columns: 1fr;
+                padding: 2rem;
+            }
+
+            .navigation-controls {
+                flex-direction: column;
+            }
+
+            .footer-bottom-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .results-actions {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero {
+                padding: 2rem 0;
+            }
+
+            .learning-interface,
+            .quiz-section {
+                padding: 2rem 0;
+            }
+
+            .lesson-container,
+            .question-card,
+            .results-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Barangay Learning Hub</span>
+                </div>
+                <div class="nav-menu" id="nav-menu">
+                   <a href="../../index.html" class="nav-link">Home</a>
+                    <a href="../../Maps/index.html" class="nav-link">Maps</a>
+                    <a href="index.html" class="nav-link active">Modules</a>
+                    <a href="../../Books/index.html" class="nav-link">Reading Corner</a>
+                    <a href="../../Calendar.html" class="nav-link">Calendar</a>
+                    <a href="../../About Us.html" class="nav-link ">About Us</a>
+                </div>
+                <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title animate-fadeInUp">Clipchamp Video Editing Module</h1>
+                    <p class="hero-subtitle animate-fadeInUp">Government Initiative for Free Community Education</p>
+                    <p class="hero-description animate-fadeInUp">Master video editing with Microsoft's powerful browser-based editor and create professional content.</p>
+                    <button class="cta-button animate-fadeInUp" onclick="startLearning()">
+                        Start Learning <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="hero-image animate-fadeInRight">
+                    <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Video Editing Setup" class="floating-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Module Interface -->
+        <section class="learning-interface" id="learning-interface" style="display: none;">
+            <div class="container">
+                <div class="module-header">
+                    <h2 id="module-title">Clipchamp Video Editing Module</h2>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                        <span class="progress-text" id="progress-text">0%</span>
+                    </div>
+                </div>
+
+                <div class="lesson-container" id="lesson-container">
+                    <div class="lesson-content" id="lesson-content">
+                        <!-- Lesson content will be dynamically loaded here -->
+                    </div>
+                    
+                    <div class="lesson-image" id="lesson-image">
+                        <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Video Editing" class="content-image">
+                    </div>
+                </div>
+
+                <div class="navigation-controls">
+                    <button class="nav-btn prev-btn" id="prev-btn" onclick="previousLesson()">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button class="nav-btn next-btn" id="next-btn" onclick="nextLesson()">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="nav-btn quiz-btn" id="quiz-btn" onclick="startQuiz()" style="display: none;">
+                        Take Quiz <i class="fas fa-brain"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section class="quiz-section" id="quiz-section" style="display: none;">
+            <div class="container">
+                <div class="quiz-header">
+                    <h2>Clipchamp Knowledge Quiz</h2>
+                    <div class="quiz-progress">
+                        <span id="quiz-progress-text">Question 1 of 10</span>
+                        <div class="quiz-progress-bar">
+                            <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-container" id="quiz-container">
+                    <div class="question-card animate-slideIn" id="question-card">
+                        <h3 id="question-text">Loading question...</h3>
+                        <div class="answer-options" id="answer-options">
+                            <!-- Answer options will be dynamically loaded -->
+                        </div>
+                    </div>
+
+                    <div class="quiz-navigation">
+                        <button class="nav-btn" id="quiz-next-btn" onclick="nextQuestion()" disabled>
+                            Next Question <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quiz Results -->
+                <div class="quiz-results" id="quiz-results" style="display: none;">
+                    <div class="results-card animate-fadeIn">
+                        <div class="results-icon">
+                            <i class="fas fa-trophy" id="results-icon"></i>
+                        </div>
+                        <h2 id="results-title">Quiz Complete!</h2>
+                        <div class="score-display">
+                            <span class="score-number" id="final-score">0</span>
+                            <span class="score-total">/ 10</span>
+                        </div>
+                        <p id="results-message">Great job!</p>
+                        <div class="results-actions">
+                            <button class="nav-btn" onclick="retakeQuiz()">
+                                <i class="fas fa-redo"></i> Retake Quiz
+                            </button>
+                            <button class="nav-btn" onclick="backToLearning()">
+                                <i class="fas fa-book"></i> Back to Learning
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+  <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Barangay Learning Hub</h3>
+                    <p>Empowering communities through digital education and technology access.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/COBBarangayLearningHub"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="/Module/index.html">Learning Modules</a></li>
+                        <li><a href="/Module/index.html">Training Programs</a></li>
+                        <li><a href="About Us.html">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Programs</h4>
+                    <ul>
+                        <li><a href="Module/index.html">Digital Literacy</a></li>
+                        <li><a href="Module/index.html">Computer Training</a></li>
+                        <li><a href="Module/index.html">Internet Safety</a></li>
+                        <li><a href="Module/index.html">Youth Programs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Barangay Learning Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Learning Module Data
+        const moduleData = {
+            lessons: [
+                {
+                    title: "Introduction to Clipchamp",
+                    content: `
+                        <h3>What is Clipchamp?</h3>
+                        <p>Clipchamp is a browser-based video editor owned by Microsoft. It provides professional video editing tools that are accessible to beginners and experienced editors alike.</p>
+                        
+                        <h4>Key Features of Clipchamp:</h4>
+                        <ul>
+                            <li><strong>Browser-based:</strong> No software installation required</li>
+                            <li><strong>Drag-and-drop interface:</strong> Easy to use for beginners</li>
+                            <li><strong>Professional tools:</strong> Advanced editing capabilities</li>
+                            <li><strong>Stock media library:</strong> Access to videos, images, and audio</li>
+                            <li><strong>Templates:</strong> Pre-designed video templates for quick creation</li>
+                            <li><strong>Export options:</strong> Multiple quality and format options</li>
+                        </ul>
+
+                        <h4>Getting Started:</h4>
+                        <ol>
+                            <li>Visit clipchamp.com</li>
+                            <li>Sign up for a free account (Microsoft account recommended)</li>
+                            <li>Choose "Create a video" to start your first project</li>
+                            <li>Select aspect ratio (16:9 for YouTube, 9:16 for mobile, 1:1 for social)</li>
+                        </ol>
+
+                        <h4>Clipchamp Plans:</h4>
+                        <ul>
+                            <li><strong>Free:</strong> Basic editing tools, 1080p export with watermark</li>
+                            <li><strong>Premium:</strong> No watermark, 4K export, premium stock content</li>
+                            <li><strong>Business:</strong> Team collaboration features and brand kits</li>
+                        </ul>
+                    `,
+                    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Clipchamp Interface Overview",
+                    content: `
+                        <h3>Understanding the Clipchamp Workspace</h3>
+                        <p>Familiarizing yourself with the Clipchamp interface is essential for efficient video editing.</p>
+                        
+                        <h4>Main Interface Components:</h4>
+                        <ul>
+                            <li><strong>Media Panel:</strong> Left sidebar containing your imported media files</li>
+                            <li><strong>Preview Window:</strong> Center area where you can preview your video</li>
+                            <li><strong>Timeline:</strong> Bottom area where you arrange and edit video clips</li>
+                            <li><strong>Properties Panel:</strong> Right sidebar for adjusting clip properties</li>
+                            <li><strong>Toolbar:</strong> Top area with tools and export options</li>
+                        </ul>
+
+                        <h4>Media Panel Features:</h4>
+                        <ul>
+                            <li><strong>Your media:</strong> Uploaded videos, images, and audio files</li>
+                            <li><strong>Stock videos:</strong> Free and premium video clips</li>
+                            <li><strong>Stock images:</strong> Photos and graphics for your projects</li>
+                            <li><strong>Stock audio:</strong> Music tracks and sound effects</li>
+                            <li><strong>Text:</strong> Title templates and text overlays</li>
+                            <li><strong>Overlays:</strong> Graphics and shapes to enhance videos</li>
+                        </ul>
+
+                        <h4>Timeline Controls:</h4>
+                        <ul>
+                            <li><strong>Play/Pause:</strong> Control video playback</li>
+                            <li><strong>Zoom:</strong> Adjust timeline zoom level for precise editing</li>
+                            <li><strong>Tracks:</strong> Multiple video and audio tracks for layering</li>
+                            <li><strong>Playhead:</strong> Shows current positionin the timeline</li>
+                            <li><strong>Scrubbing:</strong> Click and drag to navigate through video</li>
+                        </ul>
+                    `,
+                    image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Importing and Organizing Media",
+                    content: `
+                        <h3>Managing Your Video Assets</h3>
+                        <p>Proper media management is crucial for efficient video editing workflows.</p>
+                        
+                        <h4>Importing Media Files:</h4>
+                        <ol>
+                            <li><strong>Click "Import media"</strong> in the media panel</li>
+                            <li><strong>Select files</strong> from your computer (videos, images, audio)</li>
+                            <li><strong>Drag and drop</strong> files directly into the media panel</li>
+                            <li><strong>Wait for upload</strong> - larger files may take time to process</li>
+                        </ol>
+
+                        <h4>Supported File Formats:</h4>
+                        <ul>
+                            <li><strong>Video:</strong> MP4, MOV, AVI, WMV, MKV, WEBM</li>
+                            <li><strong>Audio:</strong> MP3, WAV, M4A, AAC, FLAC</li>
+                            <li><strong>Images:</strong> JPG, PNG, GIF, BMP, WEBP</li>
+                            <li><strong>Maximum file size:</strong> 1GB per file (free plan)</li>
+                        </ul>
+
+                        <h4>Using Stock Media:</h4>
+                        <ul>
+                            <li><strong>Browse categories:</strong> Nature, business, lifestyle, technology</li>
+                            <li><strong>Search functionality:</strong> Use keywords to find specific content</li>
+                            <li><strong>Preview before use:</strong> Click to preview stock videos and audio</li>
+                            <li><strong>License-free:</strong> Stock content is royalty-free for your projects</li>
+                        </ul>
+
+                        <h4>Organization Tips:</h4>
+                        <ul>
+                            <li>Create folders for different types of media</li>
+                            <li>Use descriptive filenames before importing</li>
+                            <li>Delete unused media to save storage space</li>
+                            <li>Keep track of original file locations for backup</li>
+                        </ul>
+                    `,
+                    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Basic Video Editing Techniques",
+                    content: `
+                        <h3>Essential Editing Skills</h3>
+                        <p>Learn the fundamental techniques for creating compelling videos in Clipchamp.</p>
+                        
+                        <h4>Adding Clips to Timeline:</h4>
+                        <ol>
+                            <li><strong>Drag media</strong> from the media panel to the timeline</li>
+                            <li><strong>Drop on video track</strong> for video clips with audio</li>
+                            <li><strong>Drop on audio track</strong> for audio-only files</li>
+                            <li><strong>Auto-arrange:</strong> Clips snap to the end of previous clips</li>
+                        </ol>
+
+                        <h4>Trimming and Cutting:</h4>
+                        <ul>
+                            <li><strong>Trim handles:</strong> Drag the edges of clips to shorten/lengthen</li>
+                            <li><strong>Split tool:</strong> Position playhead and click split to cut clips</li>
+                            <li><strong>Delete sections:</strong> Select unwanted portions and delete</li>
+                            <li><strong>Ripple editing:</strong> Automatically closes gaps when deleting</li>
+                        </ul>
+
+                        <h4>Arranging Clips:</h4>
+                        <ul>
+                            <li><strong>Drag to reorder:</strong> Move clips to different positions</li>
+                            <li><strong>Multiple tracks:</strong> Layer videos, images, and graphics</li>
+                            <li><strong>Timeline zoom:</strong> Use zoom slider for precise editing</li>
+                            <li><strong>Snap to grid:</strong> Clips automatically align for smooth editing</li>
+                        </ul>
+
+                        <h4>Basic Transitions:</h4>
+                        <ul>
+                            <li><strong>Fade in/out:</strong> Smooth beginning and ending transitions</li>
+                            <li><strong>Cross dissolve:</strong> Blend between two clips</li>
+                            <li><strong>Slide transitions:</strong> Clips slide in from different directions</li>
+                            <li><strong>Duration control:</strong> Adjust transition timing</li>
+                        </ul>
+                    `,
+                    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Adding Text and Graphics",
+                    content: `
+                        <h3>Enhancing Videos with Text and Graphics</h3>
+                        <p>Text overlays and graphics can significantly improve your video's impact and professionalism.</p>
+                        
+                        <h4>Adding Text Overlays:</h4>
+                        <ol>
+                            <li><strong>Click "Text"</strong> in the media panel</li>
+                            <li><strong>Choose a template:</strong> Titles, lower thirds, or basic text</li>
+                            <li><strong>Drag to timeline:</strong> Place text overlay on a separate track</li>
+                            <li><strong>Edit text:</strong> Double-click to modify the text content</li>
+                        </ol>
+
+                        <h4>Text Customization Options:</h4>
+                        <ul>
+                            <li><strong>Font selection:</strong> Choose from various font families</li>
+                            <li><strong>Size adjustment:</strong> Scale text to appropriate size</li>
+                            <li><strong>Color options:</strong> Change text and background colors</li>
+                            <li><strong>Alignment:</strong> Left, center, right, or justify text</li>
+                            <li><strong>Animation:</strong> Add entrance and exit animations</li>
+                        </ul>
+
+                        <h4>Working with Graphics:</h4>
+                        <ul>
+                            <li><strong>Overlay graphics:</strong> Add logos, shapes, and decorative elements</li>
+                            <li><strong>Transparency:</strong> Adjust opacity for subtle effects</li>
+                            <li><strong>Positioning:</strong> Place graphics anywhere on the screen</li>
+                            <li><strong>Scaling:</strong> Resize graphics while maintaining quality</li>
+                            <li><strong>Duration control:</strong> Set how long graphics appear</li>
+                        </ul>
+
+                        <h4>Best Practices for Text:</h4>
+                        <ul>
+                            <li>Keep text concise and readable</li>
+                            <li>Use contrasting colors for visibility</li>
+                            <li>Choose appropriate font sizes for screen viewing</li>
+                            <li>Time text appearance with narration or key moments</li>
+                            <li>Avoid covering important visual elements</li>
+                        </ul>
+                    `,
+                    image: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Audio Editing and Sound Design",
+                    content: `
+                        <h3>Perfecting Your Video's Audio</h3>
+                        <p>Good audio quality is crucial for professional videos. Learn to manage and enhance your audio tracks.</p>
+                        
+                        <h4>Working with Audio Tracks:</h4>
+                        <ul>
+                            <li><strong>Separate audio tracks:</strong> Video audio appears below video clips</li>
+                            <li><strong>Audio-only files:</strong> Music and sound effects on dedicated tracks</li>
+                            <li><strong>Multiple layers:</strong> Combine narration, music, and sound effects</li>
+                            <li><strong>Visual waveforms:</strong> See audio levels in the timeline</li>
+                        </ul>
+
+                        <h4>Audio Adjustments:</h4>
+                        <ul>
+                            <li><strong>Volume control:</strong> Adjust overall volume levels</li>
+                            <li><strong>Fade in/out:</strong> Smooth audio transitions</li>
+                            <li><strong>Mute sections:</strong> Remove unwanted audio portions</li>
+                            <li><strong>Speed adjustment:</strong> Change audio playback speed</li>
+                            <li><strong>Audio filters:</strong> Apply effects like echo or bass boost</li>
+                        </ul>
+
+                        <h4>Background Music:</h4>
+                        <ul>
+                            <li><strong>Stock music library:</strong> Browse Clipchamp's music collection</li>
+                            <li><strong>Genre categories:</strong> Corporate, cinematic, upbeat, ambient</li>
+                            <li><strong>Loop tracks:</strong> Extend short music clips to match video length</li>
+                            <li><strong>Volume balancing:</strong> Keep music lower than dialogue</li>
+                            <li><strong>Copyright considerations:</strong> Use royalty-free music for safety</li>
+                        </ul>
+
+                        <h4>Audio Best Practices:</h4>
+                        <ul>
+                            <li>Record audio in quiet environments</li>
+                            <li>Use external microphones for better quality</li>
+                            <li>Monitor audio levels to avoid distortion</li>
+                            <li>Add background music to enhance mood</li>
+                            <li>Use sound effects sparingly for impact</li>
+                        </ul>
+                    `,
+                    image: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                },
+                {
+                    title: "Exporting and Sharing Your Videos",
+                    content: `
+                        <h3>Publishing Your Finished Videos</h3>
+                        <p>Learn how to export your videos in the right format and quality for different platforms and purposes.</p>
+                        
+                        <h4>Export Process:</h4>
+                        <ol>
+                            <li><strong>Click "Export"</strong> button in the top-right corner</li>
+                            <li><strong>Choose quality:</strong> 480p, 720p, 1080p, or 4K (premium)</li>
+                            <li><strong>Wait for processing:</strong> Rendering time depends on video length and quality</li>
+                            <li><strong>Download file:</strong> Save the finished video to your computer</li>
+                        </ol>
+
+                        <h4>Quality Settings:</h4>
+                        <ul>
+                            <li><strong>480p:</strong> Basic quality, smaller file size, suitable for web</li>
+                            <li><strong>720p HD:</strong> Good quality, moderate file size, standard HD</li>
+                            <li><strong>1080p Full HD:</strong> High quality, larger file size, professional standard</li>
+                            <li><strong>4K Ultra HD:</strong> Premium feature, highest quality, very large files</li>
+                        </ul>
+
+                        <h4>Platform-Specific Considerations:</h4>
+                        <ul>
+                            <li><strong>YouTube:</strong> 1080p recommended, 16:9 aspect ratio</li>
+                            <li><strong>Instagram:</strong> 1080p, 1:1 (square) or 9:16 (stories) aspect ratio</li>
+                            <li><strong>Facebook:</strong> 720p minimum, 16:9 or 1:1 aspect ratio</li>
+                            <li><strong>TikTok:</strong> 1080p, 9:16 vertical aspect ratio</li>
+                            <li><strong>Email/Presentations:</strong> 720p for smaller file sizes</li>
+                        </ul>
+
+                        <h4>Sharing Options:</h4>
+                        <ul>
+                            <li><strong>Direct download:</strong> Save video file to your device</li>
+                            <li><strong>Cloud storage:</strong> Upload to Google Drive, OneDrive, or Dropbox</li>
+                            <li><strong>Social media:</strong> Share directly to platforms (premium feature)</li>
+                            <li><strong>Email sharing:</strong> Send download links to collaborators</li>
+                        </ul>
+
+                        <h4>Final Tips:</h4>
+                        <ul>
+                            <li>Preview your video before exporting</li>
+                            <li>Choose appropriate quality for your intended use</li>
+                            <li>Keep original project files for future edits</li>
+                            <li>Consider creating multiple versions for different platforms</li>
+                            <li>Test your exported video on the target platform</li>
+                        </ul>
+                    `,
+                    image: "https://images.unsplash.com/photo-1626544330495-7c9d3ee7272b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                }
+            ]
+        };
+
+        // Quiz Questions
+        const quizQuestions = [
+            {
+                question: "What type of application is Clipchamp?",
+                options: ["Desktop software", "Browser-based editor", "Mobile app only", "Plugin for other software"],
+                correct: 1
+            },
+            {
+                question: "Which company owns Clipchamp?",
+                options: ["Google", "Adobe", "Microsoft", "Apple"],
+                correct: 2
+            },
+            {
+                question: "What is the maximum file size for uploads on the free Clipchamp plan?",
+                options: ["500MB", "1GB", "2GB", "Unlimited"],
+                correct: 1
+            },
+            {
+                question: "Which aspect ratio is best for YouTube videos?",
+                options: ["1:1", "9:16", "16:9", "4:3"],
+                correct: 2
+            },
+            {
+                question: "How do you split a video clip in Clipchamp?",
+                options: ["Right-click and select split", "Position playhead and click split", "Drag the clip apart", "Use the scissors tool"],
+                correct: 1
+            },
+            {
+                question: "What happens when you add a watermark-free export?",
+                options: ["It's always free", "Requires premium subscription", "Only available for short videos", "Automatically adds Clipchamp branding"],
+                correct: 1
+            },
+            {
+                question: "Which track should you use for background music?",
+                options: ["Video track", "Audio track", "Text track", "Overlay track"],
+                correct: 1
+            },
+            {
+                question: "What is the recommended aspect ratio for Instagram Stories?",
+                options: ["16:9", "1:1", "9:16", "4:3"],
+                correct: 2
+            },
+            {
+                question: "How can you adjust the duration of a text overlay?",
+                options: ["Change the font size", "Drag the edges of the text clip", "Right-click and select duration", "Text duration cannot be changed"],
+                correct: 1
+            },
+            {
+                question: "What should you do before exporting your final video?",
+                options: ["Delete all unused media", "Preview the entire video", "Change the project name", "Add more transitions"],
+                correct: 1
+            }
+        ];
+
+        // Current state variables
+        let currentLesson = 0;
+        let currentQuestion = 0;
+        let score = 0;
+        let userAnswers = [];
+
+        // Start learning function
+        function startLearning() {
+            document.querySelector('.hero').style.display = 'none';
+            document.getElementById('learning-interface').style.display = 'block';
+            loadLesson(0);
+        }
+
+        // Load lesson content
+        function loadLesson(lessonIndex) {
+            const lesson = moduleData.lessons[lessonIndex];
+            document.getElementById('lesson-content').innerHTML = lesson.content;
+            document.getElementById('lesson-image').innerHTML = `<img src="${lesson.image}" alt="${lesson.title}" class="content-image">`;
+            
+            // Update progress
+            const progress = ((lessonIndex + 1) / moduleData.lessons.length) * 100;
+            document.getElementById('progress-fill').style.width = progress + '%';
+            document.getElementById('progress-text').textContent = Math.round(progress) + '%';
+            
+            // Update navigation buttons
+            document.getElementById('prev-btn').disabled = lessonIndex === 0;
+            
+            if (lessonIndex === moduleData.lessons.length - 1) {
+                document.getElementById('next-btn').style.display = 'none';
+                document.getElementById('quiz-btn').style.display = 'inline-flex';
+            } else {
+                document.getElementById('next-btn').style.display = 'inline-flex';
+                document.getElementById('quiz-btn').style.display = 'none';
+            }
+        }
+
+        // Navigation functions
+        function nextLesson() {
+            if (currentLesson < moduleData.lessons.length - 1) {
+                currentLesson++;
+                loadLesson(currentLesson);
+            }
+        }
+
+        function previousLesson() {
+            if (currentLesson > 0) {
+                currentLesson--;
+                loadLesson(currentLesson);
+            }
+        }
+
+        // Quiz functions
+        function startQuiz() {
+            document.getElementById('learning-interface').style.display = 'none';
+            document.getElementById('quiz-section').style.display = 'block';
+            currentQuestion = 0;
+            score = 0;
+            userAnswers = [];
+            showQuestion();
+        }
+
+        function showQuestion() {
+            if (currentQuestion < quizQuestions.length) {
+                const question = quizQuestions[currentQuestion];
+                document.getElementById('question-text').textContent = question.question;
+                
+                const optionsHtml = question.options.map((option, index) => 
+                    `<div class="answer-option" onclick="selectAnswer(${index})" id="option-${index}">
+                        ${option}
+                    </div>`
+                ).join('');
+                
+                document.getElementById('answer-options').innerHTML = optionsHtml;
+                document.getElementById('quiz-next-btn').disabled = true;
+                
+                // Update progress
+                const progress = (currentQuestion / quizQuestions.length) * 100;
+                document.getElementById('quiz-progress-fill').style.width = progress + '%';
+                document.getElementById('quiz-progress-text').textContent = `Question ${currentQuestion + 1} of ${quizQuestions.length}`;
+            } else {
+                showResults();
+            }
+        }
+
+        function selectAnswer(answerIndex) {
+            // Remove previous selections
+            document.querySelectorAll('.answer-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Mark selected option
+            document.getElementById(`option-${answerIndex}`).classList.add('selected');
+            userAnswers[currentQuestion] = answerIndex;
+            document.getElementById('quiz-next-btn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (userAnswers[currentQuestion] === quizQuestions[currentQuestion].correct) {
+                score++;
+            }
+            
+            // Show correct answer
+            document.querySelectorAll('.answer-option').forEach((option, index) => {
+                if (index === quizQuestions[currentQuestion].correct) {
+                    option.classList.add('correct');
+                } else if (index === userAnswers[currentQuestion]) {
+                    option.classList.add('incorrect');
+                }
+            });
+            
+            setTimeout(() => {
+                currentQuestion++;
+                showQuestion();
+            }, 1500);
+        }
+
+        function showResults() {
+            document.getElementById('quiz-container').style.display = 'none';
+            document.getElementById('quiz-results').style.display = 'block';
+            
+            const percentage = Math.round((score / quizQuestions.length) * 100);
+            document.getElementById('final-score').textContent = score;
+            
+            let message = "";
+            if (percentage >= 80) {
+                message = "Excellent! You're ready to create amazing videos with Clipchamp!";
+            } else if (percentage >= 60) {
+                message = "Good job! You have a solid understanding of Clipchamp basics.";
+            } else {
+                message = "Keep learning! Review the lessons and try again.";
+            }
+            
+            document.getElementById('results-message').textContent = message;
+        }
+
+        function retakeQuiz() {
+            startQuiz();
+        }
+
+        function backToLearning() {
+            document.getElementById('quiz-section').style.display = 'none';
+            document.getElementById('learning-interface').style.display = 'block';
+            currentLesson = 0;
+            loadLesson(currentLesson);
+        }
+
+        // Initialize the first lesson content
+        window.addEventListener('DOMContentLoaded', () => {
+            loadLesson(0);
+        });
+    </script>
+</body>
+</html>
